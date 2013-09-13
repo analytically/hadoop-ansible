@@ -11,8 +11,8 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
 ## Requirements
 
   - Ansible 1.3+
-  - Ubuntu (currently only tested on 13.04)
-  - `ansibler` user in sudo group without password prompt (see Bootstrap section below)
+  - Ubuntu nodes (currently only tested on 13.04)
+  - `ansibler` user in sudo group without sudo password prompt (see Bootstrap section below)
 
 ### Cloudera ([CDH 4.4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
 
@@ -21,7 +21,7 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
   - [`cdh_hadoop_config`](roles/cdh_hadoop_config/) - common configuration shared by all Hadoop nodes
   - [`cdh_hbase_config`](roles/cdh_hbase_config/) - common configuration shared by all HBase nodes
   - [`cdh_hadoop_datanode`](roles/cdh_hadoop_datanode/) - installs Hadoop DataNode
-  - [`cdh_hadoop_journal`](roles/cdh_hadoop_journal/) - installs Hadoop JournalNode
+  - [`cdh_hadoop_journalnode`](roles/cdh_hadoop_journalnode/) - installs Hadoop JournalNode
   - [`cdh_hadoop_namenode`](roles/cdh_hadoop_namenode/) - installs Hadoop NameNode
   - [`cdh_hadoop_zkfc`](roles/cdh_hadoop_zkfc/) - installs Hadoop Zookeeper Failover Controller
   - [`cdh_hbase_master`](roles/cdh_hbase_master/) - installs HBase-Master
@@ -57,6 +57,8 @@ specified in `bootstrap/hosts`. See [`bootstrap/bootstrap.yml`](bootstrap/bootst
 ## Screenshots
 
 ![zookeeper](images/zookeeper.png)
+
+![ganglia](images/ganglia.png)
 
 ![kibana](images/kibana.png)
 
