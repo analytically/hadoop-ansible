@@ -1,0 +1,8 @@
+---
+# file: roles/postfix_mandrill/handlers/main.yml
+
+- name: restart postfix
+  service: name=postfix state=restarted
+
+- name: send test email
+  shell: echo "This is a test message during an Ansible configuration of {{ ansible_hostname }} at $(date -R)" | sendmail {{ notify_email }}

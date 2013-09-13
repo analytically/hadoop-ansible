@@ -1,0 +1,14 @@
+---
+# file: roles/common/handlers/main.yml
+
+- name: restart ntp
+  service: name=ntp state=restarted
+
+- name: restart procps
+  service: name=procps state=restarted
+
+- name: restart rsyslog
+  service: name=rsyslog state=restarted
+
+- name: ldconfig
+  command: ldconfig

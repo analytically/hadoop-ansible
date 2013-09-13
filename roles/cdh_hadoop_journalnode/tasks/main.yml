@@ -1,0 +1,18 @@
+---
+# file: roles/cdh_hadoop_journalnode/tasks/main.yml
+# see http://touk.pl/blog/en/2012/10/30/hadoop-ha-setup/ and
+# http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/HDFSHighAvailabilityWithQJM.html
+
+- name: Make sure the /data/dfs/jn directory exists
+  file: path=/data/dfs/jn owner=hdfs group=hdfs state=directory
+  tags: hadoop
+
+- name: Make sure the hadoop-hdfs-journalnode service is installed
+  apt: name=hadoop-hdfs-journalnode
+  tags: hadoop
+
+- name: Make sure rsyslog is setup for hadoop-hdfs-journalnode
+  template: src=rsyslog.conf dest=/etc/rsyslog.d/60-hadoop-hdfs-journalnode.conf owner=root group=root mode=0644
+  tags: rsyslog
+  notify:
+    - restart rsyslog

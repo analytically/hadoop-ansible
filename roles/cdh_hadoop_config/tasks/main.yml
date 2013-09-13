@@ -1,0 +1,31 @@
+---
+# file: roles/cdh_hadoop_config/tasks/main.yml
+
+- name: Copy /etc/hadoop/conf.empty to /etc/hadoop/conf.{{ hadoop['site_name'] }}
+  shell: creates=/etc/hadoop/conf.{{ hadoop['site_name'] }} cp -R -p /etc/hadoop/conf.empty /etc/hadoop/conf.{{ hadoop['site_name'] }}
+  tags: hadoop
+
+- name: Make sure Hadoop has the correct configuration in /etc/hadoop/conf.{{ hadoop['site_name'] }}
+  template: src=$item dest=/etc/hadoop/conf.{{ hadoop['site_name'] }}/$item owner=root group=root mode=0644
+  with_items:
+    - core-site.xml
+    - hadoop-env.sh
+    - hadoop-metrics2.properties
+    - hdfs-site.xml
+    - org-xerial-snappy.properties
+    - slaves
+  notify:
+    - restart hadoop-hdfs-namenode
+    - restart hadoop-hdfs-journalnode
+    - restart hadoop-hdfs-datanode
+  tags:
+    - hadoop
+    - configuration
+
+- name: Ubuntu 'update-alternatives' install Hadoop configuration
+  shell: update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.{{ hadoop['site_name'] }} 50
+  tags: hadoop
+
+- name: Ubuntu 'update-alternatives' set Hadoop configuration
+  shell: update-alternatives --set hadoop-conf /etc/hadoop/conf.{{ hadoop['site_name'] }}
+  tags: hadoop

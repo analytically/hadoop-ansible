@@ -1,0 +1,27 @@
+---
+# file: roles/cdh_hbase_config/tasks/main.yml
+
+- name: Copy /etc/hbase/conf.empty to /etc/hbase/conf.{{ hadoop['site_name'] }}
+  shell: creates=/etc/hbase/conf.{{ hadoop['site_name'] }} cp -R -p /etc/hbase/conf.dist /etc/hbase/conf.{{ hadoop['site_name'] }}
+  tags: hbase
+
+- name: Make sure HBase has the correct configuration in /etc/hbase/conf.{{ hadoop['site_name'] }}
+  template: src=$item dest=/etc/hbase/conf.{{ hadoop['site_name'] }}/$item owner=root group=root mode=0644
+  with_items:
+    - hbase-env.sh
+    - hbase-site.xml
+    - regionservers
+  notify:
+    - restart hbase-master
+    - restart hbase-regionserver
+  tags:
+    - hbase
+    - configuration
+
+- name: Ubuntu 'update-alternatives' install HBase configuration
+  shell: update-alternatives --install /etc/hbase/conf hbase-conf /etc/hbase/conf.{{ hadoop['site_name'] }} 50
+  tags: hbase
+
+- name: Ubuntu 'update-alternatives' set HBase configuration
+  shell: update-alternatives --set hbase-conf /etc/hbase/conf.{{ hadoop['site_name'] }}
+  tags: hbase

@@ -1,0 +1,14 @@
+---
+# file: roles/cdh_hbase_regionserver/tasks/main.yml
+
+- name: Make sure rsyslog is setup for hbase-regionserver
+  template: src=rsyslog.conf dest=/etc/rsyslog.d/60-hbase-regionserver.conf owner=root group=root mode=0644
+  tags: rsyslog
+  notify:
+    - restart rsyslog
+
+- name: Make sure the hbase-regionserver service is installed
+  apt: name=hbase-regionserver
+  tags: hbase
+  notify:
+    - start hbase-regionserver

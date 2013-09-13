@@ -1,0 +1,2 @@
+{% for host in groups['regionservers'] %}{{ hostvars[host]['ansible_default_ipv4']['address'] }}
+{% endfor %}

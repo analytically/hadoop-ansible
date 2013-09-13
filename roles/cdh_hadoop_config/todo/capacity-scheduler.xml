@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<!-- This is the configuration file for the resource manager in Hadoop. -->
+<!-- You can configure various scheduling parameters related to queues. -->
+<!-- The properties for a queue follow a naming convention,such as, -->
+<!-- mapred.capacity-scheduler.queue.<queue-name>.property-name. -->
+
+<configuration>
+
+    <property>
+        <name>mapred.capacity-scheduler.queue.default.capacity</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.queue.default.capacity"] }}</value>
+    </property>
+
+    <property>
+        <name>mapred.capacity-scheduler.queue.default.maximum-capacity</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.queue.default.maximum-capacity"] }}</value>
+    </property>
+
+    <property>
+        <name>mapred.capacity-scheduler.queue.default.supports-priority</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.queue.default.supports-priority"] }}</value>
+    </property>
+
+    <property>
+        <name>mapred.capacity-scheduler.queue.default.minimum-user-limit-percent</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.queue.default.minimum-user-limit-percent"] }}</value>
+    </property>
+
+    <property>
+        <name>mapred.capacity-scheduler.queue.default.maximum-initialized-jobs-per-user</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.queue.default.maximum-initialized-jobs-per-user"] }}</value>
+    </property>
+
+    <!-- The default configuration settings for the capacity task scheduler -->
+    <!-- The default values would be applied to all the queues which don't have -->
+    <!-- the appropriate property for the particular queue -->
+    <property>
+        <name>mapred.capacity-scheduler.default-supports-priority</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.default-supports-priority"] }}</value>
+    </property>
+
+    <property>
+        <name>mapred.capacity-scheduler.default-minimum-user-limit-percent</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.default-minimum-user-limit-percent"] }}</value>
+    </property>
+
+    <property>
+        <name>mapred.capacity-scheduler.default-maximum-initialized-jobs-per-user</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.default-maximum-initialized-jobs-per-user"] }}</value>
+    </property>
+
+    <!-- Capacity scheduler Job Initialization configuration parameters -->
+    <property>
+        <name>mapred.capacity-scheduler.init-poll-interval</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.init-poll-interval"] }}</value>
+    </property>
+
+    <property>
+        <name>mapred.capacity-scheduler.init-worker-threads</name>
+        <value>{{ hadoop["mapred.capacity-scheduler.init-worker-threads"] }}</value>
+    </property>
+
+</configuration>

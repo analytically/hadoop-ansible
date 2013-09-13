@@ -1,0 +1,35 @@
+---
+# file: roles/cdh_zookeeper_server/tasks/main.yml
+
+- name: Make sure ZooKeeper Server is installed
+  apt: name=$item force=yes update-cache=yes
+  with_items:
+    - zookeeper=3.4.5+23-1.cdh4.4.0.p0.24~precise-cdh4.4.0
+    - zookeeper-server
+  tags: zookeeper
+
+- name: Copy /etc/zookeeper/conf.dist to /etc/zookeeper/conf.{{ hadoop['site_name'] }}
+  shell: creates=/etc/zookeeper/conf.{{ hadoop['site_name'] }} cp -R -p /etc/zookeeper/conf.dist /etc/zookeeper/conf.{{ hadoop['site_name'] }}
+  tags: zookeeper
+
+- name: Ubuntu 'update-alternatives' install ZooKeeper configuration
+  shell: update-alternatives --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.{{ hadoop['site_name'] }} 50
+  tags: zookeeper
+
+- name: Ubuntu 'update-alternatives' set ZooKeeper configuration
+  shell: update-alternatives --set zookeeper-conf /etc/zookeeper/conf.{{ hadoop['site_name'] }}
+  tags: zookeeper
+
+- name: Make sure /var/lib/zookeeper exists
+  file: path=/var/lib/zookeeper owner=zookeeper group=zookeeper state=directory
+  tags: zookeeper
+
+- name: Make sure ZooKeeper has the correct configuration in /etc/zookeeper/conf.{{ hadoop['site_name'] }}
+  template: src=zoo.cfg dest=/etc/zookeeper/conf.{{ hadoop['site_name'] }}/zoo.cfg owner=zookeeper group=zookeeper mode=0644
+  notify:
+    - restart zookeeper
+  tags: zookeeper
+
+- name: Make sure ZooKeeper is initialized
+  shell: creates=/var/lib/zookeeper/myid service zookeeper-server init --myid=${zoo_id}
+  tags: zookeeper

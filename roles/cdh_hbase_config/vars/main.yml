@@ -1,0 +1,6 @@
+---
+# file: roles/cdh_hbase_config/vars/main.yml
+
+hbase:
+    # The HBase heap size
+    heapsize: 8192

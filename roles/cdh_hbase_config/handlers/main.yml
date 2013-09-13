@@ -1,0 +1,10 @@
+---
+# file: roles/cdh_hbase_config/handlers/main.yml
+
+- name: restart hbase-master
+  service: name=hbase-master state=restarted
+  ignore_errors: yes
+
+- name: restart hbase-regionserver
+  service: name=hbase-regionserver state=restarted
+  ignore_errors: yes

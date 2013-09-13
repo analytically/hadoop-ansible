@@ -1,0 +1,5 @@
+---
+# file: roles/cdh_hadoop_journalnode/handlers/main.yml
+
+- name: restart rsyslog
+  service: name=rsyslog state=restarted

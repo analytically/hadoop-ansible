@@ -1,0 +1,168 @@
+---
+# Site Configuration
+# ==================
+
+- hosts: all
+  user: ansibler
+  sudo: true
+  roles:
+    - common
+    - postfix_mandrill
+    - ganglia_monitor
+
+- hosts: monitors[0]
+  user: ansibler
+  sudo: true
+  roles:
+    - oracle_jdk
+    - ganglia_metad
+    - ganglia_web
+    - elasticsearch
+    - kibana3
+
+- hosts: all
+  user: ansibler
+  sudo: true
+  roles:
+    - td_agent
+    - rsyslog_fluentd
+
+# Hadoop
+
+- hosts: zookeepers:journalnodes:hbase_masters:regionservers
+  user: ansibler
+  sudo: true
+  roles:
+    - oracle_jre
+    - cdh_common
+
+- hosts: zookeepers
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_zookeeper_server
+
+- hosts: journalnodes:namenodes:datanodes
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_common
+    - cdh_hadoop_config
+
+- hosts: journalnodes
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_journalnode
+
+- hosts: namenodes[0]
+  user: ansibler
+  sudo: true
+  sudo_user: hdfs
+  tasks:
+    - name: Make sure the /data/dfs/nn directory exists
+      file: path=/data/dfs/nn owner=hdfs group=hdfs state=directory
+      tags:
+        - hadoop
+        - hbase
+    - name: Make sure the namenode is formatted - WILL NOT FORMAT IF /data/dfs/nn/current/VERSION EXISTS TO AVOID DATA LOSS
+      shell: creates=/data/dfs/nn/current/VERSION hdfs namenode -format -force
+      tags:
+        - hadoop
+        - hbase
+
+- hosts: namenodes[0]
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_namenode
+    - cdh_hadoop_zkfc
+
+- hosts: namenodes[1]
+  user: ansibler
+  sudo: true
+  sudo_user: hdfs
+  tasks:
+    - name: Make sure the first namenode is online
+      wait_for: host={{ hostvars[groups['namenodes'][0]]['ansible_default_ipv4']['address'] }} port=50070
+      tags:
+        - hadoop
+        - hbase
+    - name: Make sure the /data/dfs/nn directory exists
+      file: path=/data/dfs/nn owner=hdfs group=hdfs state=directory
+      tags:
+        - hadoop
+        - hbase
+    - name: Make sure the standby namenode is bootstrapped
+      shell: creates=/data/dfs/nn/.bootstrapped hdfs namenode -bootstrapStandby && touch /data/dfs/nn/.bootstrapped
+      tags:
+        - hadoop
+        - hbase
+
+- hosts: namenodes[1]
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_namenode
+    - cdh_hadoop_zkfc
+
+- hosts: namenodes[0]
+  user: ansibler
+  sudo: true
+  tasks:
+    - name: Make sure the hadoop-hdfs-zkfc is formatted
+      shell: creates=/data/dfs/.zkfsformatted hdfs zkfc -formatZK -force && touch /data/dfs/.zkfsformatted
+      tags:
+        - hadoop
+        - hbase
+    - name: start zkfc
+      service: name=hadoop-hdfs-zkfc state=restarted
+      tags:
+        - hadoop
+        - hbase
+    - name: restart namenode
+      service: name=hadoop-hdfs-namenode state=restarted
+      tags:
+        - hadoop
+        - hbase
+
+- hosts: datanodes
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_datanode
+
+- hosts: hbase_masters:regionservers
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hbase_common
+    - cdh_hbase_config
+
+- hosts: namenodes[0]
+  user: ansibler
+  sudo: true
+  sudo_user: hdfs
+  tasks:
+    - name: Make sure a /hbase directory exists on the cluster
+      shell: creates=/data/dfs/.hbasedircreated hadoop fs -mkdir /hbase && touch /data/dfs/.hbasedircreated
+      tags:
+        - hadoop
+        - hbase
+    - name: Make sure the /hbase directory has the correct permissions
+      shell: creates=/data/dfs/.hbasedirchowned sleep 5 && hadoop fs -chown hbase:hbase /hbase && touch /data/dfs/.hbasedirchowned
+      tags:
+        - hadoop
+        - hbase
+
+- hosts: hbase_masters
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hbase_master
+
+- hosts: regionservers
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hbase_regionserver

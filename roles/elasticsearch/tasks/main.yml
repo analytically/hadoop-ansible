@@ -1,0 +1,14 @@
+---
+# file: roles/elasticsearch/tasks/main.yml
+
+- name: Make sure ElasticSearch is downloaded and installed
+  shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.3.deb && dpkg -i elasticsearch-0.90.3.deb
+  tags: elasticsearch
+
+- name: Make sure the ElasticSearch head plugin is installed
+  shell: creates=/usr/share/elasticsearch/plugins/head/_site/index.html chdir=/usr/share/elasticsearch/bin ./plugin -install mobz/elasticsearch-head
+  tags: elasticsearch
+
+- name: Make sure the ElasticSearch bigdesk plugin is installed
+  shell: creates=/usr/share/elasticsearch/plugins/bigdesk/_site/index.html chdir=/usr/share/elasticsearch/bin ./plugin -install lukas-vlcek/bigdesk
+  tags: elasticsearch

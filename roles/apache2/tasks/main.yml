@@ -1,0 +1,12 @@
+---
+# file: roles/apache2/tasks/main.yml
+
+- name: Make sure Apache2 is available
+  apt: pkg=$item
+  with_items:
+     - apache2
+  tags: apache
+
+- name: Make sure apache2 doesn't complain it can't determine the fqdn
+  lineinfile: dest=/etc/apache2/apache2.conf regexp="{{ ansible_hostname }}" line="ServerName {{ ansible_hostname }}"
+  tags: apache

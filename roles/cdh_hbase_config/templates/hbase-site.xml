@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- {{ ansible_managed }} -->
+
+<configuration>
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://{{ hadoop['site_name'] }}/hbase</value>
+    </property>
+
+    <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>{% for host in groups['zookeepers'] %}{{ host }}{% if not loop.last %},{% endif %}{% endfor %}</value>
+    </property>
+
+    <!-- ZooKeeper and HBase need same session timeout values. -->
+    <property>
+        <name>zookeeper.session.timeout</name>
+        <value>180000</value>
+    </property>
+</configuration>

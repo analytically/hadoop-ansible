@@ -1,0 +1,23 @@
+---
+
+kernel:
+    # Kernel swappines. Using the value 0 in order to avoid swapping, since the servers should have plenty of memory.
+    swappiness: 0
+
+limits:
+    # Open file limits.
+    nofile_hard: 65536
+    nofile_soft: 65536
+
+ntp:
+    # NTP servers used in all servers to synchronize time.
+    server1: ntp0.ox.ac.uk
+    server2: ntp1.ox.ac.uk
+    server3: ntp2.ox.ac.uk
+    server4: ntp3.ox.ac.uk
+    server5: 0.uk.pool.ntp.org
+    server6: 1.uk.pool.ntp.org
+    server7: ntp.ubuntu.com # fallback
+
+rsyslog:
+    polling_interval_secs: 10

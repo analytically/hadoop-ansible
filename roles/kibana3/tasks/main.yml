@@ -1,0 +1,8 @@
+---
+# file: roles/kibana3/tasks/main.yml
+
+- name: Make sure Kibana 3 is cloned under /var/www/kibana
+  git: repo=https://github.com/elasticsearch/kibana.git dest=/var/www/kibana update=yes
+  tags: kibana
+  notify:
+    - restart apache2

@@ -1,0 +1,28 @@
+---
+# file: roles/ganglia_web/tasks/main.yml
+
+- name: Make sure the Ganglia web dependencies are installed
+  apt: name=$item
+  with_items:
+    - apache2
+    - php5
+    - rrdtool
+  tags: ganglia
+
+- name: Make sure ganglia web is downloaded
+  shell: creates=/var/www/ganglia chdir=/var/www curl http://heanet.dl.sourceforge.net/project/ganglia/ganglia-web/3.5.10/ganglia-web-3.5.10.tar.gz | tar xz && mv ganglia-web-3.5.10 ganglia
+  tags: ganglia
+
+- name: Make sure ganglia web makefile has the correct path
+  shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia sed -i "s=/var/www/html/ganglia=/var/www/ganglia=" Makefile
+  tags: ganglia
+
+- name: Make sure ganglia web makefile has the correct path
+  shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia sed -i "s/APACHE_USER =  apache/APACHE_USER = www-data/" Makefile
+  tags: ganglia
+
+- name: Make sure ganglia web is built
+  shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia make install
+  notify:
+    - restart apache2
+  tags: ganglia

@@ -1,0 +1,8 @@
+---
+# file: roles/cdh_hbase_master/handlers/main.yml
+
+- name: restart rsyslog
+  service: name=rsyslog state=restarted
+
+- name: start hbase-master
+  service: name=hbase-master state=restarted

@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- {{ ansible_managed }} -->
+
+<configuration>
+    <!-- common server name -->
+    <property>
+        <name>dfs.nameservices</name>
+        <value>{{ hadoop['site_name'] }}</value>
+    </property>
+
+    <!-- HA configuration, see http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/PDF/CDH4-High-Availability-Guide.pdf -->
+    <property>
+        <name>dfs.ha.namenodes.{{ hadoop['site_name'] }}</name>
+        <value>{% for host in groups['namenodes'] %}nn{{ loop.index }}{% if not loop.last %},{% endif %}{% endfor %}</value>
+    </property>
+
+    {% for host in groups['namenodes'] %}
+    <property>
+        <name>dfs.namenode.rpc-address.{{ hadoop['site_name'] }}.nn{{ loop.index }}</name>
+        <value>{{ host }}:8020</value>
+    </property>
+    {% endfor %}
+
+    {% for host in groups['namenodes'] %}
+    <property>
+        <name>dfs.namenode.http-address.{{ hadoop['site_name'] }}.nn{{ loop.index }}</name>
+        <value>0.0.0.0:50070</value>
+    </property>
+    {% endfor %}
+
+    <!-- Storage for edits' files -->
+    <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://{% for host in groups['journalnodes'] %}{{ host }}:8485{% if not loop.last %};{% endif %}{% endfor %}/{{ hadoop['site_name'] }}</value>
+    </property>
+
+    <!-- Client failover -->
+    <property>
+        <name>dfs.client.failover.proxy.provider.{{ hadoop['site_name'] }}</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+    </property>
+
+    <!-- Fencing configuration -->
+    <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>shell(/bin/true)</value>
+    </property>
+
+    <!-- Automatic failover configuration -->
+    <property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>{% for host in groups['zookeepers'] %}{{ host }}{% if not loop.last %},{% endif %}{% endfor %}</value>
+    </property>
+
+    <!-- Replication factor -->
+    <property>
+        <name>dfs.replication</name>
+        <value>3</value>
+        <final>true</final>
+    </property>
+
+    <property>
+        <name>dfs.blocksize</name>
+        <value>{{ hadoop['dfs_blocksize'] }}</value>
+        <final>true</final>
+    </property>
+
+    <property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/data/dfs/jn</value>
+    </property>
+
+    <property>
+        <name>dfs.name.dir</name>
+        <value>file:///data/dfs/nn</value>
+    </property>
+
+    <property>
+        <name>dfs.data.dir</name>
+        <value>file:///data/dfs/dn</value>
+    </property>
+
+    <property>
+        <name>dfs.datanode.max.xcievers</name>
+        <value>{{ hadoop['max_xcievers'] }}</value>
+    </property>
+
+    <property>
+        <name>dfs.namenode.handler.count</name>
+        <value>40</value>
+    </property>
+
+    <property>
+        <name>dfs.datanode.handler.count</name>
+        <value>8</value>
+    </property>
+
+    <property>
+        <name>dfs.namenode.avoid.read.stale.datanode</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>dfs.namenode.avoid.write.stale.datanode</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>dfs.namenode.stale.datanode.interval</name>
+        <value>30000</value>
+    </property>
+</configuration>

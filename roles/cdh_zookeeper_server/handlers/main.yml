@@ -1,0 +1,6 @@
+---
+# file: roles/cdh_zookeeper_server/handlers/main.yml
+
+- name: restart zookeeper
+  service: name=zookeeper-server state=restarted
+  ignore_errors: yes

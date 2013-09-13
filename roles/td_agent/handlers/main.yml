@@ -1,0 +1,4 @@
+---
+
+- name: restart td-agent
+  command: /etc/init.d/td-agent restart

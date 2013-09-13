@@ -1,0 +1,17 @@
+---
+# file: roles/cdh_hadoop_common/tasks/main.yml
+
+- name: Make sure the base Hadoop packages are installed
+  apt: name=$item update_cache=yes
+  with_items:
+    - hadoop
+    - hadoop-hdfs
+  tags: hadoop
+
+- name: Make sure the /data directory exists
+  file: path=/data owner=hdfs group=hdfs state=directory
+  tags: hadoop
+
+- name: Make sure the /data/dfs directory exists
+  file: path=/data/dfs owner=hdfs group=hdfs state=directory
+  tags: hadoop

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<!--
+#   Copyright 2012 Tim Ellis
+#   CTO: PalominoDB
+#   The Palomino Cluster Tool
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+-->
+
+<configuration>
+  <property>
+    <name>mapreduce.jobtracker.address</name>
+    <value>{{ hostvars[groups['NameNodes'][0]]['ansible_default_ipv4']['address'] }}:{{ hadoop['mapred.job.tracker.port'] }}</value>
+  </property>
+
+  <property>
+    <name>mapred.job.tracker</name>
+    <value>{{ hostvars[groups['NameNodes'][0]]['ansible_default_ipv4']['address'] }}:{{ hadoop['mapred.job.tracker.port'] }}</value>
+  </property>
+
+  <property>
+    <name>mapred.system.dir</name>
+    <value>{{ hadoop["mapred.system.dir"] }}</value>
+  </property>
+
+  <property>
+    <name>mapreduce.jobtracker.staging.root.dir</name>
+    <value>{{ hadoop["mapred.staging.dir"] }}</value>
+  </property>
+
+  <property>
+    <name>mapred.local.dir</name>
+    <value>{{ hadoop["mapred.local.dir"] }}</value>
+  </property>
+
+  <property>
+    <name>mapred.tasktracker.map.tasks.maximum</name>
+    <value>{{ hadoop["mapred.tasktracker.map.tasks.maximum"] }}</value>
+  </property>
+
+  <property>
+    <name>mapred.tasktracker.reduce.tasks.maximum</name>
+    <value>{{ hadoop["mapred.tasktracker.reduce.tasks.maximum"] }}</value>
+  </property>
+
+  <!--
+  <property>
+    <name>dfs.hosts/dfs.hosts.exclude</name>
+    <value>List of permitted/excluded DataNodes.</value>
+  </property>
+
+  <property>
+    <name>mapred.hosts/mapred.hosts.exclude</name>
+    <value>List of permitted/excluded TaskTrackers.</value>
+  </property>
+  -->
+
+  <property>
+    <name>mapred.queue.names</name>
+    <value>default,q1,q2,q3</value>
+  </property>
+
+  <property>
+    <name>mapred.child.java.opts</name>
+    <value>{{ hadoop["mapred.child.java.opts"] }}</value>
+  </property>
+</configuration>

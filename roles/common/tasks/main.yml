@@ -1,0 +1,49 @@
+---
+# file: roles/common/tasks/main.yml
+
+- name: Make sure /etc/security/limits.conf has high max file descriptors (soft/hard)
+  template: src=limits.conf dest=/etc/security/limits.conf mode=0644
+
+- name: Make sure /etc/pam.d/common-session and /etc/pam.d/common-session-noninteractive contain pam_limits.so
+  lineinfile: name=$item regexp='pam_limits.so' line='session required pam_limits.so'
+  with_items:
+    - /etc/pam.d/common-session
+    - /etc/pam.d/common-session-noninteractive
+
+- name: Install commonly used Ubuntu packages
+  apt: pkg=$item
+  with_items:
+    - checkinstall
+    - htop
+    - sshguard
+    - curl
+    - net-tools
+    - zip
+
+- name: Create the hosts file for all machines
+  template: src=hosts dest=/etc/hosts
+
+- name: Make sure that the imfile module for rsyslog is loaded
+  template: src=rsyslog.conf dest=/etc/rsyslog.d/30-imfile.conf owner=root group=root mode=0644
+  tags: rsyslog
+  notify:
+    - restart rsyslog
+
+- name: Make sure NTP is installed
+  apt: pkg=ntp
+  tags: ntp
+
+- name: Make sure NTP is correctly configured in /etc/ntp.conf
+  template: src=ntp.conf dest=/etc/ntp.conf
+  notify:
+    - restart ntp
+  tags: ntp
+
+- name: Make sure NTP is running and enabled
+  service: name=ntp state=running enabled=yes
+  tags: ntp
+
+- name: Make sure Google Snappy is installed
+  shell: creates=/usr/local/lib/libsnappy.so.1.1.4 chdir=/tmp curl https://snappy.googlecode.com/files/snappy-1.1.0.tar.gz | tar xz && cd snappy-1.1.0 && ./configure && make && checkinstall -pkgname=snappy-1.1.0 --backup=no --deldoc=yes --fstrans=no --default
+  notify:
+    - ldconfig

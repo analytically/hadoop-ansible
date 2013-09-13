@@ -1,0 +1,8 @@
+---
+# file: roles/rsylog_fluentd/handlers/main.yml
+
+- name: restart rsyslog
+  service: name=rsyslog state=restarted
+
+- name: log installation message
+  shell: logger -t ansible "Configured rsyslog integration with Fluentd on {{ ansible_hostname }}"

@@ -1,0 +1,14 @@
+---
+# file: roles/cdh_hadoop_config/handlers/main.yml
+
+- name: restart hadoop-hdfs-namenode
+  service: name=hadoop-hdfs-namenode state=restarted
+  ignore_errors: yes
+
+- name: restart hadoop-hdfs-datanode
+  service: name=hadoop-hdfs-datanode state=restarted
+  ignore_errors: yes
+
+- name: restart hadoop-hdfs-journalnode
+  service: name=hadoop-hdfs-journalnode state=restarted
+  ignore_errors: yes

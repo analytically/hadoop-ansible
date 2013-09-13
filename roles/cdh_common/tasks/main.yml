@@ -1,0 +1,14 @@
+---
+# file: roles/cdh_common/tasks/main.yml
+
+- name: Make sure Cloudera CDH4 repository is included
+  apt_repository: repo='deb [arch=amd64] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib'
+  tags:
+    - hadoop
+    - hbase
+
+- name: Make sure Cloudera CDH4 key is present
+  apt_key: url=http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key
+  tags:
+    - hadoop
+    - hbase

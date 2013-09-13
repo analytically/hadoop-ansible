@@ -1,0 +1,45 @@
+---
+# file: roles/postfix_mandrill/tasks/main.yml
+
+- name: Make sure debconf has correct mailname for postfix
+  shell: executable=/bin/bash debconf-set-selections <<< "postfix postfix/mailname string {{ ansible_hostname }}.{{ postfix['domain'] }}"
+
+- name: Make sure debconf has correct mailer type for postfix
+  shell: executable=/bin/bash debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+
+- name: Make sure Postfix and it's dependencies are installed
+  apt: pkg=$item
+  with_items:
+     - postfix
+     - mailutils
+     - libsasl2-2
+     - libsasl2-modules
+     - ca-certificates
+
+- name: Make sure Mandrill credentials for Postfix are set up
+  template: src=sasl_passwd dest=/etc/postfix/sasl_passwd owner=root group=root mode=600
+
+- name: Make sure we run postmap to configure Postfix's lookup tables
+  shell: creates=/etc/postfix/sasl_passwd.db postmap /etc/postfix/sasl_passwd
+
+- name: Make sure Mandrill (Thawte Premium Server) SSL certificates are installed
+  shell: creates=/etc/postfix/cacert.pem cat /etc/ssl/certs/Thawte_Premium_Server_CA.pem | tee /etc/postfix/cacert.pem
+
+- name: Make sure Postfix is correctly configured
+  lineinfile: dest=/etc/postfix/main.cf regexp='$item' line='$item'
+  with_items:
+    - 'smtp_sasl_auth_enable = yes'
+    - 'smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd'
+    - 'smtp_sasl_security_options = noanonymous'
+    - 'smtp_use_tls = yes'
+    - "mydomain = {{ postfix['domain'] }}"
+    - 'inet_interfaces = 127.0.0.1' # Make sure Postfix listens to localhost only
+
+- name: Make sure Postfix's relayhost is correctly configured in /etc/postfix/main.cf
+  lineinfile: dest=/etc/postfix/main.cf regexp='mandrillapp' line='relayhost = [smtp.mandrillapp.com]'
+  notify:
+    - restart postfix
+    - send test email
+
+- name: Make sure unattended upgrades has config in /etc/apt/apt.conf.d/50unattended-upgrades (emails upon failure)
+  template: src=50unattended-upgrades dest=/etc/apt/apt.conf.d/50unattended-upgrades

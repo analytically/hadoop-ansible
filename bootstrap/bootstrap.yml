@@ -1,0 +1,23 @@
+---
+# Ansible Bootstrap
+# =================
+
+# Found on the ansible mailing list and adopted
+
+# Creates the 'ansibler' user and adds him to the 'sudo' group. Then concatenates ansible_rsa.pub to
+# the ~/.ssh/authorized_keys on the target instance with group 'sudo'. Then make sure that sudoers is set to allow
+# NOPASSWD from sudo, and run everything else with ansible with 'user: ansibler' and sudo:true. This way, all ansible
+# activity is logged, and we can specifically revoke the key (and terminate ansible's control) if either
+# (a) security is compromised or (b) we hand over control of an instance to a client.
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Make sure the user 'ansibler' exists
+      user: name=ansibler groups=sudo generate_ssh_key=yes shell=/bin/bash
+
+    - name: Make sure the 'ansibler' RSA SSH key is installed
+      authorized_key: user=ansibler key="{{ lookup('file', 'ansible_rsa.pub') }}"
+
+    - name: Make sure sudoers contains NOPASSWD for sudo group
+      shell: "creates=/etc/sudoers.bak chdir=/etc cp sudoers sudoers.bak && sed -ri -e 's/(%sudo\\s+ALL=\\(ALL:ALL\\))\\s+ALL/\\1 NOPASSWD: ALL/' /etc/sudoers"
