@@ -2,7 +2,7 @@
 # file: roles/ganglia_monitor/tasks/main.yml
 
 - name: Make sure Ganglia Monitor is installed
-  apt: name=$item
+  apt: name={{ item }}
   with_items:
     - sysstat
     - php5-cli

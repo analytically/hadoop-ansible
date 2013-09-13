@@ -2,7 +2,7 @@
 # file: roles/cdh_hadoop_common/tasks/main.yml
 
 - name: Make sure the base Hadoop packages are installed
-  apt: name=$item update_cache=yes
+  apt: name={{ item }} update_cache=yes
   with_items:
     - hadoop
     - hadoop-hdfs

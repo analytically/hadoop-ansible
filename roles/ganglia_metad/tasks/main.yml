@@ -2,7 +2,7 @@
 # file: roles/ganglia_metad/tasks/main.yml
 
 - name: Make sure Ganglia meta deamon and rrdtool are installed
-  apt: name=$item
+  apt: name={{ item }}
   with_items:
     - gmetad
     - rrdtool

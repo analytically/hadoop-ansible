@@ -5,13 +5,13 @@
   template: src=limits.conf dest=/etc/security/limits.conf mode=0644
 
 - name: Make sure /etc/pam.d/common-session and /etc/pam.d/common-session-noninteractive contain pam_limits.so
-  lineinfile: name=$item regexp='pam_limits.so' line='session required pam_limits.so'
+  lineinfile: name={{ item }} regexp='pam_limits.so' line='session required pam_limits.so'
   with_items:
     - /etc/pam.d/common-session
     - /etc/pam.d/common-session-noninteractive
 
 - name: Install commonly used Ubuntu packages
-  apt: pkg=$item
+  apt: pkg={{ item }}
   with_items:
     - checkinstall
     - htop

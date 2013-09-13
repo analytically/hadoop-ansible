@@ -2,7 +2,7 @@
 # file: roles/apache2/tasks/main.yml
 
 - name: Make sure Apache2 is available
-  apt: pkg=$item
+  apt: pkg={{ item }}
   with_items:
      - apache2
   tags: apache

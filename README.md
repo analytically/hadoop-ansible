@@ -1,7 +1,7 @@
 Hadoop (CDH) Ansible Playbook
 =============================
 
-This [Ansible](http://www.ansibleworks.com/) playbook will install a fully functional [Hadoop](http://hadoop.apache.org/)
+This [Ansible](http://www.ansibleworks.com/) Playbook installs a fully functional [Hadoop](http://hadoop.apache.org/)
 and [HBase](http://hbase.apache.org/) cluster running Java 7 (supported by CDH 4.4), together
 with [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
 and [Kibana3](http://three.kibana.org/) for monitoring and centralized log indexing.
@@ -32,7 +32,7 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
 
 Make sure you customize the following files:
 
-- [`postfix_mandrill/defaults/main.yml`](postfix_mandrill/defaults/main.yml) and customize it for your [Mandrill](http://mandrill.com/) account
+- [`postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) and customize it for your [Mandrill](http://mandrill.com/) account
 - [`group_vars/all`](group_vars/all)
 
 ## Install Hadoop

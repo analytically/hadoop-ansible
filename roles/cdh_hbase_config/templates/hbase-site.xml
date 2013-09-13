@@ -6,7 +6,7 @@
 <configuration>
     <property>
         <name>hbase.rootdir</name>
-        <value>hdfs://{{ hadoop['site_name'] }}/hbase</value>
+        <value>hdfs://{{ hadoop.site_name }}/hbase</value>
     </property>
 
     <property>

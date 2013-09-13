@@ -8,7 +8,7 @@
   shell: executable=/bin/bash debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 
 - name: Make sure Postfix and it's dependencies are installed
-  apt: pkg=$item
+  apt: pkg={{ item }}
   with_items:
      - postfix
      - mailutils
@@ -26,7 +26,7 @@
   shell: creates=/etc/postfix/cacert.pem cat /etc/ssl/certs/Thawte_Premium_Server_CA.pem | tee /etc/postfix/cacert.pem
 
 - name: Make sure Postfix is correctly configured
-  lineinfile: dest=/etc/postfix/main.cf regexp='$item' line='$item'
+  lineinfile: dest=/etc/postfix/main.cf regexp='{{ item }}' line='{{ item }}'
   with_items:
     - 'smtp_sasl_auth_enable = yes'
     - 'smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd'

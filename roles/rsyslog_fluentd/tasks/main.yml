@@ -2,7 +2,7 @@
 # file: roles/rsylog_fluentd/tasks/main.yml
 
 - name: Make sure fluentd is configured in /etc/rsyslog.d/
-  template: src=$item dest=/etc/rsyslog.d/$item owner=root group=root mode=0644
+  template: src={{ item }} dest=/etc/rsyslog.d/{{ item }} owner=root group=root mode=0644
   with_items:
     - 99-fluentd.conf
   tags:

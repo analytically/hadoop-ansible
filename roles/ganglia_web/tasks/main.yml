@@ -2,7 +2,7 @@
 # file: roles/ganglia_web/tasks/main.yml
 
 - name: Make sure the Ganglia web dependencies are installed
-  apt: name=$item
+  apt: name={{ item }}
   with_items:
     - apache2
     - php5

@@ -2,7 +2,7 @@
 # file: roles/oracle_jre/tasks/main.yml
 
 - name: Make sure Oracle Java 7 JRE is installed
-  apt: pkg=$item
+  apt: pkg={{ item }}
   with_items:
        - oracle-java7-jre
   tags: java
