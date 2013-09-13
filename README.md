@@ -1,8 +1,8 @@
 Hadoop (CDH) Ansible Playbook
 =============================
 
-This [Ansible](http://www.ansibleworks.com/) Playbook installs a fully functional [Hadoop](http://hadoop.apache.org/)
-and [HBase](http://hbase.apache.org/) cluster running Java 7 (supported by CDH 4.4), together
+This [Ansible](http://www.ansibleworks.com/) Playbook installs a [Hadoop](http://hadoop.apache.org/)
+and [HBase](http://hbase.apache.org/) cluster running on Java 7 (supported from CDH 4.4), together
 with [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
 and [Kibana3](http://three.kibana.org/) for monitoring and centralized log indexing.
 
