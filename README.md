@@ -49,7 +49,7 @@ To e.g. just install ZooKeeper (available tags: apache,configuration,elasticsear
 site.sh zookeeper
 ```
 
-## Bootstrapping your machines
+## Bootstrapping
 
 Paste your public SSH RSA key in `bootstrap/ansible_rsa.pub` and run `bootstrap.sh` to bootstrap the nodes
 specified in `bootstrap/hosts`. See [`bootstrap/bootstrap.yml`](bootstrap/bootstrap.yml) for more information.
