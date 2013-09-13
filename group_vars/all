@@ -1,4 +1,2 @@
+site_name: hydrodesk
 notify_email: info@example.com
-
-hadoop:
-  site_name: hydrodesk

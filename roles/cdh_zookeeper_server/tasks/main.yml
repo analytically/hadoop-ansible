@@ -8,24 +8,24 @@
     - zookeeper-server
   tags: zookeeper
 
-- name: Copy /etc/zookeeper/conf.dist to /etc/zookeeper/conf.{{ hadoop.site_name }}
-  shell: creates=/etc/zookeeper/conf.{{ hadoop.site_name }} cp -R -p /etc/zookeeper/conf.dist /etc/zookeeper/conf.{{ hadoop.site_name }}
+- name: Copy /etc/zookeeper/conf.dist to /etc/zookeeper/conf.{{ site_name }}
+  shell: creates=/etc/zookeeper/conf.{{ site_name }} cp -R -p /etc/zookeeper/conf.dist /etc/zookeeper/conf.{{ site_name }}
   tags: zookeeper
 
 - name: Ubuntu 'update-alternatives' install ZooKeeper configuration
-  shell: update-alternatives --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.{{ hadoop.site_name }} 50
+  shell: update-alternatives --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.{{ site_name }} 50
   tags: zookeeper
 
 - name: Ubuntu 'update-alternatives' set ZooKeeper configuration
-  shell: update-alternatives --set zookeeper-conf /etc/zookeeper/conf.{{ hadoop.site_name }}
+  shell: update-alternatives --set zookeeper-conf /etc/zookeeper/conf.{{ site_name }}
   tags: zookeeper
 
 - name: Make sure /var/lib/zookeeper exists
   file: path=/var/lib/zookeeper owner=zookeeper group=zookeeper state=directory
   tags: zookeeper
 
-- name: Make sure ZooKeeper has the correct configuration in /etc/zookeeper/conf.{{ hadoop.site_name }}
-  template: src=zoo.cfg dest=/etc/zookeeper/conf.{{ hadoop.site_name }}/zoo.cfg owner=zookeeper group=zookeeper mode=0644
+- name: Make sure ZooKeeper has the correct configuration in /etc/zookeeper/conf.{{ site_name }}
+  template: src=zoo.cfg dest=/etc/zookeeper/conf.{{ site_name }}/zoo.cfg owner=zookeeper group=zookeeper mode=0644
   notify:
     - restart zookeeper
   tags: zookeeper

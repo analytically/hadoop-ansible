@@ -7,25 +7,25 @@
     <!-- common server name -->
     <property>
         <name>dfs.nameservices</name>
-        <value>{{ hadoop.site_name }}</value>
+        <value>{{ site_name }}</value>
     </property>
 
     <!-- HA configuration, see http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/PDF/CDH4-High-Availability-Guide.pdf -->
     <property>
-        <name>dfs.ha.namenodes.{{ hadoop.site_name }}</name>
+        <name>dfs.ha.namenodes.{{ site_name }}</name>
         <value>{% for host in groups['namenodes'] %}nn{{ loop.index }}{% if not loop.last %},{% endif %}{% endfor %}</value>
     </property>
 
     {% for host in groups['namenodes'] %}
     <property>
-        <name>dfs.namenode.rpc-address.{{ hadoop.site_name }}.nn{{ loop.index }}</name>
+        <name>dfs.namenode.rpc-address.{{ site_name }}.nn{{ loop.index }}</name>
         <value>{{ host }}:8020</value>
     </property>
     {% endfor %}
 
     {% for host in groups['namenodes'] %}
     <property>
-        <name>dfs.namenode.http-address.{{ hadoop.site_name }}.nn{{ loop.index }}</name>
+        <name>dfs.namenode.http-address.{{ site_name }}.nn{{ loop.index }}</name>
         <value>0.0.0.0:50070</value>
     </property>
     {% endfor %}
@@ -33,12 +33,12 @@
     <!-- Storage for edits' files -->
     <property>
         <name>dfs.namenode.shared.edits.dir</name>
-        <value>qjournal://{% for host in groups['journalnodes'] %}{{ host }}:8485{% if not loop.last %};{% endif %}{% endfor %}/{{ hadoop.site_name }}</value>
+        <value>qjournal://{% for host in groups['journalnodes'] %}{{ host }}:8485{% if not loop.last %};{% endif %}{% endfor %}/{{ site_name }}</value>
     </property>
 
     <!-- Client failover -->
     <property>
-        <name>dfs.client.failover.proxy.provider.{{ hadoop.site_name }}</name>
+        <name>dfs.client.failover.proxy.provider.{{ site_name }}</name>
         <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
     </property>
 
