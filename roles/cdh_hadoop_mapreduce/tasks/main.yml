@@ -1,0 +1,5 @@
+---
+
+- name: Make sure the hadoop-mapreduce service is installed
+  apt: name=hadoop-mapreduce
+  tags: hadoop

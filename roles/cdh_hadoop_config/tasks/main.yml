@@ -16,6 +16,8 @@
     - hdfs-site.xml
     - org-xerial-snappy.properties
     - slaves
+    - mapred-site.xml
+    - yarn-site.xml
   notify:
     - restart hadoop-hdfs-namenode
     - restart hadoop-hdfs-journalnode

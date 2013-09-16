@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+
+    <property>
+        <name>mapreduce.jobhistory.address</name>
+        <value>{{ hostvars[groups['historyserver'][0]]['ansible_hostname'] }}:10020</value>
+    </property>
+
+    <property>
+        <name>mapreduce.jobhistory.webapp.address</name>
+        <value>{{ hostvars[groups['historyserver'][0]]['ansible_hostname'] }}:19888</value>
+    </property>
+
+    <property>
+        <name>yarn.web-proxy.address</name>
+        <value>{{ hostvars[groups['historyserver'][0]]['ansible_hostname'] }}:8088</value>
+    </property>
+</configuration>

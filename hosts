@@ -19,14 +19,17 @@ hslave01
 hslave02
 hslave03
 
-[jobtrackers]
-# Not needed for HBase
+[resourcemanager]
+hmaster01
 
 [datanodes]
 hslave[01:10]
 
-[tasktrackers]
-# Not needed for HBase
+[nodemanagers:children]
+datanodes
+
+[historyserver]
+hslave01
 
 # HBase Nodes
 # ===========
@@ -46,10 +49,10 @@ monitor01
 [masters:children]
 zookeepers
 namenodes
-jobtrackers
+resourcemanager
 hbase_masters
 
 [slaves:children]
 datanodes
-tasktrackers
+nodemanagers
 regionservers

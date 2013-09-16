@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 
-127.0.0.1 {{ inventory_hostname }} localhost
+127.0.0.1 localhost
 
 {% for host in groups['all'] %}
 {{ hostvars[host].ansible_default_ipv4.address }} {{ hostvars[host].ansible_hostname }}

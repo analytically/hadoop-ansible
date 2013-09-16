@@ -29,7 +29,7 @@
 
 # Hadoop
 
-- hosts: zookeepers:journalnodes:hbase_masters:regionservers
+- hosts: zookeepers:journalnodes:resourcemanager:nodemanagers:historyserver:hbase_masters:regionservers
   user: ansibler
   sudo: true
   roles:
@@ -132,6 +132,12 @@
   roles:
     - cdh_hadoop_datanode
 
+- hosts: nodemanagers
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_mapreduce
+
 - hosts: hbase_masters:regionservers
   user: ansibler
   sudo: true
@@ -144,16 +150,55 @@
   sudo: true
   sudo_user: hdfs
   tasks:
+    - name: Make sure a /tmp directory exists on the cluster
+      shell: creates=/data/dfs/.tmpdircreated hadoop fs -mkdir /tmp && touch /data/dfs/.tmpdircreated
+      tags:
+        - hadoop
+    - name: Make sure the /tmp directory has the correct permissions
+      shell: creates=/data/dfs/.tmpdirchowned sleep 5 && hadoop fs -chmod -R 1777 /tmp && touch /data/dfs/.tmpdirchowned
+      tags:
+        - hadoop
+    - name: Make sure a /user/history directory exists on the cluster
+      shell: creates=/data/dfs/.historydircreated hadoop fs -mkdir /user/history && touch /data/dfs/.historydircreated
+      tags:
+        - hadoop
+    - name: Make sure the /user/history directory has the correct permissions
+      shell: creates=/data/dfs/.historydirchmodded sleep 5 && hadoop fs -chmod -R 1777 /user/history && touch /data/dfs/.historydirchmodded
+      tags:
+        - hadoop
+    - name: Make sure the /user/history directory has the correct owner
+      shell: creates=/data/dfs/.historydirchowned sleep 5 && hadoop fs -chown yarn /user/history && touch /data/dfs/.historydirchowned
+      tags:
+        - hadoop
     - name: Make sure a /hbase directory exists on the cluster
       shell: creates=/data/dfs/.hbasedircreated hadoop fs -mkdir /hbase && touch /data/dfs/.hbasedircreated
       tags:
         - hadoop
         - hbase
-    - name: Make sure the /hbase directory has the correct permissions
+    - name: Make sure the /hbase directory has the correct owner
       shell: creates=/data/dfs/.hbasedirchowned sleep 5 && hadoop fs -chown hbase:hbase /hbase && touch /data/dfs/.hbasedirchowned
       tags:
         - hadoop
         - hbase
+
+- hosts: resourcemanager
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_yarn_resourcemanager
+
+- hosts: nodemanagers
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_yarn_nodemanager
+
+- hosts: historyserver
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hadoop_mapreduce_historyserver
+    - cdh_hadoop_yarn_proxyserver
 
 - hosts: hbase_masters
   user: ansibler

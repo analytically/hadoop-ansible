@@ -1,0 +1,13 @@
+---
+
+- name: Make sure the /data/yarn/local directory exists
+  file: path=/data/yarn/local owner=yarn group=yarn state=directory
+  tags: hadoop
+
+- name: Make sure the /data/yarn/logs directory exists
+  file: path=/data/yarn/logs owner=yarn group=yarn state=directory
+  tags: hadoop
+
+- name: Make sure the hadoop-yarn-nodemanager service is installed
+  apt: name=hadoop-yarn-nodemanager
+  tags: hadoop

@@ -6,6 +6,7 @@
   with_items:
     - hadoop
     - hadoop-hdfs
+    - hadoop-yarn
   tags: hadoop
 
 - name: Make sure the /data directory exists
