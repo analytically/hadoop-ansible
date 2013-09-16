@@ -69,6 +69,8 @@ specified in `bootstrap/hosts`. See [`bootstrap/bootstrap.yml`](bootstrap/bootst
 
 ![zookeeper](images/zookeeper.png)
 
+![hmaster01](images/hmaster01.png)
+
 ![ganglia](images/ganglia.png)
 
 ![kibana](images/kibana.png)
