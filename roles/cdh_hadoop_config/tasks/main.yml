@@ -18,6 +18,7 @@
     - slaves
     - mapred-site.xml
     - yarn-site.xml
+    - fair-scheduler.xml
   notify:
     - restart hadoop-hdfs-namenode
     - restart hadoop-hdfs-journalnode

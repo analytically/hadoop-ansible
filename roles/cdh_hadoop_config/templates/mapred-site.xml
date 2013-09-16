@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- {{ ansible_managed }} -->
 
 <configuration>
     <property>
@@ -21,5 +22,29 @@
     <property>
         <name>yarn.web-proxy.address</name>
         <value>{{ hostvars[groups['historyserver'][0]]['ansible_hostname'] }}:8088</value>
+    </property>
+
+    <!-- MapReduce intermediate compression -->
+    <property>
+        <name>mapreduce.map.output.compress</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>mapreduce.map.output.compress.codec</name>
+        <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+    </property>
+
+    <!-- MapReduce final output compression -->
+    <property>
+        <name>mapreduce.output.fileoutputformat.compress</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>mapred.output.fileoutputformat.compress.codec</name>
+        <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+    </property>
+    <property>
+        <name>mapreduce.output.fileoutputformat.compress.type</name>
+        <value>BLOCK</value>
     </property>
 </configuration>
