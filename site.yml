@@ -33,7 +33,7 @@
   user: ansibler
   sudo: true
   roles:
-    - oracle_jre
+    - oracle_jdk
     - cdh_common
 
 - hosts: zookeepers

@@ -35,6 +35,11 @@ Make sure you customize the following files:
 - [`postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) and customize it for your [Mandrill](http://mandrill.com/) account
 - [`group_vars/all`](group_vars/all)
 
+## Running on JDK 1.6 instead
+
+In [`roles/oab_java/tasks/main.yml`](roles/oab_java/tasks/main.yml) remove `-7` from `script: oab-java.sh -s -7`. This
+will then install the latest Oracle JDK 1.6 release.
+
 ## Install Hadoop
 
 To run Ansible:
