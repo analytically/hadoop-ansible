@@ -22,7 +22,12 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
   - [`cdh_hbase_config`](roles/cdh_hbase_config/) - common configuration shared by all HBase nodes
   - [`cdh_hadoop_datanode`](roles/cdh_hadoop_datanode/) - installs Hadoop DataNode
   - [`cdh_hadoop_journalnode`](roles/cdh_hadoop_journalnode/) - installs Hadoop JournalNode
+  - [`cdh_hadoop_mapreduce`](roles/cdh_hadoop_mapreduce/) - installs Hadoop MapReduce
+  - [`cdh_hadoop_mapreduce_historyserver`](roles/cdh_hadoop_mapreduce_historyserver/) - installs Hadoop MapReduce history server
   - [`cdh_hadoop_namenode`](roles/cdh_hadoop_namenode/) - installs Hadoop NameNode
+  - [`cdh_hadoop_yarn_nodemanager`](roles/cdh_hadoop_yarn_nodemanager/) - installs Hadoop YARN node manager
+  - [`cdh_hadoop_yarn_proxyserver`](roles/cdh_hadoop_yarn_proxyserver/) - installs Hadoop YARN proxy server
+  - [`cdh_hadoop_yarn_resourcemanager`](roles/cdh_hadoop_yarn_resourcemanager/) - installs Hadoop YARN resource manager
   - [`cdh_hadoop_zkfc`](roles/cdh_hadoop_zkfc/) - installs Hadoop Zookeeper Failover Controller
   - [`cdh_hbase_master`](roles/cdh_hbase_master/) - installs HBase-Master
   - [`cdh_hbase_regionserver`](roles/cdh_hbase_regionserver/) - installs HBase RegionServer
@@ -32,8 +37,9 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
 
 Make sure you customize the following files:
 
-- [`postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) and customize it for your [Mandrill](http://mandrill.com/) account
-- [`group_vars/all`](group_vars/all)
+- [`group_vars/all`](group_vars/all) - site_name and notify_email
+- [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
+- [`roles/cdh_hadoop_config/defaults/main.yml`](roles/cdh_hadoop_config/defaults/main.yml) - Hadoop settings
 
 ## Running on JDK 1.6 instead
 

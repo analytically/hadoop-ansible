@@ -1,4 +1,5 @@
 ---
+# file: roles/cdh_hadoop_yarn_nodemanager/tasks/main.yml
 
 - name: Make sure the /data/yarn/local directory exists
   file: path=/data/yarn/local owner=yarn group=yarn state=directory
