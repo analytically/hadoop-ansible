@@ -1,5 +1,5 @@
-Hadoop (CDH) Ansible Playbook
-=============================
+Hadoop Ansible Playbook
+=======================
 
 [Ansible](http://www.ansibleworks.com/) Playbook that installs a [Hadoop](http://hadoop.apache.org/) (YARN)
 and [HBase](http://hbase.apache.org/) cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Release-Notes/Whats_New_in_4-4.html)), together
@@ -10,9 +10,9 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
 
 ## Requirements
 
-  - Ansible 1.3+
+  - Ansible 1.3
   - Ubuntu nodes (currently only tested on 13.04)
-  - `ansibler` user in sudo group without sudo password prompt (see Bootstrap section below)
+  - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
 ### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
 
@@ -51,14 +51,14 @@ will then install the latest Oracle JDK 1.6 release.
 To run Ansible:
 
 ```
-site.sh
+./site.sh
 ```
 
 To e.g. just install ZooKeeper (available tags: apache, configuration, elasticsearch, fluentd, ganglia, hadoop,
 hannibal, hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 
 ```
-site.sh zookeeper
+./site.sh zookeeper
 ```
 
 ## Performance testing
