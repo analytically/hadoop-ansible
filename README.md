@@ -14,7 +14,7 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
   - Ubuntu nodes (currently only tested on 13.04)
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrap section below)
 
-### Cloudera ([CDH 4.4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
+### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
 
   - [`cdh_common`](roles/cdh_common/) - sets up Cloudera's Ubuntu repository and key
   - [`cdh_hadoop_common`](roles/cdh_hadoop_cmmon/) - common packages shared by all Hadoop/HBase nodes
@@ -63,14 +63,14 @@ site.sh zookeeper
 
 ## Performance testing
 
-Instructions on how to test the performance of your own cluster.
+Instructions on how to test the performance of your CDH4 cluster.
 
   - Login into one of the machines.
   - Change to the `hdfs` user: `sudo su - hdfs`
   - Set HADOOP_MAPRED_HOME: `export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce`
   - `cd /usr/lib/hadoop-mapreduce`
 
-#### TeraSort
+#### TeraGen and TeraSort
 
   - `hadoop jar hadoop-mapreduce-examples.jar teragen -Dmapred.map.tasks=1000 10000000000 /tera/in` to run TeraGen
   - `hadoop jar hadoop-mapreduce-examples.jar terasort /tera/in /tera/out` to run TeraSort
