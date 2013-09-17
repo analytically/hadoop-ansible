@@ -61,16 +61,23 @@ hannibal, hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 site.sh zookeeper
 ```
 
-## Running TeraGen/TeraSort
+## Performance testing
 
-Since it's badly documented, here instructions on how to run the TeraSort on your own cluster.
+Instructions on how to test the performance of your own cluster.
 
-- Login into one of the machines.
-- Change to the `hdfs` user: `sudo su - hdfs`
-- Set HADOOP_MAPRED_HOME: `export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce`
-- `cd /usr/lib/hadoop-mapreduce`
-- `hadoop jar hadoop-mapreduce-examples.jar teragen -Dmapred.map.tasks=1000 10000000000 /tera/in` to run TeraGen
-- `hadoop jar hadoop-mapreduce-examples.jar terasort /tera/in /tera/out` to run TeraSort
+  - Login into one of the machines.
+  - Change to the `hdfs` user: `sudo su - hdfs`
+  - Set HADOOP_MAPRED_HOME: `export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce`
+  - `cd /usr/lib/hadoop-mapreduce`
+
+#### TeraSort
+
+  - `hadoop jar hadoop-mapreduce-examples.jar teragen -Dmapred.map.tasks=1000 10000000000 /tera/in` to run TeraGen
+  - `hadoop jar hadoop-mapreduce-examples.jar terasort /tera/in /tera/out` to run TeraSort
+
+#### DFSIO
+
+  - `hadoop jar hadoop-mapreduce-client-jobclient-2.0.0-cdh4.4.0-tests.jar TestDFSIO -write`
 
 ## Bootstrapping
 
