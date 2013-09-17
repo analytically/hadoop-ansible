@@ -9,4 +9,4 @@ hadoop:
     max_xcievers: 4096
 
     # The Hadoop DataNode heap size
-    heapsize: 8192
+    heapsize: 12278

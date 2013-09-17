@@ -89,16 +89,19 @@
     <property>
         <name>dfs.datanode.max.xcievers</name>
         <value>{{ hadoop['max_xcievers'] }}</value>
+        <final>true</final>
     </property>
 
     <property>
         <name>dfs.namenode.handler.count</name>
         <value>40</value>
+        <final>true</final>
     </property>
 
     <property>
         <name>dfs.datanode.handler.count</name>
         <value>8</value>
+        <final>true</final>
     </property>
 
     <property>
@@ -114,5 +117,20 @@
     <property>
         <name>dfs.namenode.stale.datanode.interval</name>
         <value>30000</value>
+    </property>
+
+    <property>
+        <name>dfs.client.read.shortcircuit</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>dfs.domain.socket.path</name>
+        <value>/var/run/hadoop-hdfs/dn._PORT</value>
+    </property>
+
+    <property>
+        <name>dfs.client.file-block-storage-locations.timeout</name>
+        <value>3000</value>
     </property>
 </configuration>

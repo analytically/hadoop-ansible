@@ -1,7 +1,7 @@
 Hadoop (CDH) Ansible Playbook
 =============================
 
-This [Ansible](http://www.ansibleworks.com/) Playbook installs a [Hadoop](http://hadoop.apache.org/) (YARN)
+[Ansible](http://www.ansibleworks.com/) Playbook that installs a [Hadoop](http://hadoop.apache.org/) (YARN)
 and [HBase](http://hbase.apache.org/) cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Release-Notes/Whats_New_in_4-4.html)), together
 with [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
 and [Kibana3](http://three.kibana.org/) for monitoring and centralized log indexing.
@@ -54,11 +54,23 @@ To run Ansible:
 site.sh
 ```
 
-To e.g. just install ZooKeeper (available tags: apache,configuration,elasticsearch,fluentd,ganglia,hadoop,hannibal,hbase,java,kibana,ntp,rsyslog,tdagent,zookeeper):
+To e.g. just install ZooKeeper (available tags: apache, configuration, elasticsearch, fluentd, ganglia, hadoop,
+hannibal, hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 
 ```
 site.sh zookeeper
 ```
+
+## Running TeraGen/TeraSort
+
+Since it's badly documented, here instructions on how to run the TeraSort on your own cluster.
+
+- Login into one of the machines.
+- Change to the `hdfs` user: `sudo su - hdfs`
+- Set HADOOP_MAPRED_HOME: `export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce`
+- `cd /usr/lib/hadoop-mapreduce`
+- `hadoop jar hadoop-mapreduce-examples.jar teragen -Dmapred.map.tasks=1000 10000000000 /tera/in` to run TeraGen
+- `hadoop jar hadoop-mapreduce-examples.jar terasort /tera/in /tera/out` to run TeraSort
 
 ## Bootstrapping
 
