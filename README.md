@@ -1,10 +1,10 @@
 Hadoop Ansible Playbook
 =======================
 
-[Ansible](http://www.ansibleworks.com/) Playbook that installs a [Hadoop](http://hadoop.apache.org/) (YARN)
-and [HBase](http://hbase.apache.org/) cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Release-Notes/Whats_New_in_4-4.html)), together
+[Ansible](http://www.ansibleworks.com/) Playbook that installs a [Hadoop](http://hadoop.apache.org/)
+cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Release-Notes/Whats_New_in_4-4.html)),
 with [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
-and [Kibana3](http://three.kibana.org/) for monitoring and centralized log indexing.
+and [Kibana 3](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
 
 Follow [@analytically](http://twitter.com/analytically) for updates.
 
@@ -44,7 +44,7 @@ Make sure you customize the following files:
 ## Running on JDK 1.6 instead
 
 In [`roles/oab_java/tasks/main.yml`](roles/oab_java/tasks/main.yml) remove `-7` from `script: oab-java.sh -s -7`. This
-will then install the latest Oracle JDK 1.6 release.
+will install Oracle JDK 1.6 instead of 1.7.
 
 ## Install Hadoop
 
@@ -65,7 +65,7 @@ hannibal, hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 
 Instructions on how to test the performance of your CDH4 cluster.
 
-  - Login into one of the machines.
+  - SSH into one of the machines.
   - Change to the `hdfs` user: `sudo su - hdfs`
   - Set HADOOP_MAPRED_HOME: `export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce`
   - `cd /usr/lib/hadoop-mapreduce`
