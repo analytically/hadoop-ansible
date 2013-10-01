@@ -14,7 +14,9 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
   - Ubuntu nodes (currently only tested on 13.04)
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
-##### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
+### Available Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
+
+If you're assembling your own playbook, these roles are available for you to reuse:
 
   - [`cdh_common`](roles/cdh_common/) - sets up Cloudera's Ubuntu repository and key
   - [`cdh_hadoop_common`](roles/cdh_hadoop_cmmon/) - common packages shared by all Hadoop/HBase nodes
