@@ -8,13 +8,13 @@ and [Kibana 3](http://www.elasticsearch.org/overview/kibana/) for monitoring and
 
 Follow [@analytically](http://twitter.com/analytically) for updates.
 
-## Requirements
+### Requirements
 
   - Ansible 1.3
   - Ubuntu nodes (currently only tested on 13.04)
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
-### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
+##### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
 
   - [`cdh_common`](roles/cdh_common/) - sets up Cloudera's Ubuntu repository and key
   - [`cdh_hadoop_common`](roles/cdh_hadoop_cmmon/) - common packages shared by all Hadoop/HBase nodes
@@ -33,7 +33,7 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
   - [`cdh_hbase_regionserver`](roles/cdh_hbase_regionserver/) - installs HBase RegionServer
   - [`cdh_zookeeper_server`](roles/cdh_zookeeper_server/) - installs ZooKeeper Server
 
-## Configure
+### Configure
 
 Make sure you customize the following files:
 
@@ -41,12 +41,12 @@ Make sure you customize the following files:
 - [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
 - [`roles/cdh_hadoop_config/defaults/main.yml`](roles/cdh_hadoop_config/defaults/main.yml) - Hadoop settings
 
-## Running on JDK 1.6 instead
+##### Running on JDK 1.6 instead
 
 In [`roles/oab_java/tasks/main.yml`](roles/oab_java/tasks/main.yml) remove `-7` from `script: oab-java.sh -s -7`. This
 will install Oracle JDK 1.6 instead of 1.7.
 
-## Install Hadoop
+### Installing Hadoop
 
 To run Ansible:
 
@@ -54,14 +54,14 @@ To run Ansible:
 ./site.sh
 ```
 
-To e.g. just install ZooKeeper (available tags: apache, configuration, elasticsearch, fluentd, ganglia, hadoop,
-hannibal, hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
+To e.g. just install ZooKeeper, add the `zookeeper` tag as argument (available tags: apache, configuration, elasticsearch, fluentd, ganglia, hadoop,
+hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 
 ```
 ./site.sh zookeeper
 ```
 
-## Performance testing
+### Performance testing
 
 Instructions on how to test the performance of your CDH4 cluster.
 
@@ -70,21 +70,21 @@ Instructions on how to test the performance of your CDH4 cluster.
   - Set HADOOP_MAPRED_HOME: `export HADOOP_MAPRED_HOME=/usr/lib/hadoop-mapreduce`
   - `cd /usr/lib/hadoop-mapreduce`
 
-#### TeraGen and TeraSort
+##### TeraGen and TeraSort
 
   - `hadoop jar hadoop-mapreduce-examples.jar teragen -Dmapred.map.tasks=1000 10000000000 /tera/in` to run TeraGen
   - `hadoop jar hadoop-mapreduce-examples.jar terasort /tera/in /tera/out` to run TeraSort
 
-#### DFSIO
+##### DFSIO
 
   - `hadoop jar hadoop-mapreduce-client-jobclient-2.0.0-cdh4.4.0-tests.jar TestDFSIO -write`
 
-## Bootstrapping
+### Bootstrapping
 
 Paste your public SSH RSA key in `bootstrap/ansible_rsa.pub` and run `bootstrap.sh` to bootstrap the nodes
 specified in `bootstrap/hosts`. See [`bootstrap/bootstrap.yml`](bootstrap/bootstrap.yml) for more information.
 
-## Screenshots
+### Screenshots
 
 ![zookeeper](images/zookeeper.png)
 
