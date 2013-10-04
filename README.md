@@ -63,6 +63,17 @@ hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 ./site.sh zookeeper
 ```
 
+#### What else is installed?
+
+  - [Htop](http://htop.sourceforge.net/)
+  - [Sshguard](http://www.sshguard.net/)
+  - curl, checkinstall, net-tools, zip
+  - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
+  - [Google Snappy 1.1.0](https://code.google.com/p/snappy/)
+  - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
+  - [local 'apt' repository for Oracle Java packages](https://github.com/flexiondotorg/oab-java6)
+  - unattended upgrades [email to inform success/failure](roles/postfix_mandrill/templates/50unattended-upgrades)
+
 ### Performance testing
 
 Instructions on how to test the performance of your CDH4 cluster.
