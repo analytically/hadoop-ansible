@@ -16,7 +16,7 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
 
 ### Available Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
 
-If you're assembling your own playbook, these roles are available for you to reuse:
+If you're assembling your own Hadoop playbook, these roles are available for you to reuse:
 
   - [`cdh_common`](roles/cdh_common/) - sets up Cloudera's Ubuntu repository and key
   - [`cdh_hadoop_common`](roles/cdh_hadoop_cmmon/) - common packages shared by all Hadoop/HBase nodes
