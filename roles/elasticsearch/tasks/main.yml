@@ -6,9 +6,9 @@
   tags: elasticsearch
 
 - name: Make sure the ElasticSearch head plugin is installed
-  shell: creates=/usr/share/elasticsearch/plugins/head/_site/index.html chdir=/usr/share/elasticsearch/bin ./plugin -install mobz/elasticsearch-head
+  shell: creates=/usr/share/elasticsearch/plugins/head chdir=/usr/share/elasticsearch/bin ./plugin -install mobz/elasticsearch-head
   tags: elasticsearch
 
 - name: Make sure the ElasticSearch bigdesk plugin is installed
-  shell: creates=/usr/share/elasticsearch/plugins/bigdesk/_site/index.html chdir=/usr/share/elasticsearch/bin ./plugin -install lukas-vlcek/bigdesk
+  shell: creates=/usr/share/elasticsearch/plugins/bigdesk chdir=/usr/share/elasticsearch/bin ./plugin -install lukas-vlcek/bigdesk
   tags: elasticsearch
