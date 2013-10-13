@@ -6,6 +6,7 @@
   with_items:
     - hadoop
     - hadoop-hdfs
+    - hadoop-lzo-cdh4
     - hadoop-yarn
   tags: hadoop
 
