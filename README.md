@@ -99,6 +99,11 @@ Instructions on how to test the performance of your CDH4 cluster.
 Paste your public SSH RSA key in `bootstrap/ansible_rsa.pub` and run `bootstrap.sh` to bootstrap the nodes
 specified in `bootstrap/hosts`. See [`bootstrap/bootstrap.yml`](bootstrap/bootstrap.yml) for more information.
 
+### What about Pig, Hive, Flume, etc?
+
+You can manually install additional components after running this playbook. Follow the
+official [CDH4 Installation Guide](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Installation-Guide/CDH4-Installation-Guide.html).
+
 ### Screenshots
 
 ![zookeeper](images/zookeeper.png)
