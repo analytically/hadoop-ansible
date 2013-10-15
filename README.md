@@ -66,13 +66,15 @@ hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 #### What else is installed?
 
   - [Htop](http://htop.sourceforge.net/)
-  - [Sshguard](http://www.sshguard.net/)
+  - [SSHGuard](http://www.sshguard.net/)
   - curl, checkinstall, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
   - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
   - [local 'apt' repository for Oracle Java packages](https://github.com/flexiondotorg/oab-java6)
   - unattended upgrades [email to inform success/failure](roles/postfix_mandrill/templates/50unattended-upgrades)
-  - LZO  (Lempel–Ziv–Oberhumer) and [Google Snappy](https://code.google.com/p/snappy/) compression
+  - php5-cli, sysstat, hddtemp to report [device metrics](roles/ganglia_monitor/templates/device-metrics.php)
+    (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d).
+  - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy](https://code.google.com/p/snappy/) compression
 
 ### Performance testing
 
