@@ -3,10 +3,8 @@
 // {{ ansible_managed }}
 
 exec('iostat -d -x -k 10 2', $out);
-exec('hddtemp -n /dev/' . $data[$row][0], $temperature);
 
 $out = array_slice($out, ceil(count($out) / 2));
-
 $header = array();
 $data = array();
 
@@ -76,6 +74,7 @@ for ($row = 0; $row < count($data); $row++) {
         exec('gmetric -c /etc/ganglia/gmond.conf --name="' . $name . '" --title="' . $title . '" --value="' . $value . '" --type="float" --units="' . $unit . '" -g disk');
     }
 
+    exec('hddtemp -n /dev/' . $data[$row][0], $temperature);
     exec('gmetric -c /etc/ganglia/gmond.conf --name="' . $namePrefix . 'temp" --title="' . $titlePrefix . 'Temperature" --value="' . $temperature[0] . '" --type="int8" --units="degrees C" -g disk');
 }
 ?>
