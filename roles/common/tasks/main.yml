@@ -1,6 +1,9 @@
 ---
 # file: roles/common/tasks/main.yml
 
+- name: Upgrade all safe packages
+  apt: upgrade=safe
+
 - name: Make sure /etc/security/limits.conf has high max file descriptors (soft/hard)
   template: src=limits.conf dest=/etc/security/limits.conf mode=0644
 
@@ -20,6 +23,7 @@
     - net-tools
     - liblzo2-dev
     - zip
+    - intel-microcode
 
 - name: Create the hosts file for all machines
   template: src=hosts dest=/etc/hosts

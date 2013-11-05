@@ -10,6 +10,12 @@
     - postfix_mandrill
     - ganglia_monitor
 
+- hosts: 2_links_aggregated
+  user: ansibler
+  sudo: true
+  roles:
+    - { role: 2_aggregated_links, when: "ansible_interfaces|length > 2 and ansible_interfaces|length < 4 and 'bond0' not in ansible_interfaces" }
+
 - hosts: monitors[0]
   user: ansibler
   sudo: true

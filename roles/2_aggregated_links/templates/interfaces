@@ -1,0 +1,55 @@
+# {{ ansible_managed }}
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+{% if ansible_interfaces|length > 2 %}
+{% for interface in ansible_interfaces|sort if interface != 'lo' and interface != 'bond0' %}
+
+auto {{ interface }}
+iface {{ interface }} inet manual
+{% if loop.index > 1 %}
+pre-up sleep 3
+{% endif %}
+hardware-dma-ring-rx 4096
+hardware-dma-ring-tx 4096
+ethernet-pause-autoneg off
+ethernet-pause-rx off
+ethernet-pause-tx off
+bond-master bond0
+
+{% endfor %}
+
+# The primary (bonded) network interface
+auto bond0
+iface bond0 inet dhcp
+post-up /sbin/ifconfig bond0 mtu {{ mtu }}
+bond-mode {{ bond_mode }}
+bond-slaves none
+
+# Indicates that the devices are polled every 200ms to check for connection changes, such as
+# a link being down or a link duplex having changed
+bond-miimon 100
+
+# Sets the rate for transmitting LACPDU packets, 0 is once every 30 seconds, 1 is every 1 second, which allows our
+# network devices to automatically configure a single logical connection at the switch quickly - only applies to LACP
+#bond-lacp-rate 1
+
+# Instructs the driver to spread the load over interfaces based on the source and destination
+# IP address instead of MAC address
+bond-xmit-hash-policy layer3+4
+{% endif %}
+
+{% if ansible_interfaces|length == 2 %}
+
+# The primary network interface
+auto {{ ansible_default_ipv4.interface }}
+iface {{ ansible_default_ipv4.interface }} inet dhcp
+
+{% endif %}
+
+dns-nameservers 8.8.8.8 8.8.4.4

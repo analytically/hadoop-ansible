@@ -56,3 +56,16 @@ hbase_masters
 datanodes
 nodemanagers
 regionservers
+
+[2_link_aggregation_balance_alb:children]
+zookeepers
+namenodes
+journalnodes
+datanodes
+
+[2_link_aggregation_balance_alb:vars]
+mtu=9216
+bond_mode=balance-alb
+
+[2_links_aggregated:children]
+2_link_aggregation_balance_alb

@@ -11,7 +11,7 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
 ### Requirements
 
   - Ansible 1.3
-  - Ubuntu nodes (currently only tested on 13.04)
+  - Ubuntu (tested on 12.04.3, 13.04 and 13.10)
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
 ### Available Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
@@ -42,11 +42,6 @@ Make sure you customize the following files:
 - [`group_vars/all`](group_vars/all) - site_name and notify_email
 - [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
 - [`roles/cdh_hadoop_config/defaults/main.yml`](roles/cdh_hadoop_config/defaults/main.yml) - Hadoop settings
-
-##### Running on JDK 1.6 instead
-
-In [`roles/oab_java/tasks/main.yml`](roles/oab_java/tasks/main.yml) remove `-7` from `script: oab-java.sh -s -7`. This
-will install Oracle JDK 1.6 instead of 1.7.
 
 ### Installing Hadoop
 

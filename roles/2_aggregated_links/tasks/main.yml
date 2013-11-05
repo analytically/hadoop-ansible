@@ -1,0 +1,18 @@
+---
+# file: roles/2_aggregated_links/tasks/main.yml
+
+- name: Make sure /etc/network/interfaces has the correct bonding configuration
+  template: backup=yes src=interfaces dest=/etc/network/interfaces
+  tags: bonding
+
+- name: Make sure to reboot after bonding the interfaces
+  shell: sleep 2s && /sbin/reboot &
+  tags: bonding
+
+- name: Wait for the server to go down (reboot)
+  local_action: wait_for host=${inventory_hostname} port=22 state=stopped
+  tags: bonding
+
+- name: Wait for the server to come up
+  local_action: wait_for host=${inventory_hostname} port=22 delay=30
+  tags: bonding
