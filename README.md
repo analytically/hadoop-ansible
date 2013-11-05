@@ -43,6 +43,11 @@ Make sure you customize the following files:
 - [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
 - [`roles/cdh_hadoop_config/defaults/main.yml`](roles/cdh_hadoop_config/defaults/main.yml) - Hadoop settings
 
+#### Ganglia nodes
+
+Since we're using unicast mode for Ganglia (which significantly reduces the chatter), you may have to wait 60 seconds
+after node startup before it is seen/shows up in the web interface.
+
 ### Installing Hadoop
 
 To run Ansible:
@@ -62,14 +67,14 @@ hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 
   - [Htop](http://htop.sourceforge.net/)
   - [SSHGuard](http://www.sshguard.net/)
-  - curl, checkinstall, net-tools, zip
+  - curl, checkinstall, intel-microcode, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
   - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
   - [local 'apt' repository for Oracle Java packages](https://github.com/flexiondotorg/oab-java6)
   - unattended upgrades [email to inform success/failure](roles/postfix_mandrill/templates/50unattended-upgrades)
   - php5-cli, sysstat, hddtemp to report [device metrics](roles/ganglia_monitor/templates/device-metrics.php)
     (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d).
-  - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy](https://code.google.com/p/snappy/) compression
+  - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy 1.1.1](https://code.google.com/p/snappy/) compression
 
 ### Performance testing
 
