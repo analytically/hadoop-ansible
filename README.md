@@ -52,14 +52,14 @@ after node startup before it is seen/shows up in the web interface.
 
 To run Ansible:
 
-```
+```sh
 ./site.sh
 ```
 
 To e.g. just install ZooKeeper, add the `zookeeper` tag as argument (available tags: apache, configuration, elasticsearch, fluentd, ganglia, hadoop,
 hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 
-```
+```sh
 ./site.sh zookeeper
 ```
 
@@ -98,6 +98,23 @@ Instructions on how to test the performance of your CDH4 cluster.
 
 Paste your public SSH RSA key in `bootstrap/ansible_rsa.pub` and run `bootstrap.sh` to bootstrap the nodes
 specified in `bootstrap/hosts`. See [`bootstrap/bootstrap.yml`](bootstrap/bootstrap.yml) for more information.
+
+### Cluster-wide SSH
+
+If you feel like using Ansible to run cluster-wide commands is overkill, take a look at
+[ClusterSSH](http://sourceforge.net/apps/mediawiki/clusterssh/index.php?title=Main_Page).
+
+To install:
+
+```sh
+apt-get install clusterssh
+```
+
+To open a SSH connection to all nodes used in this playbook:
+
+```sh
+./cssh.sh
+```
 
 ### What about Pig, Hive, Flume, etc?
 
