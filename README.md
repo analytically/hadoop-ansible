@@ -65,6 +65,7 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, java, kibana, ntp, rsyslog, tdag
 
 #### What else is installed?
 
+  - [link aggregation](roles/2_aggregated_links/templates/interfaces) if 2 interfaces are available on the nodes (`balance-alb` by default)
   - [Htop](http://htop.sourceforge.net/)
   - [SSHGuard](http://www.sshguard.net/)
   - curl, checkinstall, intel-microcode, net-tools, zip
