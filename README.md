@@ -56,8 +56,8 @@ To run Ansible:
 ./site.sh
 ```
 
-To e.g. just install ZooKeeper, add the `zookeeper` tag as argument (available tags: apache, configuration, elasticsearch, fluentd, ganglia, hadoop,
-hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
+To e.g. just install ZooKeeper, add the `zookeeper` tag as argument (available tags: apache, bonding, configuration,
+elasticsearch, fluentd, ganglia, hadoop, hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
 
 ```sh
 ./site.sh zookeeper
