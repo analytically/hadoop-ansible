@@ -1,0 +1,8 @@
+---
+# file: roles/presto_coordinator/tasks/main.yml
+
+- name: Make sure Presto coordinator is configured
+  template: src={{ item }} dest=/usr/local/presto/etc/{{ item }} owner=root group=root mode=0644
+  with_items:
+    - config.properties
+  tags: presto

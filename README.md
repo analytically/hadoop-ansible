@@ -6,7 +6,7 @@ cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/con
 with [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
 and [Kibana 3](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
 
-Follow [@analytically](http://twitter.com/analytically) for updates.
+Follow [@analytically](http://twitter.com/analytically) for updates. `NEW: Installs [Facebook Presto](http://prestodb.io/)]!`
 
 ### Requirements
 
@@ -14,7 +14,7 @@ Follow [@analytically](http://twitter.com/analytically) for updates.
   - Ubuntu (tested on 12.04.3, 13.04 and 13.10)
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
-### Available Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
+### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
 
 If you're assembling your own Hadoop playbook, these roles are available for you to reuse:
 
@@ -33,7 +33,14 @@ If you're assembling your own Hadoop playbook, these roles are available for you
   - [`cdh_hadoop_zkfc`](roles/cdh_hadoop_zkfc/) - installs Hadoop Zookeeper Failover Controller
   - [`cdh_hbase_master`](roles/cdh_hbase_master/) - installs HBase-Master
   - [`cdh_hbase_regionserver`](roles/cdh_hbase_regionserver/) - installs HBase RegionServer
+  - [`cdh_hive_metastore`](roles/cdh_hive_metastore/) - installs Hive metastore (using PostgreSQL database)
   - [`cdh_zookeeper_server`](roles/cdh_zookeeper_server/) - installs ZooKeeper Server
+
+### [Facebook Presto](http://prestodb.io/) 0.52 Roles
+
+  - [`presto_common`](roles/presto_common/) - downloads Presto to /usr/local/presto and prepares the node configuration
+  - [`presto_coordinator`](roles/presto_coordinator/) - installs Presto coordinator config
+  - [`presto_worker`](roles/presto_worker/) - installs Presto worker config
 
 ### Configure
 
@@ -57,7 +64,7 @@ To run Ansible:
 ```
 
 To e.g. just install ZooKeeper, add the `zookeeper` tag as argument (available tags: apache, bonding, configuration,
-elasticsearch, fluentd, ganglia, hadoop, hbase, java, kibana, ntp, rsyslog, tdagent, zookeeper):
+elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, presto, rsyslog, tdagent, zookeeper):
 
 ```sh
 ./site.sh zookeeper

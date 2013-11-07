@@ -23,7 +23,7 @@ hslave03
 hmaster01
 
 [datanodes]
-hslave[01:10]
+hslave[01:08]
 
 [nodemanagers:children]
 datanodes
@@ -42,6 +42,25 @@ datanodes
 
 [monitors]
 monitor01
+
+# Hive Nodes
+# ==========
+
+[hive_metastore]
+hmaster02
+
+# Presto Nodes
+# ============
+
+[presto_coordinators]
+hmaster02
+
+[presto_workers]
+hslave09
+hslave10
+
+[presto_discovery]
+hmaster02
 
 # Groups
 # ======

@@ -52,7 +52,6 @@
   user: ansibler
   sudo: true
   roles:
-    - cdh_hadoop_common
     - cdh_hadoop_config
 
 - hosts: journalnodes
@@ -148,7 +147,6 @@
   user: ansibler
   sudo: true
   roles:
-    - cdh_hbase_common
     - cdh_hbase_config
 
 - hosts: namenodes[0]
@@ -217,3 +215,42 @@
   sudo: true
   roles:
     - cdh_hbase_regionserver
+
+- hosts: hive_metastore
+  user: ansibler
+  sudo: true
+  roles:
+    - postgresql_server
+    - cdh_hive_config
+
+- hosts: hive_metastore
+  user: ansibler
+  sudo: true
+  sudo_user: postgres
+  tasks:
+    - postgresql_user: user=hiveuser password=hive_{{ site_name }}
+      tags: hive
+    - postgresql_db: name=metastore
+      tags: hive
+    - shell: psql --dbname=metastore --file=/usr/lib/hive/scripts/metastore/upgrade/postgres/hive-schema-0.10.0.postgres.sql
+      tags: hive
+    - shell: psql --command="GRANT ALL PRIVILEGES ON DATABASE metastore TO hiveuser;"
+      tags: hive
+
+- hosts: hive_metastore
+  user: ansibler
+  sudo: true
+  roles:
+    - cdh_hive_metastore
+
+- hosts: presto_coordinators
+  user: ansibler
+  sudo: true
+  roles:
+    - presto_coordinator
+
+- hosts: presto_workers
+  user: ansibler
+  sudo: true
+  roles:
+    - presto_worker

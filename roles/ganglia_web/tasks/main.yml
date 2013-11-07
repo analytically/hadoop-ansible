@@ -9,19 +9,19 @@
     - rrdtool
   tags: ganglia
 
-- name: Make sure ganglia web is downloaded
+- name: Make sure ganglia-web is availabble at /var/www/ganglia
   shell: creates=/var/www/ganglia chdir=/var/www curl http://heanet.dl.sourceforge.net/project/ganglia/ganglia-web/3.5.10/ganglia-web-3.5.10.tar.gz | tar xz && mv ganglia-web-3.5.10 ganglia
   tags: ganglia
 
-- name: Make sure ganglia web makefile has the correct path
+- name: Make sure ganglia-web makefile has the correct path
   shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia sed -i "s=/var/www/html/ganglia=/var/www/ganglia=" Makefile
   tags: ganglia
 
-- name: Make sure ganglia web makefile has the correct path
+- name: Make sure ganglia-web makefile has the correct user
   shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia sed -i "s/APACHE_USER =  apache/APACHE_USER = www-data/" Makefile
   tags: ganglia
 
-- name: Make sure ganglia web is built
+- name: Make sure ganglia-web is installed (make install)
   shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia make install
   notify:
     - restart apache2

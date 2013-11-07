@@ -1,0 +1,6 @@
+---
+# file: roles/cdh_hive_config/handlers/main.yml
+
+- name: restart hive-metastore
+  service: name=hive-metastore state=restarted
+  ignore_errors: yes
