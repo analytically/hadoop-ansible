@@ -49,6 +49,6 @@
   tags: ntp
 
 - name: Make sure Google Snappy is installed
-  shell: creates=/usr/local/lib/libsnappy.so.1.2.0 chdir=/tmp curl https://snappy.googlecode.com/files/snappy-1.1.1.tar.gz | tar xz && cd snappy-1.1.1 && CFLAGS="-O2 -DNDEBUG" CXXFLAGS="-O2 -DNDEBUG" ./configure && make && checkinstall -pkgname=snappy-1.1.1 --backup=no --deldoc=yes --fstrans=no --default
+  shell: creates=/usr/local/lib/libsnappy.so.1.2.0 chdir=/tmp curl https://snappy.googlecode.com/files/snappy-1.1.1.tar.gz | tar xz && cd snappy-1.1.1 && CFLAGS="-funroll-loops -O2 -DNDEBUG" CXXFLAGS="-funroll-loops -O2 -DNDEBUG" ./configure && make && checkinstall -pkgname=snappy-1.1.1 --backup=no --deldoc=yes --fstrans=no --default
   notify:
     - ldconfig
