@@ -6,7 +6,7 @@ cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/con
 with [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
 and [Kibana 3](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
 
-Follow [@analytically](http://twitter.com/analytically) for updates. **NEW: Deploys [Hive](http://hive.apache.org) Metastore and [Facebook Presto](http://prestodb.io)]!**
+Follow [@analytically](http://twitter.com/analytically) for updates. **NEW: Deploys [Hive](http://hive.apache.org) Metastore and [Facebook Presto](http://prestodb.io)!**
 
 ### Requirements
 

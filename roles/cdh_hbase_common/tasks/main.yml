@@ -1,6 +1,6 @@
 ---
 # file: roles/cdh_hbase_common/tasks/main.yml
 
-- name: Make sure the base HBase packages is installed
+- name: Make sure the base HBase package is installed
   apt: name=hbase update_cache=yes
   tags: hbase
