@@ -36,7 +36,7 @@ If you're assembling your own Hadoop playbook, these roles are available for you
   - [`cdh_hive_metastore`](roles/cdh_hive_metastore/) - installs Hive metastore (using PostgreSQL database)
   - [`cdh_zookeeper_server`](roles/cdh_zookeeper_server/) - installs ZooKeeper Server
 
-### [Facebook Presto](http://prestodb.io/) 0.52 Roles
+### [Facebook Presto](http://prestodb.io/) Roles
 
   - [`presto_common`](roles/presto_common/) - downloads Presto to /usr/local/presto and prepares the node configuration
   - [`presto_coordinator`](roles/presto_coordinator/) - installs Presto coordinator config
