@@ -6,7 +6,7 @@ cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/con
 with [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
 and [Kibana 3](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
 
-Follow [@analytically](http://twitter.com/analytically) for updates. **NEW: Deploys [Hive](http://hive.apache.org) Metastore and [Facebook Presto](http://prestodb.io)!**
+Hire/Follow [@analytically](http://twitter.com/analytically). **NEW: Deploys [Hive](http://hive.apache.org) Metastore and [Facebook Presto](http://prestodb.io)!**
 
 ### Requirements
 
@@ -49,6 +49,8 @@ Make sure you customize the following files:
 - [`group_vars/all`](group_vars/all) - site_name and notify_email
 - [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
 - [`roles/cdh_hadoop_config/defaults/main.yml`](roles/cdh_hadoop_config/defaults/main.yml) - Hadoop settings
+- [`roles/presto_coordinator/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
+- [`roles/presto_worker/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
 
 #### Ganglia nodes
 
@@ -124,7 +126,7 @@ To open a SSH connection to all nodes used in this playbook:
 ./cssh.sh
 ```
 
-### What about Pig, Hive, Flume, etc?
+### What about Pig, Flume, etc?
 
 You can manually install additional components after running this playbook. Follow the
 official [CDH4 Installation Guide](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Installation-Guide/CDH4-Installation-Guide.html).
