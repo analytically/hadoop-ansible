@@ -57,7 +57,7 @@ Make sure you customize the following files:
 
 #### Adding hosts
 
-Edit the (hosts)[hosts] file and list hosts per group:
+Edit the [hosts](hosts) file and list hosts per group:
 
 ```
 [datanodes]
