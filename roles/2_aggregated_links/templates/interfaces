@@ -17,7 +17,6 @@ pre-up sleep 3
 {% endif %}
 hardware-dma-ring-rx 4096
 hardware-dma-ring-tx 4096
-# disable auto-negotiation and flow control
 ethernet-pause-autoneg off
 ethernet-pause-rx off
 ethernet-pause-tx off
@@ -28,15 +27,15 @@ bond-master bond0
 # The primary (bonded) network interface
 auto bond0
 iface bond0 inet dhcp
-post-up /sbin/ifconfig bond0 mtu {{ mtu }}
-bond-mode {{ bond_mode }}
+post-up /sbin/ifconfig bond0 mtu {{ bonding['mtu'] }}
+bond-mode {{ bonding['bond_mode'] }}
 bond-slaves none
 
 # Indicates that the devices are polled every 100ms to check for connection changes, such as
 # a link being down or a link duplex having changed
 bond-miimon 100
 
-{% if bond_mode equals "lacp" %}
+{% if bonding['bond_mode'] == 'lacp' %}
 # Sets the rate for transmitting LACPDU packets, 0 is once every 30 seconds, 1 is every 1 second, which allows our
 # network devices to automatically configure a single logical connection at the switch quickly
 bond-lacp-rate 1
