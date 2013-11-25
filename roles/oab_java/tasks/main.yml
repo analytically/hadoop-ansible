@@ -1,7 +1,7 @@
 ---
 # file: roles/oab_java/tasks/main.yml
 
-- name: Make sure a local 'apt' repository exists for Sun Java 6 and/or Oracle Java 7 packages
+- name: create a local 'apt' repository for Sun Java 6 and/or Oracle Java 7 packages
   script: oab-java.sh -s -7
   tags:
     - java

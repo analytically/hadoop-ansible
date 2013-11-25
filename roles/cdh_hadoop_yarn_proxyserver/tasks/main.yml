@@ -1,5 +1,6 @@
 ---
+# file: roles/cdh_hadoop_yarn_proxyserver/tasks/main.yml
 
-- name: Make sure the hadoop-yarn-proxyserver service is installed
+- name: install hadoop-yarn-proxyserver via apt
   apt: name=hadoop-yarn-proxyserver
   tags: hadoop

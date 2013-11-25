@@ -1,11 +1,11 @@
 ---
 # file: roles/cdh_hbase_config/tasks/main.yml
 
-- name: Copy /etc/hbase/conf.empty to /etc/hbase/conf.{{ site_name }}
+- name: copy /etc/hbase/conf.empty to /etc/hbase/conf.{{ site_name }}
   shell: creates=/etc/hbase/conf.{{ site_name }} cp -R -p /etc/hbase/conf.dist /etc/hbase/conf.{{ site_name }}
   tags: hbase
 
-- name: Make sure HBase has the correct configuration in /etc/hbase/conf.{{ site_name }}
+- name: configure HBase in /etc/hbase/conf.{{ site_name }}
   template: src={{ item }} dest=/etc/hbase/conf.{{ site_name }}/{{ item }} owner=root group=root mode=0644
   with_items:
     - hbase-env.sh
@@ -18,10 +18,10 @@
     - hbase
     - configuration
 
-- name: Ubuntu 'update-alternatives' install HBase configuration
+- name: run 'update-alternatives' to install HBase configuration
   shell: update-alternatives --install /etc/hbase/conf hbase-conf /etc/hbase/conf.{{ site_name }} 50
   tags: hbase
 
-- name: Ubuntu 'update-alternatives' set HBase configuration
+- name: run 'update-alternatives' to set HBase configuration
   shell: update-alternatives --set hbase-conf /etc/hbase/conf.{{ site_name }}
   tags: hbase

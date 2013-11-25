@@ -1,7 +1,7 @@
 Hadoop Ansible Playbook
 =======================
 
-[Ansible](http://www.ansibleworks.com/) Playbook that installs a [Hadoop](http://hadoop.apache.org/)
+[Ansible](http://www.ansibleworks.com/) Playbook that installs a CDH4 [Hadoop](http://hadoop.apache.org/)
 cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Release-Notes/Whats_New_in_4-4.html)),
 with [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
 and [Kibana 3](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
@@ -10,8 +10,8 @@ Hire/Follow [@analytically](http://twitter.com/analytically). **NEW: Deploys [Hi
 
 ### Requirements
 
-  - Ansible 1.3
-  - Ubuntu (tested on 12.04.3, 13.04 and 13.10)
+  - [Ansible](http://www.ansibleworks.com/) 1.3 or later
+  - 8+1 Ubuntu 12.04 LTS, 13.04 or 13.10 hosts
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
 ### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
@@ -19,9 +19,8 @@ Hire/Follow [@analytically](http://twitter.com/analytically). **NEW: Deploys [Hi
 If you're assembling your own Hadoop playbook, these roles are available for you to reuse:
 
   - [`cdh_common`](roles/cdh_common/) - sets up Cloudera's Ubuntu repository and key
-  - [`cdh_hadoop_common`](roles/cdh_hadoop_cmmon/) - common packages shared by all Hadoop/HBase nodes
+  - [`cdh_hadoop_common`](roles/cdh_hadoop_common/) - common packages shared by all Hadoop nodes
   - [`cdh_hadoop_config`](roles/cdh_hadoop_config/) - common configuration shared by all Hadoop nodes
-  - [`cdh_hbase_config`](roles/cdh_hbase_config/) - common configuration shared by all HBase nodes
   - [`cdh_hadoop_datanode`](roles/cdh_hadoop_datanode/) - installs Hadoop DataNode
   - [`cdh_hadoop_journalnode`](roles/cdh_hadoop_journalnode/) - installs Hadoop JournalNode
   - [`cdh_hadoop_mapreduce`](roles/cdh_hadoop_mapreduce/) - installs Hadoop MapReduce
@@ -31,8 +30,12 @@ If you're assembling your own Hadoop playbook, these roles are available for you
   - [`cdh_hadoop_yarn_proxyserver`](roles/cdh_hadoop_yarn_proxyserver/) - installs Hadoop YARN proxy server
   - [`cdh_hadoop_yarn_resourcemanager`](roles/cdh_hadoop_yarn_resourcemanager/) - installs Hadoop YARN resource manager
   - [`cdh_hadoop_zkfc`](roles/cdh_hadoop_zkfc/) - installs Hadoop Zookeeper Failover Controller
+  - [`cdh_hbase_common`](roles/cdh_hbase_common/) - common packages shared by all HBase nodes
+  - [`cdh_hbase_config`](roles/cdh_hbase_common/) - common configuration shared by all HBase nodes
   - [`cdh_hbase_master`](roles/cdh_hbase_master/) - installs HBase-Master
   - [`cdh_hbase_regionserver`](roles/cdh_hbase_regionserver/) - installs HBase RegionServer
+  - [`cdh_hive_common`](roles/cdh_hive_common/) - common packages shared by all Hive nodes
+  - [`cdh_hive_config`](roles/cdh_hive_config/) - common configuration shared by all Hive nodes
   - [`cdh_hive_metastore`](roles/cdh_hive_metastore/) - installs Hive metastore (using PostgreSQL database)
   - [`cdh_zookeeper_server`](roles/cdh_zookeeper_server/) - installs ZooKeeper Server
 
@@ -102,7 +105,7 @@ Instructions on how to test the performance of your CDH4 cluster.
 
 ##### DFSIO
 
-  - `hadoop jar hadoop-mapreduce-client-jobclient-2.0.0-cdh4.4.0-tests.jar TestDFSIO -write`
+  - `hadoop jar hadoop-mapreduce-client-jobclient-2.0.0-cdh4.5.0-tests.jar TestDFSIO -write`
 
 ### Bootstrapping
 

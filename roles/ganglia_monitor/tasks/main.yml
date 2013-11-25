@@ -1,7 +1,7 @@
 ---
 # file: roles/ganglia_monitor/tasks/main.yml
 
-- name: Make sure Ganglia Monitor is installed
+- name: install Ganglia Monitor and required packages via apt
   apt: name={{ item }}
   with_items:
     - sysstat
@@ -10,16 +10,16 @@
     - hddtemp
   tags: ganglia
 
-- name: Make sure our customized gmond.conf is available under /etc/ganglia/gmond.conf
+- name: configure gmond.conf in /etc/ganglia/gmond.conf
   template: src=gmond.conf dest=/etc/ganglia/gmond.conf owner=root group=root mode=0644
   tags: ganglia
   notify:
     - restart ganglia-monitor
 
-- name: Make sure the device-metrics script is available at /usr/local/sbin
+- name: install the device-metrics script at /usr/local/sbin
   template: src=device-metrics.php dest=/usr/local/sbin/device-metrics.php owner=root group=root mode=0644
   tags: ganglia
 
-- name: Make sure the device-metrics crontab is available at /etc/cron.d/device-metrics
+- name: install the device-metrics crontab at /etc/cron.d/device-metrics
   template: src=device-metrics.cron.d dest=/etc/cron.d/device-metrics owner=root group=root mode=644
   tags: ganglia

@@ -1,11 +1,11 @@
 ---
 # file: roles/cdh_hadoop_namenode/tasks/main.yml
 
-- name: Make sure hadoop-hdfs-namenode service is installed
+- name: install hadoop-hdfs-namenode via apt
   apt: name=hadoop-hdfs-namenode
   tags: hadoop
 
-- name: Make sure rsyslog is setup for hadoop-hdfs-namenode
+- name: configure rsyslog for hadoop-hdfs-namenode
   template: src=rsyslog.conf dest=/etc/rsyslog.d/60-hadoop-hdfs-namenode.conf owner=root group=root mode=0644
   tags: rsyslog
   notify:

@@ -1,14 +1,14 @@
 ---
 # file: roles/ganglia_metad/tasks/main.yml
 
-- name: Make sure Ganglia meta deamon and rrdtool are installed
+- name: install Ganglia meta deamon and rrdtool via apt
   apt: name={{ item }}
   with_items:
     - gmetad
     - rrdtool
   tags: ganglia
 
-- name: Make sure our customized gmetad.conf is available under /etc/ganglia/gmetad.conf
+- name: configure gmetad.conf in /etc/ganglia/gmetad.conf
   template: src=gmetad.conf dest=/etc/ganglia/gmetad.conf owner=root group=root mode=0644
   tags: ganglia
   notify:

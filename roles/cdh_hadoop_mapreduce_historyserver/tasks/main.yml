@@ -1,5 +1,5 @@
 ---
 
-- name: Make sure the hadoop-mapreduce-historyserver service is installed
+- name: install hadoop-mapreduce-historyserver via apt
   apt: name=hadoop-mapreduce-historyserver
   tags: hadoop

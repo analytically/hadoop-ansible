@@ -1,34 +1,34 @@
 ---
 # file: roles/presto_common/tasks/main.yml
 
-- name: Make sure the /data/presto directory exists
+- name: create the /data/presto directory
   file: path=/data/presto state=directory
   tags: presto
 
-- name: Make sure the /usr/local/presto directory exists
+- name: create the /usr/local/presto directory
   file: path=/usr/local/presto state=directory
   tags: presto
 
-- name: Make sure an /usr/local/presto/etc directory exists
+- name: create the /usr/local/presto/etc directory
   file: path=/usr/local/presto/etc state=directory
   tags: presto
 
-- name: Make sure an /usr/local/presto/etc/catalog directory exists
+- name: create the /usr/local/presto/etc/catalog directory
   file: path=/usr/local/presto/etc/catalog state=directory
   tags: presto
 
-- name: Make sure Presto is available at /usr/local/presto
+- name: install Presto at /usr/local/presto
   shell: creates=/usr/local/presto/bin/launcher chdir=/tmp curl http://search.maven.org/remotecontent?filepath=com/facebook/presto/presto-server/0.53/presto-server-0.53.tar.gz | tar xz && mv presto-server-0.53/* /usr/local/presto
   tags: presto
 
-- name: Make sure Presto is configured
+- name: configure Presto
   template: src={{ item }} dest=/usr/local/presto/etc/{{ item }} owner=root group=root mode=0644
   with_items:
     - node.properties
     - jvm.config
   tags: presto
 
-- name: Make sure Presto Hive Catalog is configured
+- name: configure Presto Hive Catalog
   template: src={{ item }} dest=/usr/local/presto/etc/catalog/{{ item }} owner=root group=root mode=0644
   with_items:
     - jmx.properties

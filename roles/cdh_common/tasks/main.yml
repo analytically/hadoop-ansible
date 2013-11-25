@@ -1,19 +1,24 @@
 ---
 # file: roles/cdh_common/tasks/main.yml
 
-- name: Make sure Cloudera CDH4 repository is included
+- name: install Google Snappy
+  shell: creates=/usr/local/lib/libsnappy.so.1.2.0 chdir=/tmp curl https://snappy.googlecode.com/files/snappy-1.1.1.tar.gz | tar xz && cd snappy-1.1.1 && CFLAGS="-funroll-loops -O2 -DNDEBUG" CXXFLAGS="-funroll-loops -O2 -DNDEBUG" ./configure && make && checkinstall -pkgname=snappy-1.1.1 --backup=no --deldoc=yes --fstrans=no --default
+  notify:
+    - ldconfig
+
+- name: add Cloudera CDH4 repository
   apt_repository: repo='deb [arch=amd64] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib'
   tags:
     - hadoop
     - hbase
 
-- name: Make sure Cloudera CDH4 GPL extras repository is included
+- name: add Cloudera CDH4 GPL extras repository
   apt_repository: repo='deb [arch=amd64] http://archive.cloudera.com/gplextras/ubuntu/precise/amd64/gplextras precise-gplextras4 contrib'
   tags:
     - hadoop
     - hbase
 
-- name: Make sure Cloudera CDH4 key is present
+- name: add Cloudera CDH4 key
   apt_key: url=http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key
   tags:
     - hadoop

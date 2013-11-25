@@ -1,15 +1,15 @@
 ---
 # file: roles/cdh_hadoop_datanode/tasks/main.yml
 
-- name: Make sure the /data/dfs/dn directory exists
+- name: create the /data/dfs/dn directory
   file: path=/data/dfs/dn owner=hdfs group=hdfs state=directory
   tags: hadoop
 
-- name: Make sure hadoop-hdfs-datanode service is installed
+- name: install hadoop-hdfs-datanode via apt
   apt: name=hadoop-hdfs-datanode
   tags: hadoop
 
-- name: Make sure rsyslog is setup for hadoop-hdfs-datanode
+- name: configure rsyslog for hadoop-hdfs-datanode
   template: src=rsyslog.conf dest=/etc/rsyslog.d/60-hadoop-hdfs-datanode.conf owner=root group=root mode=0644
   tags: rsyslog
   notify:

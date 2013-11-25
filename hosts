@@ -5,8 +5,6 @@
 hmaster01 zoo_id=1
 hmaster02 zoo_id=2
 hslave01 zoo_id=3
-hslave02 zoo_id=4
-hslave03 zoo_id=5
 
 [namenodes]
 hmaster01 ganglia_accept=true
@@ -16,14 +14,12 @@ hmaster02 ganglia_accept=true
 hmaster01
 hmaster02
 hslave01
-hslave02
-hslave03
 
 [resourcemanager]
 hmaster01
 
 [datanodes]
-hslave[01:08]
+hslave[01:06]
 
 [nodemanagers:children]
 datanodes
@@ -56,8 +52,8 @@ hmaster02
 hmaster02
 
 [presto_workers]
-hslave09
-hslave10
+hslave07
+hslave08
 
 # Groups
 # ======
@@ -78,10 +74,6 @@ zookeepers
 namenodes
 journalnodes
 datanodes
-
-[2_link_aggregation_balance_alb:vars]
-mtu=9216
-bond_mode=balance-alb
 
 [2_links_aggregated:children]
 2_link_aggregation_balance_alb

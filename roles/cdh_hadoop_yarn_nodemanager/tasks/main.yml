@@ -1,14 +1,14 @@
 ---
 # file: roles/cdh_hadoop_yarn_nodemanager/tasks/main.yml
 
-- name: Make sure the /data/yarn/local directory exists
+- name: create the /data/yarn/local directory
   file: path=/data/yarn/local owner=yarn group=yarn state=directory
   tags: hadoop
 
-- name: Make sure the /data/yarn/logs directory exists
+- name: create the /data/yarn/logs directory
   file: path=/data/yarn/logs owner=yarn group=yarn state=directory
   tags: hadoop
 
-- name: Make sure the hadoop-yarn-nodemanager service is installed
+- name: install hadoop-yarn-nodemanager via apt
   apt: name=hadoop-yarn-nodemanager
   tags: hadoop

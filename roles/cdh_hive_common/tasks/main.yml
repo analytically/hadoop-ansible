@@ -1,6 +1,6 @@
 ---
 # file: roles/cdh_hive_common/tasks/main.yml
 
-- name: Make sure the base Hive package is installed
+- name: install base Hive package via apt
   apt: name=hive update_cache=yes
   tags: hive

@@ -1,0 +1,5 @@
+---
+# file: roles/cdh_common/handlers/main.yml
+
+- name: ldconfig
+  command: ldconfig

@@ -9,6 +9,3 @@
 
 - name: restart rsyslog
   service: name=rsyslog state=restarted
-
-- name: ldconfig
-  command: ldconfig

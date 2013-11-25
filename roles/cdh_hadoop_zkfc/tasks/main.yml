@@ -1,6 +1,6 @@
 ---
 # file: roles/cdh_hadoop_zkfc/tasks/main.yml
 
-- name: Make sure the hadoop-hdfs-zkfc (Hadoop HDFS Zookeeper Failover Controller) service is installed
+- name: install hadoop-hdfs-zkfc (Hadoop HDFS Zookeeper Failover Controller) via apt
   apt: name=hadoop-hdfs-zkfc
   tags: hadoop

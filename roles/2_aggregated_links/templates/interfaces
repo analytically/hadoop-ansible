@@ -17,6 +17,7 @@ pre-up sleep 3
 {% endif %}
 hardware-dma-ring-rx 4096
 hardware-dma-ring-tx 4096
+# disable auto-negotiation and flow control
 ethernet-pause-autoneg off
 ethernet-pause-rx off
 ethernet-pause-tx off
@@ -31,13 +32,15 @@ post-up /sbin/ifconfig bond0 mtu {{ mtu }}
 bond-mode {{ bond_mode }}
 bond-slaves none
 
-# Indicates that the devices are polled every 200ms to check for connection changes, such as
+# Indicates that the devices are polled every 100ms to check for connection changes, such as
 # a link being down or a link duplex having changed
 bond-miimon 100
 
+{% if bond_mode equals "lacp" %}
 # Sets the rate for transmitting LACPDU packets, 0 is once every 30 seconds, 1 is every 1 second, which allows our
-# network devices to automatically configure a single logical connection at the switch quickly - only applies to LACP
-#bond-lacp-rate 1
+# network devices to automatically configure a single logical connection at the switch quickly
+bond-lacp-rate 1
+{% endif %}
 
 # Instructs the driver to spread the load over interfaces based on the source and destination
 # IP address instead of MAC address
@@ -52,4 +55,5 @@ iface {{ ansible_default_ipv4.interface }} inet dhcp
 
 {% endif %}
 
+# Google Public DNS - see https://developers.google.com/speed/public-dns/
 dns-nameservers 8.8.8.8 8.8.4.4

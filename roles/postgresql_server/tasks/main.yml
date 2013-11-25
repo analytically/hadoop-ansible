@@ -1,22 +1,22 @@
 ---
 # file: roles/postgresql_server/tasks/main.yml
 
-- name: Make sure PostgreSQL repository is included
+- name: add PostgreSQL repository
   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
   tags:
       - postgres
 
-- name: Make sure the PostgreSQL key is present
+- name: add PostgreSQL key
   apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
   tags:
       - postgres
 
-- name: Make sure the necessary packages are installed for PostgreSQL (common from raring repo)
+- name: install PostgreSQL (common from raring repo) via apt
   apt: name={{ item }} default_release=raring update-cache=true
   with_items:
     - postgresql-common
 
-- name: Make sure the necessary packages are installed for PostgreSQL
+- name: install PostgreSQL via apt
   apt: name={{ item }}
   with_items:
     - postgresql-9.1

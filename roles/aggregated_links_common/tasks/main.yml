@@ -2,10 +2,10 @@
 # file: roles/aggregated_links_common/tasks/main.yml
 # see https://help.ubuntu.com/community/UbuntuBonding
 
-- name: Make sure ifenslave-2.6 is installed
+- name: install ifenslave-2.6
   apt: pkg=ifenslave-2.6
   tags: bonding
 
-- name: Make sure the bonding kernel module is loaded
+- name: configure bonding kernel module
   lineinfile: dest=/etc/modules regexp="bonding" line=bonding
   tags: bonding

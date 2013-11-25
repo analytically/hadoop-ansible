@@ -1,6 +1,6 @@
 ---
 # file: roles/cdh_hive_metastore/tasks/main.yml
 
-- name: Make sure the Hive metastore is installed
+- name: install hive-metastore via apt
   apt: name=hive-metastore
   tags: hive
