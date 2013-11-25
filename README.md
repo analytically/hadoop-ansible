@@ -47,10 +47,16 @@ If you're assembling your own Hadoop playbook, these roles are available for you
 
 ### Configure
 
-Make sure you customize the following files:
+Customize the following files:
+
+Required:
 
 - [`group_vars/all`](group_vars/all) - site_name and notify_email
+
+Optional:
+
 - [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
+- [`roles/2_aggregated_links /defaults/main.yml`](roles/2_aggregated_links /defaults/main.yml) - aggregated link bond mode and mtu
 - [`roles/cdh_hadoop_config/defaults/main.yml`](roles/cdh_hadoop_config/defaults/main.yml) - Hadoop settings
 - [`roles/presto_coordinator/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
 - [`roles/presto_worker/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
