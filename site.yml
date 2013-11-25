@@ -65,12 +65,12 @@
   sudo: true
   sudo_user: hdfs
   tasks:
-    - name: Make sure the /data/dfs/nn directory exists
+    - name: create the /data/dfs/nn directory
       file: path=/data/dfs/nn owner=hdfs group=hdfs state=directory
       tags:
         - hadoop
         - hbase
-    - name: Make sure the namenode is formatted - WILL NOT FORMAT IF /data/dfs/nn/current/VERSION EXISTS TO AVOID DATA LOSS
+    - name: format the namenode - WILL NOT FORMAT IF /data/dfs/nn/current/VERSION EXISTS TO AVOID DATA LOSS
       shell: creates=/data/dfs/nn/current/VERSION hdfs namenode -format -force
       tags:
         - hadoop
@@ -88,17 +88,17 @@
   sudo: true
   sudo_user: hdfs
   tasks:
-    - name: Make sure the first namenode is online
+    - name: wait for the first namenode to come online
       wait_for: host={{ hostvars[groups['namenodes'][0]]['ansible_default_ipv4']['address'] }} port=50070
       tags:
         - hadoop
         - hbase
-    - name: Make sure the /data/dfs/nn directory exists
+    - name: create the /data/dfs/nn directory
       file: path=/data/dfs/nn owner=hdfs group=hdfs state=directory
       tags:
         - hadoop
         - hbase
-    - name: Make sure the standby namenode is bootstrapped
+    - name: bootstrap the standby namenode
       shell: creates=/data/dfs/nn/.bootstrapped hdfs namenode -bootstrapStandby && touch /data/dfs/nn/.bootstrapped
       tags:
         - hadoop
@@ -115,7 +115,7 @@
   user: ansibler
   sudo: true
   tasks:
-    - name: Make sure the hadoop-hdfs-zkfc is formatted
+    - name: format hadoop-hdfs-zkfc
       shell: creates=/data/dfs/.zkfsformatted hdfs zkfc -formatZK -force && touch /data/dfs/.zkfsformatted
       tags:
         - hadoop
@@ -154,32 +154,32 @@
   sudo: true
   sudo_user: hdfs
   tasks:
-    - name: Make sure a /tmp directory exists on the cluster
+    - name: create /tmp directory on the cluster
       shell: creates=/data/dfs/.tmpdircreated hadoop fs -mkdir /tmp && touch /data/dfs/.tmpdircreated
       tags:
         - hadoop
-    - name: Make sure the /tmp directory has the correct permissions
+    - name: make sure the /tmp directory has the correct permissions
       shell: creates=/data/dfs/.tmpdirchowned sleep 5 && hadoop fs -chmod -R 1777 /tmp && touch /data/dfs/.tmpdirchowned
       tags:
         - hadoop
-    - name: Make sure a /user/history directory exists on the cluster
+    - name: create a /user/history directory on the cluster
       shell: creates=/data/dfs/.historydircreated hadoop fs -mkdir /user/history && touch /data/dfs/.historydircreated
       tags:
         - hadoop
-    - name: Make sure the /user/history directory has the correct permissions
+    - name: make sure the /user/history directory has the correct permissions
       shell: creates=/data/dfs/.historydirchmodded sleep 5 && hadoop fs -chmod -R 1777 /user/history && touch /data/dfs/.historydirchmodded
       tags:
         - hadoop
-    - name: Make sure the /user/history directory has the correct owner
+    - name: make sure the /user/history directory has the correct owner
       shell: creates=/data/dfs/.historydirchowned sleep 5 && hadoop fs -chown yarn /user/history && touch /data/dfs/.historydirchowned
       tags:
         - hadoop
-    - name: Make sure a /hbase directory exists on the cluster
+    - name: create the /hbase directory on the cluster
       shell: creates=/data/dfs/.hbasedircreated hadoop fs -mkdir /hbase && touch /data/dfs/.hbasedircreated
       tags:
         - hadoop
         - hbase
-    - name: Make sure the /hbase directory has the correct owner
+    - name: make sure the /hbase directory has the correct owner
       shell: creates=/data/dfs/.hbasedirchowned sleep 5 && hadoop fs -chown hbase:hbase /hbase && touch /data/dfs/.hbasedirchowned
       tags:
         - hadoop
