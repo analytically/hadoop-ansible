@@ -57,17 +57,16 @@ Make sure you customize the following files:
 
 #### Adding hosts
 
-Edit the [hosts](hosts) file and list hosts per group:
+Edit the [hosts](hosts) file and list hosts per group (see [Inventory](http://www.ansibleworks.com/docs/intro_inventory.html) for more examples):
 
 ```
 [datanodes]
 hslave010
-hslave011
-hslave[020:030]
 hslave[090:252]
+hadoop-slave-[a:f].example.com
 ```
 
-Make sure that the `zookeeper` and `journalnodes` groups contain at least 3 hosts and have an odd number of hosts.
+Make sure that the `zookeepers` and `journalnodes` groups contain at least 3 hosts and have an odd number of hosts.
 
 #### Ganglia nodes
 
