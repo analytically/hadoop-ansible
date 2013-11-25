@@ -13,11 +13,11 @@
 - hosts: all
   sudo: true
   tasks:
-    - name: Make sure the user 'ansibler' exists
+    - name: create user 'ansibler'
       user: name=ansibler groups=sudo generate_ssh_key=yes shell=/bin/bash
 
-    - name: Make sure the 'ansibler' RSA SSH key is installed
+    - name: add 'ansibler' RSA SSH key
       authorized_key: user=ansibler key="{{ lookup('file', 'ansible_rsa.pub') }}"
 
-    - name: Make sure sudoers contains NOPASSWD for sudo group
+    - name: change sudoers to contains NOPASSWD for sudo group
       shell: "creates=/etc/sudoers.bak chdir=/etc cp sudoers sudoers.bak && sed -ri -e 's/(%sudo\\s+ALL=\\(ALL:ALL\\))\\s+ALL/\\1 NOPASSWD: ALL/' /etc/sudoers"
