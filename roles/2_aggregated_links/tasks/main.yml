@@ -1,7 +1,7 @@
 ---
 # file: roles/2_aggregated_links/tasks/main.yml
 
-- name: Configure /etc/network/interfaces with a bonding configuration
+- name: configure /etc/network/interfaces with a bonding configuration
   template: backup=yes src=interfaces dest=/etc/network/interfaces
   tags: bonding
 

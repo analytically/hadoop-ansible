@@ -2,4 +2,4 @@
 mtu=9216
 
 # see https://www.kernel.org/doc/Documentation/networking/bonding.txt - balance-alb doesn't require any switch setup
-bond-mode=balance-alb
+bond_mode=balance-alb
