@@ -1,8 +1,8 @@
 ---
 # file: roles/kibana3/tasks/main.yml
 
-- name: clone Kibana 3 at /var/www/kibana
-  git: repo=https://github.com/elasticsearch/kibana.git dest=/var/www/kibana update=yes
+- name: download and extract Kibana 3 to /var/www/kibana
+  shell: creates=/var/www/kibana chdir=/tmp curl -O http://download.elasticsearch.org/kibana/kibana/kibana-latest.zip && unzip kibana-latest.zip && mv kibana-latest /var/www/kibana
   tags: kibana
   notify:
     - restart apache2
