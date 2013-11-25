@@ -1,7 +1,7 @@
 # Hadoop Nodes
 # ============
 
-[zookeepers] # minimal 3, must be odd number of servers
+[zookeepers] # minimal 3, must be odd number of hosts
 hmaster01 zoo_id=1
 hmaster02 zoo_id=2
 hslave01 zoo_id=3
@@ -10,7 +10,7 @@ hslave01 zoo_id=3
 hmaster01 ganglia_accept=true
 hmaster02 ganglia_accept=true
 
-[journalnodes] # minimal 3, must be odd number of servers
+[journalnodes] # minimal 3, must be odd number of hosts
 hmaster01
 hmaster02
 hslave01

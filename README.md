@@ -55,9 +55,23 @@ Make sure you customize the following files:
 - [`roles/presto_coordinator/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
 - [`roles/presto_worker/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
 
+#### Adding hosts
+
+Edit the (hosts)[hosts] file and list hosts per group:
+
+```
+[datanodes]
+hslave010
+hslave011
+hslave[020:030]
+hslave[090:252]
+```
+
+Make sure that the `zookeeper` and `journalnodes` groups contain at least 3 hosts and have an odd number of hosts.
+
 #### Ganglia nodes
 
-Since we're using unicast mode for Ganglia (which significantly reduces the chatter), you may have to wait 60 seconds
+Since we're using unicast mode for Ganglia (which significantly reduces chatter), you may have to wait 60 seconds
 after node startup before it is seen/shows up in the web interface.
 
 ### Installing Hadoop
