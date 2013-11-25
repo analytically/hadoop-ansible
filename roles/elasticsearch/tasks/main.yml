@@ -2,7 +2,7 @@
 # file: roles/elasticsearch/tasks/main.yml
 
 - name: install ElasticSearch
-  shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.6.deb && dpkg -i elasticsearch-0.90.6.deb
+  shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.deb && dpkg -i elasticsearch-0.90.7.deb
   tags: elasticsearch
 
 - name: install ElasticSearch head plugin
