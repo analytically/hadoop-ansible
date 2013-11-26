@@ -7,8 +7,7 @@
 auto lo
 iface lo inet loopback
 
-{% if ansible_interfaces|length > 2 %}
-{% for interface in ansible_interfaces|sort if interface != 'lo' and interface != 'bond0' %}
+{% for interface in ansible_interfaces|sort if interface != 'lo' %}
 
 auto {{ interface }}
 iface {{ interface }} inet manual
@@ -44,15 +43,6 @@ bond-lacp-rate 1
 # Instructs the driver to spread the load over interfaces based on the source and destination
 # IP address instead of MAC address
 bond-xmit-hash-policy layer3+4
-{% endif %}
-
-{% if ansible_interfaces|length == 2 %}
-
-# The primary network interface
-auto {{ ansible_default_ipv4.interface }}
-iface {{ ansible_default_ipv4.interface }} inet dhcp
-
-{% endif %}
 
 # Google Public DNS - see https://developers.google.com/speed/public-dns/
 dns-nameservers 8.8.8.8 8.8.4.4
