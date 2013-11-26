@@ -67,7 +67,7 @@
 
     <property>
         <name>dfs.blocksize</name>
-        <value>{{ hadoop['dfs_blocksize'] }}</value>
+        <value>{{ dfs_blocksize }}</value>
         <final>true</final>
     </property>
 
@@ -88,7 +88,7 @@
 
     <property>
         <name>dfs.datanode.max.xcievers</name>
-        <value>{{ hadoop['max_xcievers'] }}</value>
+        <value>{{ max_xcievers }}</value>
         <final>true</final>
     </property>
 

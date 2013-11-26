@@ -1,12 +1,11 @@
 ---
 # file: roles/cdh_hadoop_config/vars/main.yml
 
-hadoop:
-    # The default block size for new files, in bytes - here 256 MB
-    dfs_blocksize: 268435456
+# The default block size for new files, in bytes - here 256 MB
+dfs_blocksize: 268435456
 
-    # Upper bound on the number of files that it will serve at any one time
-    max_xcievers: 4096
+# Upper bound on the number of files that it will serve at any one time
+max_xcievers: 4096
 
-    # The Hadoop DataNode heap size
-    heapsize: 12278
+# The Hadoop DataNode heap size
+heapsize: 12278

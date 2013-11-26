@@ -1,19 +1,17 @@
 ---
 
-limits:
-    # Open file limits.
-    nofile_hard: 65536
-    nofile_soft: 65536
+# Open file limits.
+limits_nofile_hard: 65536
+limits_nofile_soft: 65536
 
-ntp:
-    # NTP servers used in all servers to synchronize time.
-    server1: ntp0.ox.ac.uk
-    server2: ntp1.ox.ac.uk
-    server3: ntp2.ox.ac.uk
-    server4: ntp3.ox.ac.uk
-    server5: 0.uk.pool.ntp.org
-    server6: 1.uk.pool.ntp.org
-    server7: ntp.ubuntu.com # fallback
+# NTP servers used in all servers to synchronize time.
+ntp_server1: ntp0.ox.ac.uk
+ntp_server2: ntp1.ox.ac.uk
+ntp_server3: ntp2.ox.ac.uk
+ntp_server4: ntp3.ox.ac.uk
+ntp_server5: 0.uk.pool.ntp.org
+ntp_server6: 1.uk.pool.ntp.org
+ntp_server7: ntp.ubuntu.com # fallback
 
-rsyslog:
-    polling_interval_secs: 10
+# rsyslog
+rsyslog_polling_interval_secs: 10
