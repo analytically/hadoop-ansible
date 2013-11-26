@@ -75,6 +75,7 @@
       tags:
         - hadoop
         - hbase
+        - hive
 
 - hosts: namenodes[0]
   user: ansibler
@@ -103,6 +104,7 @@
       tags:
         - hadoop
         - hbase
+        - hive
 
 - hosts: namenodes[1]
   user: ansibler
@@ -120,16 +122,19 @@
       tags:
         - hadoop
         - hbase
+        - hive
     - name: start zkfc
       service: name=hadoop-hdfs-zkfc state=restarted
       tags:
         - hadoop
         - hbase
+        - hive
     - name: restart namenode
       service: name=hadoop-hdfs-namenode state=restarted
       tags:
         - hadoop
         - hbase
+        - hive
 
 - hosts: datanodes
   user: ansibler
@@ -177,12 +182,10 @@
     - name: create the /hbase directory on the cluster
       shell: creates=/data/dfs/.hbasedircreated hadoop fs -mkdir /hbase && touch /data/dfs/.hbasedircreated
       tags:
-        - hadoop
         - hbase
     - name: make sure the /hbase directory has the correct owner
       shell: creates=/data/dfs/.hbasedirchowned sleep 5 && hadoop fs -chown hbase:hbase /hbase && touch /data/dfs/.hbasedirchowned
       tags:
-        - hadoop
         - hbase
 
 - hosts: resourcemanager

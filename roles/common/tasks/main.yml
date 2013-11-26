@@ -25,6 +25,14 @@
     - zip
     - intel-microcode
 
+- name: Remove various useless files
+  command: removes=$item rm $item
+  with_items:
+    - /etc/update-motd.d/10-help-text
+    - /etc/update-motd.d/51-cloudguest
+    - /etc/update-motd.d/91-release-upgrade
+    - /etc/update-motd.d/98-cloudguest
+
 - name: create the hosts file for all machines
   template: src=hosts dest=/etc/hosts
 
@@ -47,3 +55,6 @@
 - name: make sure NTP is running and enabled
   service: name=ntp state=running enabled=yes
   tags: ntp
+
+- name: copy disk-usage-alert script to /etc/cron.hourly
+  template: src=disk-usage-alert.sh dest=/etc/cron.hourly/disk-usage-alert owner=root group=root mode=755

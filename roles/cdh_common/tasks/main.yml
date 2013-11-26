@@ -11,15 +11,18 @@
   tags:
     - hadoop
     - hbase
+    - hive
 
 - name: add Cloudera CDH4 GPL extras repository
   apt_repository: repo='deb [arch=amd64] http://archive.cloudera.com/gplextras/ubuntu/precise/amd64/gplextras precise-gplextras4 contrib'
   tags:
     - hadoop
     - hbase
+    - hive
 
 - name: add Cloudera CDH4 key
   apt_key: url=http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key
   tags:
     - hadoop
     - hbase
+    - hive
