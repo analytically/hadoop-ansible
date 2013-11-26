@@ -1,8 +1,7 @@
 ---
 
-bonding:
-    # maximum for Intel/Cisco hardware
-    mtu: 9216
+# maximum for Intel/Cisco hardware
+mtu: 9216
 
-    # see https://www.kernel.org/doc/Documentation/networking/bonding.txt - balance-alb doesn't require any switch setup
-    bond_mode: balance-alb
+# see https://www.kernel.org/doc/Documentation/networking/bonding.txt - balance-alb doesn't require any switch setup
+bond_mode: balance-alb
