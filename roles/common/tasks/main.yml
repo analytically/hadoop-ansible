@@ -29,7 +29,7 @@
     - intel-microcode
 
 - name: Remove various useless files
-  command: removes=$item rm $item
+  command: removes={{ item }} rm {{ item }}
   with_items:
     - /etc/update-motd.d/10-help-text
     - /etc/update-motd.d/51-cloudguest
