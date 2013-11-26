@@ -1,9 +1,6 @@
 ---
 # file: roles/postfix_mandrill/defaults/main.yml
 
-postfix:
-    domain: example.com
-
-mandrill:
-    username: yours
-    api_key: yours
+postfix_domain: example.com
+mandrill_username: yours
+mandrill_api_key: yours

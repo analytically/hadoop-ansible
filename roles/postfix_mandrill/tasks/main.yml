@@ -2,7 +2,7 @@
 # file: roles/postfix_mandrill/tasks/main.yml
 
 - name: debconf-set-selections mailname for postfix
-  shell: executable=/bin/bash debconf-set-selections <<< "postfix postfix/mailname string {{ ansible_hostname }}.{{ postfix['domain'] }}"
+  shell: executable=/bin/bash debconf-set-selections <<< "postfix postfix/mailname string {{ ansible_hostname }}.{{ postfix_domain }}"
 
 - name: debconf-set-selections mailer type for postfix
   shell: executable=/bin/bash debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
@@ -32,7 +32,7 @@
     - 'smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd'
     - 'smtp_sasl_security_options = noanonymous'
     - 'smtp_use_tls = yes'
-    - "mydomain = {{ postfix['domain'] }}"
+    - "mydomain = {{ postfix_domain }}"
     - 'inet_interfaces = 127.0.0.1' # Make sure Postfix listens to localhost only
 
 - name: configure postfix's relayhost in /etc/postfix/main.cf
