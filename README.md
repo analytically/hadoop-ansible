@@ -61,6 +61,12 @@ Optional:
 - [`roles/presto_coordinator/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
 - [`roles/presto_worker/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
 
+##### Role Vars
+
+When specifying/reusing roles, one can override the vars, eg.:
+
+`- { role: postfix_mandrill, postfix_domain: status.io, mandrill_username: analytically, mandrill_api_key: 132456 }`
+
 #### Adding hosts
 
 Edit the [hosts](hosts) file and list hosts per group (see [Inventory](http://www.ansibleworks.com/docs/intro_inventory.html) for more examples):

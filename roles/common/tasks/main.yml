@@ -21,7 +21,6 @@
   with_items:
     - checkinstall
     - htop
-    - sshguard
     - curl
     - net-tools
     - liblzo2-dev
