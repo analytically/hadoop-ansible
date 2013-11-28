@@ -7,7 +7,7 @@
 auto lo
 iface lo inet loopback
 
-{% for interface in ansible_interfaces|sort if interface != 'lo' %}
+{% for interface in ansible_interfaces|sort if no interface.startswith('lo') %}
 
 auto {{ interface }}
 iface {{ interface }} inet manual
