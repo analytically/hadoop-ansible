@@ -35,6 +35,10 @@
     - hive.properties
   tags: presto
 
+- name: install presto command line client
+  shell: chdir=/usr/bin curl -o presto http://search.maven.org/remotecontent?filepath=com/facebook/presto/presto-cli/0.54/presto-cli-0.54-executable.jar && chmod +x presto
+  tags: presto
+
 - name: install upstart config for presto
   template: src=upstart.conf dest=/etc/init/presto.conf owner=root group=root mode=0644
   tags: presto
