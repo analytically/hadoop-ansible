@@ -3,6 +3,7 @@
 # ==================
 
 - hosts: all
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
@@ -11,12 +12,14 @@
     - ganglia_monitor
 
 - hosts: 2_links_aggregated
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - { role: 2_aggregated_links, when: "ansible_interfaces|length == 3 and 'bond0' not in ansible_interfaces" }
 
 - hosts: monitors[0]
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
@@ -27,6 +30,7 @@
     - kibana3
 
 - hosts: all
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
@@ -36,6 +40,7 @@
 # Hadoop
 
 - hosts: zookeepers:journalnodes:resourcemanager:nodemanagers:historyserver:hbase_masters:regionservers
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
@@ -43,24 +48,28 @@
     - cdh_common
 
 - hosts: zookeepers
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_zookeeper_server
 
 - hosts: journalnodes:namenodes:datanodes
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hadoop_config
 
 - hosts: journalnodes
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hadoop_journalnode
 
 - hosts: namenodes[0]
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   sudo_user: hdfs
@@ -78,6 +87,7 @@
         - hive
 
 - hosts: namenodes[0]
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
@@ -85,6 +95,7 @@
     - cdh_hadoop_zkfc
 
 - hosts: namenodes[1]
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   sudo_user: hdfs
@@ -107,6 +118,7 @@
         - hive
 
 - hosts: namenodes[1]
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
@@ -114,6 +126,7 @@
     - cdh_hadoop_zkfc
 
 - hosts: namenodes[0]
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   tasks:
@@ -137,24 +150,28 @@
         - hive
 
 - hosts: datanodes
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hadoop_datanode
 
 - hosts: nodemanagers
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hadoop_mapreduce
 
 - hosts: hbase_masters:regionservers
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hbase_config
 
 - hosts: namenodes[0]
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   sudo_user: hdfs
@@ -189,18 +206,21 @@
         - hbase
 
 - hosts: resourcemanager
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hadoop_yarn_resourcemanager
 
 - hosts: nodemanagers
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hadoop_yarn_nodemanager
 
 - hosts: historyserver
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
@@ -208,18 +228,21 @@
     - cdh_hadoop_yarn_proxyserver
 
 - hosts: hbase_masters
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hbase_master
 
 - hosts: regionservers
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hbase_regionserver
 
 - hosts: hive_metastore
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
@@ -227,6 +250,7 @@
     - cdh_hive_config
 
 - hosts: hive_metastore
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   sudo_user: postgres
@@ -249,12 +273,14 @@
         - hive
 
 - hosts: hive_metastore
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - cdh_hive_metastore
 
 - hosts: namenodes[0]
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   sudo_user: hdfs
@@ -269,12 +295,14 @@
         - hive
 
 - hosts: presto_coordinators
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
     - presto_coordinator
 
 - hosts: presto_workers
+  accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
   roles:
