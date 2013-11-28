@@ -5,32 +5,36 @@
   file: path=/data/presto state=directory
   tags: presto
 
-- name: create the /usr/local/presto directory
-  file: path=/usr/local/presto state=directory
+- name: create the /usr/lib/presto directory
+  file: path=/usr/lib/presto state=directory
   tags: presto
 
-- name: create the /usr/local/presto/etc directory
-  file: path=/usr/local/presto/etc state=directory
+- name: create the /usr/lib/presto/etc directory
+  file: path=/usr/lib/presto/etc state=directory
   tags: presto
 
-- name: create the /usr/local/presto/etc/catalog directory
-  file: path=/usr/local/presto/etc/catalog state=directory
+- name: create the /usr/lib/presto/etc/catalog directory
+  file: path=/usr/lib/presto/etc/catalog state=directory
   tags: presto
 
-- name: install Presto at /usr/local/presto
-  shell: creates=/usr/local/presto/bin/launcher chdir=/tmp curl http://central.maven.org/maven2/com/facebook/presto/presto-server/0.54/presto-server-0.54.tar.gz | tar xz && mv presto-server-0.54/* /usr/local/presto
+- name: install Presto at /usr/lib/presto
+  shell: creates=/usr/lib/presto/bin/launcher chdir=/tmp curl http://central.maven.org/maven2/com/facebook/presto/presto-server/0.54/presto-server-0.54.tar.gz | tar xz && mv presto-server-0.54/* /usr/lib/presto
   tags: presto
 
 - name: configure Presto
-  template: src={{ item }} dest=/usr/local/presto/etc/{{ item }} owner=root group=root mode=0644
+  template: src={{ item }} dest=/usr/lib/presto/etc/{{ item }} owner=root group=root mode=0644
   with_items:
     - node.properties
     - jvm.config
   tags: presto
 
 - name: configure Presto Hive Catalog
-  template: src={{ item }} dest=/usr/local/presto/etc/catalog/{{ item }} owner=root group=root mode=0644
+  template: src={{ item }} dest=/usr/lib/presto/etc/catalog/{{ item }} owner=root group=root mode=0644
   with_items:
     - jmx.properties
     - hive.properties
+  tags: presto
+
+- name: install upstart config for presto
+  template: src=upstart.conf dest=/etc/init/presto.conf owner=root group=root mode=0644
   tags: presto

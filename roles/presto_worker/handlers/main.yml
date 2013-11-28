@@ -1,0 +1,5 @@
+---
+# file: roles/presto_worker/handlers/main.yml
+
+- name: restart presto
+  service: name=presto state=restarted
