@@ -267,10 +267,6 @@
       shell: creates=/data/dfs/.hivewarehousedirchmodded sleep 5 && hadoop fs -chmod -R 1777 /user/hive/warehouse && touch /data/dfs/.hivewarehousedirchmodded
       tags:
         - hive
-    - name: make sure the /user/hive/warehouse directory has the correct owner
-      shell: creates=/data/dfs/.hivewarehousedirchowned sleep 5 && hadoop fs -chown hive /user/hive/warehouse && touch /data/dfs/.hivewarehousedirchowned
-      tags:
-        - hive
 
 - hosts: presto_coordinators
   user: ansibler
