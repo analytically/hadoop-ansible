@@ -104,7 +104,7 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, presto,
 
   - [link aggregation](roles/2_aggregated_links/templates/interfaces) if 2 interfaces are available on the nodes (`balance-alb` by default)
   - [Htop](http://htop.sourceforge.net/)
-  - curl, checkinstall, intel-microcode, net-tools, zip
+  - curl, checkinstall, intel-microcode/amd64-microcode, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
   - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
   - [local 'apt' repository for Oracle Java packages](https://github.com/flexiondotorg/oab-java6)
