@@ -40,6 +40,12 @@
     </property>
 
     <property>
+        <name>io.sort.mb</name>
+        <value>512</value>
+        <description>Higher memory-limit while sorting data.</description>
+    </property>
+
+    <property>
         <name>mapreduce.reduce.shuffle.parallelcopies</name>
         <value>30</value>
     </property>
