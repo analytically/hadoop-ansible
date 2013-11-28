@@ -5,10 +5,6 @@
   file: path=/data/presto state=directory
   tags: presto
 
-- name: create the /usr/lib/presto directory
-  file: path=/usr/lib/presto state=directory
-  tags: presto
-
 - name: create the /usr/lib/presto/etc directory
   file: path=/usr/lib/presto/etc state=directory
   tags: presto
