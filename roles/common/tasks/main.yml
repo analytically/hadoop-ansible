@@ -25,7 +25,14 @@
     - net-tools
     - liblzo2-dev
     - zip
-    - intel-microcode
+
+- name: install intel-microcode
+  apt: pkg=intel-microcode
+  when: '"Intel" in ansible_processor[0]'
+
+- name: install amd64-microcode
+  apt: pkg=amd64-microcode
+  when: '"AMD" in ansible_processor[0] and ansible_architecture == "x86_64"'
 
 - name: Remove various useless files
   command: removes={{ item }} rm {{ item }}
