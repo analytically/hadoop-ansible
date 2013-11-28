@@ -24,5 +24,5 @@
   tags: hive
 
 - name: soft link postgresql-jdbc4.jar
-  shell: ln -s /usr/share/java/postgresql-jdbc4.jar /usr/lib/hive/lib/postgresql-jdbc4.jar
+  shell: creates=/usr/lib/hive/lib/postgresql-jdbc4.jar ln -s /usr/share/java/postgresql-jdbc4.jar /usr/lib/hive/lib/postgresql-jdbc4.jar
   tags: hive

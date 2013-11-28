@@ -11,11 +11,6 @@
   tags:
       - postgres
 
-- name: install PostgreSQL (common from raring repo) via apt
-  apt: name={{ item }} default_release=raring update-cache=true
-  with_items:
-    - postgresql-common
-
 - name: install PostgreSQL via apt
   apt: name={{ item }}
   with_items:

@@ -231,20 +231,46 @@
   sudo: true
   sudo_user: postgres
   tasks:
-    - postgresql_user: user=hiveuser password=hive_{{ site_name }}
-      tags: hive
     - postgresql_db: name=metastore
-      tags: hive
+      tags:
+        - postgres
+        - hive
+    - postgresql_user: db=metastore name=hiveuser password=hive_{{ site_name }} priv=CONNECT
+      tags:
+        - postgres
+        - hive
     - shell: psql --dbname=metastore --file=/usr/lib/hive/scripts/metastore/upgrade/postgres/hive-schema-0.10.0.postgres.sql
-      tags: hive
-    - shell: psql --command="GRANT ALL PRIVILEGES ON DATABASE metastore TO hiveuser;"
-      tags: hive
+      tags:
+        - postgres
+        - hive
+    - shell: psql --dbname=metastore --command="GRANT ALL ON ALL TABLES IN SCHEMA public TO hiveuser;"
+      tags:
+        - postgres
+        - hive
 
 - hosts: hive_metastore
   user: ansibler
   sudo: true
   roles:
     - cdh_hive_metastore
+
+- hosts: namenodes[0]
+  user: ansibler
+  sudo: true
+  sudo_user: hdfs
+  tasks:
+    - name: create a /user/hive/warehouse directory on the cluster
+      shell: creates=/data/dfs/.hivewarehousedircreated hadoop fs -mkdir /user/hive/warehouse && touch /data/dfs/.hivewarehousedircreated
+      tags:
+        - hive
+    - name: make sure the /user/hive/warehouse directory has the correct permissions
+      shell: creates=/data/dfs/.hivewarehousedirchmodded sleep 5 && hadoop fs -chmod -R 1777 /user/hive/warehouse && touch /data/dfs/.hivewarehousedirchmodded
+      tags:
+        - hive
+    - name: make sure the /user/hive/warehouse directory has the correct owner
+      shell: creates=/data/dfs/.hivewarehousedirchowned sleep 5 && hadoop fs -chown hive /user/hive/warehouse && touch /data/dfs/.hivewarehousedirchowned
+      tags:
+        - hive
 
 - hosts: presto_coordinators
   user: ansibler

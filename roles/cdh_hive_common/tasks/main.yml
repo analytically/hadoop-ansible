@@ -3,4 +3,6 @@
 
 - name: install base Hive package via apt
   apt: name=hive update_cache=yes
-  tags: hive
+  tags:
+    - postgres
+    - hive

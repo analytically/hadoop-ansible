@@ -21,7 +21,11 @@
 
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
+        {% if hostvars[groups["hive_metastore"][0]]["ansible_hostname"] == ansible_hostname %}
+        <value>jdbc:postgresql://localhost/metastore</value>
+        {% else %}
         <value>jdbc:postgresql://{{ hostvars[groups["hive_metastore"][0]]["ansible_hostname"] }}/metastore</value>
+        {% endif %}
     </property>
 
     <property>
