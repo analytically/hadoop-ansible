@@ -65,7 +65,7 @@ Optional:
 
 When specifying/reusing roles, one can override the vars, eg.:
 
-`- { role: postfix_mandrill, postfix_domain: status.io, mandrill_username: analytically, mandrill_api_key: 132456 }`
+`- { role: postfix_mandrill, postfix_domain: example.com, mandrill_username: joe, mandrill_api_key: 123 }`
 
 #### Adding hosts
 
@@ -104,7 +104,6 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, presto,
 
   - [link aggregation](roles/2_aggregated_links/templates/interfaces) if 2 interfaces are available on the nodes (`balance-alb` by default)
   - [Htop](http://htop.sourceforge.net/)
-  - [SSHGuard](http://www.sshguard.net/)
   - curl, checkinstall, intel-microcode, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
   - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
