@@ -45,8 +45,8 @@
 - name: create the hosts file for all machines
   template: src=hosts dest=/etc/hosts
 
-- name: configure landscape-sysinfo to now show link
-  template: src=client.comf dest=/etc/landscape/client.conf owner=root group=root mode=0644
+- name: configure landscape-sysinfo to not show link
+  template: src=client.conf dest=/etc/landscape/client.conf owner=root group=root mode=0644
 
 - name: configure rsyslog with the imfile module
   template: src=rsyslog.conf dest=/etc/rsyslog.d/30-imfile.conf owner=root group=root mode=0644
