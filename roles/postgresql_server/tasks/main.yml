@@ -15,8 +15,10 @@
   apt: name={{ item }}
   with_items:
     - postgresql-9.1
-    - postgresql-contrib-9.1
     - python-psycopg2
     - libpostgresql-jdbc-java
   tags:
     - postgres
+
+- name: install PostgreSQL contrib via apt
+  apt: name=postgresql-contrib-9.1 force=yes
