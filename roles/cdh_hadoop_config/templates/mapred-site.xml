@@ -31,7 +31,7 @@
 
     <property>
         <name>mapred.reduce.tasks</name>
-        <value>2</value>
+        <value>6</value>
     </property>
 
     <property>
