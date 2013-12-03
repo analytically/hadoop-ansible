@@ -102,7 +102,7 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, presto,
 
 #### What else is installed?
 
-  - [link aggregation](roles/2_aggregated_links/templates/interfaces) if 2 interfaces are available on the nodes (`balance-alb` by default)
+  - [link aggregation](roles/2_aggregated_links/templates/interfaces) configures [Link Aggregation](https://help.ubuntu.com/community/UbuntuBonding) if 2 interfaces are available on the nodes (`balance-alb` by default)
   - [Htop](http://htop.sourceforge.net/)
   - curl, checkinstall, intel-microcode/amd64-microcode, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
