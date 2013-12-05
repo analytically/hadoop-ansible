@@ -12,6 +12,7 @@ Hire/Follow [@analytically](http://twitter.com/analytically). **NEW: Deploys [Hi
 
   - [Ansible](http://www.ansibleworks.com/) 1.3 or later
   - 8+1 Ubuntu 12.04 LTS, 13.04 or 13.10 hosts
+  - [Mandrill](http://mandrill.com/) API key for sending emails
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
 ### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
@@ -52,10 +53,10 @@ Customize the following files:
 Required:
 
 - [`group_vars/all`](group_vars/all) - site_name and notify_email
+- [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
 
 Optional:
 
-- [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
 - [`roles/2_aggregated_links/defaults/main.yml`](roles/2_aggregated_links/defaults/main.yml) - aggregated link bond mode and mtu
 - [`roles/cdh_hadoop_config/defaults/main.yml`](roles/cdh_hadoop_config/defaults/main.yml) - Hadoop settings
 - [`roles/presto_coordinator/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
