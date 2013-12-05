@@ -41,5 +41,8 @@
     - restart postfix
     - send test email
 
-- name: configure unattended upgrades in /etc/apt/apt.conf.d/50unattended-upgrades (emails upon failure)
+- name: copy disk-usage-alert script to /etc/cron.hourly (emails when disk full)
+  template: src=disk-usage-alert.sh dest=/etc/cron.hourly/disk-usage-alert owner=root group=root mode=755
+
+- name: configure unattended upgrades in /etc/apt/apt.conf.d/50unattended-upgrades (emails upon upgrade failure)
   template: src=50unattended-upgrades dest=/etc/apt/apt.conf.d/50unattended-upgrades

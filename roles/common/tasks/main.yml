@@ -67,6 +67,3 @@
 - name: make sure NTP is running and enabled
   service: name=ntp state=running enabled=yes
   tags: ntp
-
-- name: copy disk-usage-alert script to /etc/cron.hourly
-  template: src=disk-usage-alert.sh dest=/etc/cron.hourly/disk-usage-alert owner=root group=root mode=755
