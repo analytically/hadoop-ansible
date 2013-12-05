@@ -59,12 +59,12 @@ hslave08
 # ======
 
 [masters:children]
-zookeepers
 namenodes
 resourcemanager
 hbase_masters
 
 [slaves:children]
+zookeepers
 datanodes
 nodemanagers
 regionservers

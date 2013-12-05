@@ -2,7 +2,7 @@
 # file: roles/common/tasks/main.yml
 
 - name: upgrade all safe packages
-  apt: upgrade=safe
+  apt: upgrade=safe update_cache=yes
 
 - name: mount / with inode_readahead_blks=128,noatime,errors=remount-ro
   shell: creates=/etc/fstab.bak chdir=/etc cp fstab fstab.bak && sed -i "s/ errors=remount-ro/ inode_readahead_blks=128,noatime,errors=remount-ro/" fstab
@@ -34,7 +34,7 @@
   apt: pkg=amd64-microcode
   when: '"AMD" in ansible_processor[0] and ansible_architecture == "x86_64"'
 
-- name: Remove various useless files
+- name: remove various useless files
   command: removes={{ item }} rm {{ item }}
   with_items:
     - /etc/update-motd.d/10-help-text
