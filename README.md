@@ -11,7 +11,7 @@ Hire/Follow [@analytically](http://twitter.com/analytically). **NEW: Deploys [Hi
 ### Requirements
 
   - [Ansible](http://www.ansibleworks.com/) 1.4 or later
-  - 8+1 Ubuntu 12.04 LTS, 13.04 or 13.10 hosts
+  - 8+1 Ubuntu 12.04 LTS, 13.04 or 13.10 hosts - see [ubuntu-netboot-tftp](https://github.com/analytically/ubuntu-netboot-tftp) if you need automated server installation
   - [Mandrill](http://mandrill.com/) API key for sending emails
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
