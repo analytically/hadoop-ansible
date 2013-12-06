@@ -13,6 +13,9 @@
 - hosts: all
   sudo: true
   tasks:
+    - name: hostname should match inventory name
+      hostname: name={{ inventory_hostname }}
+
     - name: create user 'ansibler'
       user: name=ansibler groups=sudo generate_ssh_key=yes shell=/bin/bash
 

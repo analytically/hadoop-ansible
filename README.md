@@ -10,7 +10,7 @@ Hire/Follow [@analytically](http://twitter.com/analytically). **NEW: Deploys [Hi
 
 ### Requirements
 
-  - [Ansible](http://www.ansibleworks.com/) 1.3 or later
+  - [Ansible](http://www.ansibleworks.com/) 1.4 or later
   - 8+1 Ubuntu 12.04 LTS, 13.04 or 13.10 hosts
   - [Mandrill](http://mandrill.com/) API key for sending emails
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
