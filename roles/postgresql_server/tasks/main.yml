@@ -12,7 +12,7 @@
       - postgres
 
 - name: install PostgreSQL via apt
-  apt: name={{ item }}
+  apt: name={{ item }} force=yes
   with_items:
     - postgresql-9.1
     - python-psycopg2
