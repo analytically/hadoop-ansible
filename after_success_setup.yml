@@ -30,7 +30,7 @@
     - debug: msg="{{ hosts.results[0].droplet }}"
 
     - name: add the newly created hosts to /etc/hosts
-      lineinfile: dest=/tmp/hosts line="{{ item.droplet.ip_address }} {{ item.droplet.name }}"
+      lineinfile: dest=/etc/hosts line="{{ item.droplet.ip_address }} {{ item.droplet.name }}"
       with_items: hosts.results
 
     - name: create a hosts file with private IP addresses
