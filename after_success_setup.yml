@@ -17,17 +17,15 @@
           name={{ item }}
           ssh_key_ids="{{ traviscikey.ssh_key.id }}"
           private_networking=yes
-          id=821082
           client_id={{ client_id }}
           api_key={{ api_key }}
           size_id=62
           region_id=5
           image_id=961965
-          wait_timeout=500
+          wait_timeout=10000
       register: hosts
       with_items:
         - hmaster01
-    - debug: msg="{{ hosts.results[0].droplet }}"
 
     - name: add the newly created hosts to /etc/hosts
       sudo: true
