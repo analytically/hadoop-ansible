@@ -12,15 +12,15 @@
           api_key={{ api_key_password }}
       register: traviscikey
 
-    - name: create droplets to deploy cluster on (2+6 droplets)
+    - name: create droplets to deploy cluster on (1 monitor + 2 master + 4 slave droplets)
       digital_ocean: >
           name={{ item }}
           ssh_key_ids="{{ traviscikey.ssh_key.id }}"
           private_networking=yes
           client_id={{ client_id }}
           api_key={{ api_key_password }}
-          size_id=62
-          region_id=5
+          size_id=64
+          region_id=4
           image_id=961965
           wait_timeout=10000
       register: hosts
