@@ -1,9 +1,6 @@
 ---
 # file: roles/common/tasks/main.yml
 
-- name: upgrade all safe packages
-  apt: upgrade=safe update_cache=yes
-
 - name: mount / with inode_readahead_blks=128,noatime,errors=remount-ro
   shell: creates=/etc/fstab.bak chdir=/etc cp fstab fstab.bak && sed -i "s/ errors=remount-ro/ inode_readahead_blks=128,noatime,errors=remount-ro/" fstab
 
@@ -17,7 +14,7 @@
     - /etc/pam.d/common-session-noninteractive
 
 - name: install commonly used packages via apt
-  apt: pkg={{ item }}
+  apt: pkg={{ item }} update_cache=yes
   with_items:
     - checkinstall
     - htop
