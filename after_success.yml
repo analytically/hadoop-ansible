@@ -1,0 +1,48 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: create DigitalOcean SSH key
+      digital_ocean: >
+          command=ssh
+          name=travisci
+          ssh_pub_key='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1J3LsiGCDBPqwdnDyDHif7DnusJvTCydtg6cT0414J+8+jssgrxSzdM8da7V+CjFssD3X8KUM2SrSOoVEKq7ZJ1KGnGapKKmiW2oZ8Ndy5y3Xox7mP1kLYoFEunjy4zOe6kftiI/rKytEBjFCbkqtVa/giF9j5u/GeKcZAsEMHa2UqFe6w6n+MNkqCZzaPBBXlI+9gXdWXVv3d74rdHh0i24zVr+MjelFXetOLUGHOiyr29DQ5wd/V5GHCyZ/7nBNS0GszVDX8XWbwHjdFZ1Oaqswu+okZCSN2SrTXIF2YMWK7tupmSNagUVa9xPZrs8GEC64AZeXNQh/UJO+TzRn noreply@travis-ci.org'
+          client_id={{ client_id }}
+          api_key={{ api_key_password }}
+      register: traviscikey
+
+    - name: create droplets to deploy cluster on (1 monitor + 2 master + 4 slave droplets)
+      digital_ocean: >
+          name={{ item }}
+          ssh_key_ids="{{ traviscikey.ssh_key.id }}"
+          private_networking=yes
+          client_id={{ client_id }}
+          api_key={{ api_key_password }}
+          size_id=64
+          region_id=4
+          image_id=961965
+          wait_timeout=10000
+      register: hosts
+      with_items:
+        - monitor01
+        - hmaster01
+        - hmaster02
+        - hslave01
+        - hslave02
+        - hslave03
+        - hslave04
+
+    - name: add delete line to /etc/rc6.d/K10do_destroy.sh
+      sudo: true
+      lineinfile: dest=/etc/rc6.d/K10do_destroy.sh line="wget -qO- https://api.digitalocean.com/droplets/{{ item.droplet.id }}/destroy/\?client_id\={{ client_id }}\&api_key\={{ api_key_password }}"
+      with_items: hosts.results
+
+    - name: add the newly created hosts to /etc/hosts
+      sudo: true
+      lineinfile: dest=/etc/hosts line="{{ item.droplet.ip_address }} {{ item.droplet.name }}"
+      with_items: hosts.results
+
+    - name: create a hosts file with private IP addresses
+      lineinfile: dest=privatehosts line="{{ item.droplet.private_ip_address }} {{ item.droplet.name }}"
+      with_items: hosts.results

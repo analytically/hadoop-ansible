@@ -19,7 +19,7 @@ hslave01
 hmaster01
 
 [datanodes]
-hslave[01:06]
+hslave[01:04]
 
 [nodemanagers:children]
 datanodes
@@ -52,8 +52,8 @@ hmaster02
 hmaster02
 
 [presto_workers]
-hslave07
-hslave08
+hslave03
+hslave04
 
 # Groups
 # ======
