@@ -37,8 +37,9 @@
         - hslave07
         - hslave08
 
-    - name: add delete line to do_destroy.sh
-      lineinfile: dest=do_destroy.sh line="wget https://api.digitalocean.com/droplets/{{ item.droplet.id }}/destroy/?client_id={{ client_id }}&api_key={{ api_key_password }}"
+    - name: add delete line to /etc/rc6.d/K99_do_destroy.sh
+      sudo: true
+      lineinfile: dest=/etc/rc6.d/K99_do_destroy.sh line="wget -qO- https://api.digitalocean.com/droplets/{{ item.droplet.id }}/destroy/\?client_id\={{ client_id }}\&api_key\={{ api_key_password }}"
       with_items: hosts.results
 
     - name: add the newly created hosts to /etc/hosts
