@@ -25,12 +25,17 @@
           wait_timeout=10000
       register: hosts
       with_items:
+        - monitor01
         - hmaster01
         - hmaster02
         - hslave01
         - hslave02
         - hslave03
         - hslave04
+        - hslave05
+        - hslave06
+        - hslave07
+        - hslave08
 
     - name: add delete line to do_destroy.sh
       lineinfile: dest=do_destroy.sh line="wget https://api.digitalocean.com/droplets/{{ item.droplet.id }}/destroy/?client_id={{ client_id }}&api_key={{ api_key_password }}"

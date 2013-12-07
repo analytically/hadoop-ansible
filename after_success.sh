@@ -21,7 +21,7 @@ ansible-playbook -i after_success_hosts --extra-vars "api_key_password=$DO_API_K
 
 cp travis.ssh.pub bootstrap/ansible_rsa.pub
 cd bootstrap
-ansible-playbook -vvvv -i hosts -u root bootstrap.yml
+ansible-playbook -i hosts -u root bootstrap.yml
 cd ..
 
 ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml
