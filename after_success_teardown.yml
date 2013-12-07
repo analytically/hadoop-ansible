@@ -1,0 +1,20 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: destroy droplets
+      digital_ocean: >
+          state=deleted
+          name={{ item }}
+      with_items:
+        - hmaster01
+        - hmaster02
+        - hslave01
+        - hslave02
+        - hslave03
+        - hslave04
+        - hslave05
+        - hslave06
+        - hslave07
+        - hslave08

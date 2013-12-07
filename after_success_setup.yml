@@ -1,0 +1,38 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: create DigitalOcean SSH key
+      digital_ocean: >
+          command=ssh
+          name=travisci
+          ssh_pub_key='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1J3LsiGCDBPqwdnDyDHif7DnusJvTCydtg6cT0414J+8+jssgrxSzdM8da7V+CjFssD3X8KUM2SrSOoVEKq7ZJ1KGnGapKKmiW2oZ8Ndy5y3Xox7mP1kLYoFEunjy4zOe6kftiI/rKytEBjFCbkqtVa/giF9j5u/GeKcZAsEMHa2UqFe6w6n+MNkqCZzaPBBXlI+9gXdWXVv3d74rdHh0i24zVr+MjelFXetOLUGHOiyr29DQ5wd/V5GHCyZ/7nBNS0GszVDX8XWbwHjdFZ1Oaqswu+okZCSN2SrTXIF2YMWK7tupmSNagUVa9xPZrs8GEC64AZeXNQh/UJO+TzRn noreply@travis-ci.org'
+          client_id={{ client_id }}
+          api_key={{ api_key }}
+      register: traviscikey
+
+    - name: create droplets to deploy cluster on (2+6 droplets)
+      digital_ocean: >
+          name={{ item }}
+          ssh_key_ids="{{ traviscikey.ssh_key.id }}"
+          private_networking=yes
+          id=821082
+          client_id={{ client_id }}
+          api_key={{ api_key }}
+          size_id=62
+          region_id=5
+          image_id=961965
+          wait_timeout=500
+      register: hosts
+      with_items:
+        - hmaster01
+    - debug: msg="{{ hosts.results[0].droplet }}"
+
+    - name: add the newly created hosts to /etc/hosts
+      lineinfile: dest=/tmp/hosts line="{{ item.droplet.ip_address }} {{ item.droplet.name }}"
+      with_items: hosts.results
+
+    - name: create a hosts file with private IP addresses
+      lineinfile: dest=privatehosts line="{{ item.droplet.private_ip_address }} {{ item.droplet.name }}"
+      with_items: hosts.results

@@ -1,6 +1,12 @@
 language: python
-python: "2.7"
+python: '2.7'
 install:
   - pip install ansible
 script:
   - ansible-playbook --syntax-check -i hosts site.yml
+after_success: ./after_success.sh
+env:
+  global:
+    # DO_CLIENT_ID and DO_API_KEY
+    - secure: "YBnTdEJ6U6i5no2eRlVC5dsqvSmYqULG+zWyTk2KqWGGMCza3RFi0wUueK3NuN+tl4Ijzf26Kma7wqdjkort0UrfxiH2xd4DWv3LvWz5vpKFP4GaSQGcd5zokHAJJ5hs0JgKY5jwGfoNHcnL16oUJEtptfLqTjGKRIHS+Ye1LmQ="
+    - secure: "DmsCmxwGBWVnYV6CDuCiJsATk85eFUr/Zs7BeYWjlKvAQz4Np9GTDECe3rE1KAA42PZrbvyAdWD31Np9QF0zj8Aq6poCvZ0c0Mib2bRi3eOP8tPL6EUggAl125UkoAZzxtgRWvILZfeRGhBzYsRX9C7/UtA8F8Ij0hXknkgdY48="
