@@ -7,6 +7,13 @@
       digital_ocean: >
           state=deleted
           name={{ item }}
+          id=821082
+          client_id={{ client_id }}
+          api_key={{ api_key }}
+          size_id=62
+          region_id=5
+          image_id=961965
+          wait_timeout=500
       with_items:
         - hmaster01
         - hmaster02
