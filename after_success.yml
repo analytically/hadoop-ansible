@@ -26,6 +26,15 @@
       register: hosts
       with_items:
         - hmaster01
+        - hmaster02
+        - hslave01
+        - hslave02
+        - hslave03
+        - hslave04
+
+    - name: add delete line to do_destroy.sh
+      lineinfile: dest=do_destroy.sh line="wget https://api.digitalocean.com/droplets/{{ item.droplet.id }}/destroy/?client_id={{ client_id }}&api_key={{ api_key_password }}"
+      with_items: hosts.results
 
     - name: add the newly created hosts to /etc/hosts
       sudo: true
