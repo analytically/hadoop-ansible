@@ -12,6 +12,8 @@
 
 - hosts: all
   sudo: true
+  vars:
+    - authorized_rsa_key: "{{ lookup('file', 'ansible_rsa.pub') }}"
   tasks:
     - name: hostname should match inventory name
       hostname: name={{ inventory_hostname }}
@@ -20,7 +22,7 @@
       user: name=ansibler groups=sudo generate_ssh_key=yes shell=/bin/bash
 
     - name: add 'ansibler' RSA SSH key
-      authorized_key: user=ansibler key="{{ lookup('file', 'ansible_rsa.pub') }}"
+      authorized_key: user=ansibler key="{{ authorized_rsa_key }}"
 
     - name: change sudoers to contains NOPASSWD for sudo group
       shell: "creates=/etc/sudoers.bak chdir=/etc cp sudoers sudoers.bak && sed -ri -e 's/(%sudo\\s+ALL=\\(ALL:ALL\\))\\s+ALL/\\1 NOPASSWD: ALL/' /etc/sudoers"

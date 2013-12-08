@@ -1,21 +1,31 @@
 language: python
 python: '2.6'
-install:
-  - pip install ansible
-  - sudo pip install dopy --upgrade
-before_script:
-  - "sh -e /etc/init.d/xvfb start"
-  - "echo 'installing SlimerJS'"
-  - "wget -q http://download.slimerjs.org/v0.9/0.9.0rc1/slimerjs-0.9.0rc1.zip"
-  - "unzip slimerjs-0.9.0rc1.zip"
-  - "mv slimerjs-0.9.0rc1 ./slimerjs"
-script:
-  - ansible-playbook --syntax-check -i hosts site.yml
-after_success: ./after_success.sh
 addons:
   firefox: "25.0.1"
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+install:
+  - pip install ansible
+  - sudo pip install dopy
+before_script:
+  - wget http://download.slimerjs.org/v0.9/0.9.0rc1/slimerjs-0.9.0rc1.zip
+  - unzip slimerjs-0.9.0rc1.zip
+  - mv slimerjs-0.9.0rc1 ./slimerjs
+  - chmod 400 travis.ssh && eval 'ssh-agent' && ssh-add travis.ssh
+  - ansible-playbook -i do_cluster_hosts --extra-vars 'api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID' do_cluster.yml
+  - sleep 5 # give Digital Ocean some time to fully provision the nodes
+  - ansible-playbook -i do_cluster_hosts --extra-vars 'authorized_rsa_key=$(cat travis.ssh.pub)' -u root bootstrap/bootstrap.yml
+script:
+  - ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml
+after_success:
+  - ./after_success.sh
+after_script:
+  - sudo /etc/rc6.d/K10do_destroy.sh
 env:
   global:
+    - ANSIBLE_HOST_KEY_CHECKING=False
+    - ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
     - SLIMERJSLAUNCHER=$(which firefox) DISPLAY=:99.0 PATH=$TRAVIS_BUILD_DIR/slimerjs:$PATH
     - secure: "YBnTdEJ6U6i5no2eRlVC5dsqvSmYqULG+zWyTk2KqWGGMCza3RFi0wUueK3NuN+tl4Ijzf26Kma7wqdjkort0UrfxiH2xd4DWv3LvWz5vpKFP4GaSQGcd5zokHAJJ5hs0JgKY5jwGfoNHcnL16oUJEtptfLqTjGKRIHS+Ye1LmQ="
     - secure: "DmsCmxwGBWVnYV6CDuCiJsATk85eFUr/Zs7BeYWjlKvAQz4Np9GTDECe3rE1KAA42PZrbvyAdWD31Np9QF0zj8Aq6poCvZ0c0Mib2bRi3eOP8tPL6EUggAl125UkoAZzxtgRWvILZfeRGhBzYsRX9C7/UtA8F8Ij0hXknkgdY48="
