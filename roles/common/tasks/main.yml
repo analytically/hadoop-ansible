@@ -22,6 +22,8 @@
     - net-tools
     - liblzo2-dev
     - zip
+    - python-pycurl
+    - software-properties-common
 
 - name: install intel-microcode
   apt: pkg=intel-microcode
