@@ -29,5 +29,27 @@ cd ..
 echo 'Run ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml'
 ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml
 
+cd /tmp
+git clone https://${GH_OAUTH_TOKEN}@github.com/${GH_USER_NAME}/${GH_PROJECT_NAME} hadoop-ansible
+cd hadoop-ansible
+
+echo '---- Set git settings ----'
+git config --global user.name $GIT_AUTHOR_NAME
+git config --global user.email $GIT_AUTHOR_EMAIL
+
+mkdir ci
+mkdir ci/$TRAVIS_BUILD_NUMBER
+cd ci/$TRAVIS_BUILD_NUMBER
+phantomjs screenshot.js http://hmaster01:50070 active-namenode.png
+phantomjs screenshot.js http://hmaster02:50070 standby-namenode.png
+phantomjs screenshot.js http://hmaster01:60010/master-status hbase.png
+phantomjs screenshot.js http://monitor01/ganglia ganglia.png
+phantomjs screenshot.js http://monitor01/kibana/index.html#/dashboard/file/logstash.json kibana.png
+phantomjs screenshot.js http://monitor01:9200/_plugin/head/ elasticsearch-head.png
+phantomjs screenshot.js http://monitor01:9200/_plugin/bigdesk/ elasticsearch-bigdesk.png
+git add .
+git commit -m "[ci skip] Screenshots committed by Travis-CI"
+git push https://${GH_OAUTH_TOKEN}@github.com/${GH_USER_NAME}/${GH_PROJECT_NAME} 2>&1
+
 echo 'Destroying DigitalOcean instances...'
 sudo /etc/rc6.d/K10do_destroy.sh
