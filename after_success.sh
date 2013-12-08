@@ -3,10 +3,6 @@
 export ANSIBLE_HOST_KEY_CHECKING=False
 export ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
 
-echo 'Installing dopy and python-keyczar'
-sudo pip install dopy
-sudo pip install python-keyczar
-
 echo 'Install the Travis CI SSH key'
 chmod 400 travis.ssh
 eval `ssh-agent`
@@ -19,6 +15,8 @@ sudo chmod +x /etc/rc6.d/K10do_destroy.sh
 
 echo 'Run ansible-playbook after_success.yml'
 ansible-playbook -i after_success_hosts --extra-vars "api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID" after_success.yml
+
+sleep 10
 
 cp travis.ssh.pub bootstrap/ansible_rsa.pub
 cd bootstrap
