@@ -12,7 +12,8 @@ before_script:
   - wget http://download.slimerjs.org/v0.9/0.9.0rc1/slimerjs-0.9.0rc1.zip
   - unzip slimerjs-0.9.0rc1.zip
   - mv slimerjs-0.9.0rc1 ./slimerjs
-  - chmod 400 travis.ssh && eval 'ssh-agent' && ssh-add travis.ssh
+  - eval `ssh-agent`
+  - chmod 400 travis.ssh && ssh-add travis.ssh
   - ansible-playbook -i do_cluster_hosts --extra-vars 'api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID' do_cluster.yml
   - sleep 5 # give Digital Ocean some time to fully provision the nodes
   - ansible-playbook -i do_cluster_hosts --extra-vars 'authorized_rsa_key=$(cat travis.ssh.pub)' -u root bootstrap/bootstrap.yml
