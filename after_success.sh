@@ -4,8 +4,8 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 export ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
 
 sudo pip install dopy
-sudo pip install pycurl
-sudo apt-get install python-pycurl -y
+sudo apt-get install libcurl4-gnutls-dev
+sudo pip install pycurl --upgrade
 sudo pip install psycopg2
 sudo pip install python-apt
 
