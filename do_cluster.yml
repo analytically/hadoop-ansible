@@ -42,7 +42,3 @@
       sudo: true
       lineinfile: dest=/etc/hosts line="{{ item.droplet.ip_address }} {{ item.droplet.name }}"
       with_items: hosts.results
-
-    - name: create a hosts file with private IP addresses
-      lineinfile: create=yes dest=privatehosts line="{{ item.droplet.private_ip_address }} {{ item.droplet.name }}"
-      with_items: hosts.results

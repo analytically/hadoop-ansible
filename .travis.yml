@@ -17,15 +17,13 @@ after_success:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - wget http://download.slimerjs.org/v0.9/0.9.0rc1/slimerjs-0.9.0rc1.zip
-  - unzip slimerjs-0.9.0rc1.zip
-  - mv slimerjs-0.9.0rc1 ./slimerjs
-  - ./after_success.sh
+  - unzip slimerjs-0.9.0rc1.zip && mv slimerjs-0.9.0rc1 ./slimerjs
+  - ./screenshots.sh
 after_script:
   - sudo /etc/rc6.d/K10do_destroy.sh
 env:
   global:
-    - ANSIBLE_HOST_KEY_CHECKING=False
-    - ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
+    - ANSIBLE_HOST_KEY_CHECKING=False ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
     - SLIMERJSLAUNCHER=$(which firefox) DISPLAY=:99.0 PATH=$TRAVIS_BUILD_DIR/slimerjs:$PATH
     - secure: "YBnTdEJ6U6i5no2eRlVC5dsqvSmYqULG+zWyTk2KqWGGMCza3RFi0wUueK3NuN+tl4Ijzf26Kma7wqdjkort0UrfxiH2xd4DWv3LvWz5vpKFP4GaSQGcd5zokHAJJ5hs0JgKY5jwGfoNHcnL16oUJEtptfLqTjGKRIHS+Ye1LmQ="
     - secure: "DmsCmxwGBWVnYV6CDuCiJsATk85eFUr/Zs7BeYWjlKvAQz4Np9GTDECe3rE1KAA42PZrbvyAdWD31Np9QF0zj8Aq6poCvZ0c0Mib2bRi3eOP8tPL6EUggAl125UkoAZzxtgRWvILZfeRGhBzYsRX9C7/UtA8F8Ij0hXknkgdY48="
