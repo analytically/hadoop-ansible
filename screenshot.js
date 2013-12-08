@@ -7,8 +7,14 @@ if (args.length === 3) {
     var page = require('webpage').create();
     page.viewportSize = { width: 1024, height: 768 };
     page.open(url, function () {
-        page.render(filename);
-        phantom.exit();
+        page.onConsoleMessage = function (msg) {
+            console.log(msg);
+        };
+
+        window.setTimeout(function () {
+            page.render(filename);
+            phantom.exit();
+        }, 500);
     });
 }
 else {
