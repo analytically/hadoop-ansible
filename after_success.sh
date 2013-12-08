@@ -3,15 +3,6 @@
 export ANSIBLE_HOST_KEY_CHECKING=False
 export ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
 
-sudo pip install dopy
-sudo pip install psycopg2
-sudo pip install python-apt
-
-echo 'Install the Travis CI SSH key'
-chmod 400 travis.ssh
-eval `ssh-agent`
-ssh-add travis.ssh
-
 echo 'Touch local temp files'
 touch privatehosts
 sudo touch /etc/rc6.d/K10do_destroy.sh
@@ -43,13 +34,11 @@ git config --global push.default matching
 mkdir ci
 mkdir ci/$TRAVIS_BUILD_NUMBER
 cd ci/$TRAVIS_BUILD_NUMBER
-phantomjs ../../screenshot.js http://hmaster01:50070 active-namenode.png
-phantomjs ../../screenshot.js http://hmaster02:50070 standby-namenode.png
-phantomjs ../../screenshot.js http://hmaster01:60010/master-status hbase.png
-phantomjs ../../screenshot.js http://monitor01/ganglia ganglia.png
-phantomjs ../../screenshot.js http://monitor01/kibana/index.html\#/dashboard/file/logstash.json kibana.png
-phantomjs ../../screenshot.js http://monitor01:9200/_plugin/head/ elasticsearch-head.png
-phantomjs ../../screenshot.js http://monitor01:9200/_plugin/bigdesk/ elasticsearch-bigdesk.png
+../../slimerjs/slimerjs ../../screenshot.js http://hmaster01:50070 active-namenode.png
+../../slimerjs/slimerjs ../../screenshot.js http://hmaster02:50070 standby-namenode.png
+../../slimerjs/slimerjs ../../screenshot.js http://hmaster01:60010 hbase.png
+../../slimerjs/slimerjs ../../screenshot.js http://monitor01/ganglia ganglia.png
+../../slimerjs/slimerjs ../../screenshot.js http://monitor01/kibana/index.html\#/dashboard/file/logstash.json kibana.png
 git add .
 git commit -m "[ci skip] Screenshots committed by Travis-CI"
 git push https://${GH_OAUTH_TOKEN}@github.com/${GH_USER_NAME}/${GH_PROJECT_NAME} 2>&1
