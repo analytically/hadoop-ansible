@@ -16,7 +16,7 @@
   user: ansibler
   sudo: true
   roles:
-    - { role: 2_aggregated_links, when: "ansible_interfaces|length == 3 and 'bond0' not in ansible_interfaces" }
+    - { role: 2_aggregated_links, when: "ansible_virtualization_type == 'kvm' and ansible_interfaces|length == 3 and 'bond0' not in ansible_interfaces" }
 
 - hosts: monitors[0]
   accelerate: "{{ accelerate }}"
