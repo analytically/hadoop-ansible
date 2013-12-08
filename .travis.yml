@@ -15,11 +15,12 @@ after_success: ./after_success.sh
 addons:
   firefox: "25.0.1"
 env:
-  - SLIMERJSLAUNCHER=$(which firefox) DISPLAY=:99.0 PATH=$TRAVIS_BUILD_DIR/slimerjs:$PATH
-  - secure: "YBnTdEJ6U6i5no2eRlVC5dsqvSmYqULG+zWyTk2KqWGGMCza3RFi0wUueK3NuN+tl4Ijzf26Kma7wqdjkort0UrfxiH2xd4DWv3LvWz5vpKFP4GaSQGcd5zokHAJJ5hs0JgKY5jwGfoNHcnL16oUJEtptfLqTjGKRIHS+Ye1LmQ="
-  - secure: "DmsCmxwGBWVnYV6CDuCiJsATk85eFUr/Zs7BeYWjlKvAQz4Np9GTDECe3rE1KAA42PZrbvyAdWD31Np9QF0zj8Aq6poCvZ0c0Mib2bRi3eOP8tPL6EUggAl125UkoAZzxtgRWvILZfeRGhBzYsRX9C7/UtA8F8Ij0hXknkgdY48="
-  - secure: "e1CgM7pcNr5P8aOlLAthEO1PmE9Fy7yxveH09ARvOICkupkNjdM3CAvjQAI5xbhD/ExEjqlRbGHb7LMTrPyLbNehTDTcxcD4gWeNte18hE9A+4foGFOUzyWa7+2X5j6LndLec8EAxV87eI2uX5oO4VSggg3CXhuR084ETg/4ah8="
-  - GH_USER_NAME: analytically
-  - GH_PROJECT_NAME: hadoop-ansible
-  - GIT_AUTHOR_NAME: "TravisCI"
-  - GIT_AUTHOR_EMAIL: "noreply@travis-ci.org"
+  global:
+    - SLIMERJSLAUNCHER=$(which firefox) DISPLAY=:99.0 PATH=$TRAVIS_BUILD_DIR/slimerjs:$PATH
+    - secure: "YBnTdEJ6U6i5no2eRlVC5dsqvSmYqULG+zWyTk2KqWGGMCza3RFi0wUueK3NuN+tl4Ijzf26Kma7wqdjkort0UrfxiH2xd4DWv3LvWz5vpKFP4GaSQGcd5zokHAJJ5hs0JgKY5jwGfoNHcnL16oUJEtptfLqTjGKRIHS+Ye1LmQ="
+    - secure: "DmsCmxwGBWVnYV6CDuCiJsATk85eFUr/Zs7BeYWjlKvAQz4Np9GTDECe3rE1KAA42PZrbvyAdWD31Np9QF0zj8Aq6poCvZ0c0Mib2bRi3eOP8tPL6EUggAl125UkoAZzxtgRWvILZfeRGhBzYsRX9C7/UtA8F8Ij0hXknkgdY48="
+    - secure: "e1CgM7pcNr5P8aOlLAthEO1PmE9Fy7yxveH09ARvOICkupkNjdM3CAvjQAI5xbhD/ExEjqlRbGHb7LMTrPyLbNehTDTcxcD4gWeNte18hE9A+4foGFOUzyWa7+2X5j6LndLec8EAxV87eI2uX5oO4VSggg3CXhuR084ETg/4ah8="
+    - GH_USER_NAME: analytically
+    - GH_PROJECT_NAME: hadoop-ansible
+    - GIT_AUTHOR_NAME: "TravisCI"
+    - GIT_AUTHOR_EMAIL: "noreply@travis-ci.org"
