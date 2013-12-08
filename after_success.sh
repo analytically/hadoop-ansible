@@ -5,7 +5,7 @@ export ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
 
 echo 'Installing dopy and python-keyczar'
 sudo pip install dopy
-sudo apt-get -y install python-keyczar
+sudo pip install python-keyczar
 
 echo 'Install the Travis CI SSH key'
 chmod 400 travis.ssh
