@@ -26,8 +26,8 @@ echo 'Run ansible-playbook -i hosts -u root bootstrap.yml'
 ansible-playbook -i hosts -u root bootstrap.yml
 cd ..
 
-echo 'Run ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml'
-ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml
+echo 'Run ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml'
+ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml
 
 cd /tmp
 git clone https://${GH_OAUTH_TOKEN}@github.com/${GH_USER_NAME}/${GH_PROJECT_NAME} hadoop-ansible
@@ -45,7 +45,7 @@ phantomjs ../../screenshot.js http://hmaster01:50070 active-namenode.png
 phantomjs ../../screenshot.js http://hmaster02:50070 standby-namenode.png
 phantomjs ../../screenshot.js http://hmaster01:60010/master-status hbase.png
 phantomjs ../../screenshot.js http://monitor01/ganglia ganglia.png
-phantomjs ../../screenshot.js http://monitor01/kibana/index.html#/dashboard/file/logstash.json kibana.png
+phantomjs ../../screenshot.js http://monitor01/kibana/index.html\#/dashboard/file/logstash.json kibana.png
 phantomjs ../../screenshot.js http://monitor01:9200/_plugin/head/ elasticsearch-head.png
 phantomjs ../../screenshot.js http://monitor01:9200/_plugin/bigdesk/ elasticsearch-bigdesk.png
 git add .
