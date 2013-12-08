@@ -22,7 +22,6 @@
           size_id=64
           region_id=4
           image_id=961965
-          wait_timeout=10000
       register: hosts
       with_items:
         - monitor01
