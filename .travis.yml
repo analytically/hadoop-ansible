@@ -7,7 +7,7 @@ install:
   - sudo pip install dopy
 before_script:
   - ansible-playbook -i localhost --extra-vars "api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID" do_cluster.yml
-  - sleep 5 # give Digital Ocean some time to fully provision the nodes
+  - sleep 20 # give the last created node time to boot
   - eval `ssh-agent`
   - chmod 400 travis.ssh && ssh-add travis.ssh
   - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
