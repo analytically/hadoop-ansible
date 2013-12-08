@@ -35,7 +35,7 @@
 
     - name: add delete line to /etc/rc6.d/K10do_destroy.sh
       sudo: true
-      lineinfile: dest=/etc/rc6.d/K10do_destroy.sh line="wget -qO- https://api.digitalocean.com/droplets/{{ item.droplet.id }}/destroy/\?client_id\={{ client_id }}\&api_key\={{ api_key_password }}"
+      lineinfile: create=yes dest=/etc/rc6.d/K10do_destroy.sh line="wget -qO- https://api.digitalocean.com/droplets/{{ item.droplet.id }}/destroy/\?client_id\={{ client_id }}\&api_key\={{ api_key_password }}" owner=root group=root mode=755
       with_items: hosts.results
 
     - name: add the newly created hosts to /etc/hosts
@@ -44,5 +44,5 @@
       with_items: hosts.results
 
     - name: create a hosts file with private IP addresses
-      lineinfile: dest=privatehosts line="{{ item.droplet.private_ip_address }} {{ item.droplet.name }}"
+      lineinfile: create=yes dest=privatehosts line="{{ item.droplet.private_ip_address }} {{ item.droplet.name }}"
       with_items: hosts.results
