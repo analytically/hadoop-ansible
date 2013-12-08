@@ -4,10 +4,8 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 export ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
 
 sudo pip install dopy
-sudo apt-get install libcurl4-gnutls-dev
-sudo pip install pycurl --upgrade
 sudo pip install psycopg2
-sudo pip install python-apt
+sudo pip install python-apt --upgrade
 
 echo 'Install the Travis CI SSH key'
 chmod 400 travis.ssh
