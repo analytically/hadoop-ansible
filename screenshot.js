@@ -14,7 +14,7 @@ if (args.length === 3) {
         window.setTimeout(function () {
             page.render(filename);
             phantom.exit();
-        }, 500);
+        }, 1000);
     });
 }
 else {
