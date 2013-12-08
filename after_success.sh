@@ -5,6 +5,7 @@ export ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
 
 sudo pip install dopy
 sudo pip install pycurl
+sudo apt-get install python-pycurl -y
 sudo pip install psycopg2
 sudo pip install python-apt
 
