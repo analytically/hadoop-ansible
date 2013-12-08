@@ -2,24 +2,23 @@ language: python
 python: '2.6'
 addons:
   firefox: "25.0.1"
-before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
 install:
   - pip install ansible
   - sudo pip install dopy
 before_script:
-  - wget http://download.slimerjs.org/v0.9/0.9.0rc1/slimerjs-0.9.0rc1.zip
-  - unzip slimerjs-0.9.0rc1.zip
-  - mv slimerjs-0.9.0rc1 ./slimerjs
-  - eval `ssh-agent`
-  - chmod 400 travis.ssh && ssh-add travis.ssh
   - ansible-playbook -i do_cluster_hosts --extra-vars 'api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID' do_cluster.yml
   - sleep 5 # give Digital Ocean some time to fully provision the nodes
+  - eval `ssh-agent`
+  - chmod 400 travis.ssh && ssh-add travis.ssh
   - ansible-playbook -i do_cluster_hosts --extra-vars 'authorized_rsa_key=$(cat travis.ssh.pub)' -u root bootstrap/bootstrap.yml
 script:
   - ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml
 after_success:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - wget http://download.slimerjs.org/v0.9/0.9.0rc1/slimerjs-0.9.0rc1.zip
+  - unzip slimerjs-0.9.0rc1.zip
+  - mv slimerjs-0.9.0rc1 ./slimerjs
   - ./after_success.sh
 after_script:
   - sudo /etc/rc6.d/K10do_destroy.sh
