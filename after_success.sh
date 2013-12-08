@@ -3,6 +3,11 @@
 export ANSIBLE_HOST_KEY_CHECKING=False
 export ANSIBLE_SSH_ARGS="-o ForwardAgent=yes"
 
+echo 'Install the Travis CI SSH key'
+chmod 400 travis.ssh
+eval `ssh-agent`
+ssh-add travis.ssh
+
 echo 'Touch local temp files'
 touch privatehosts
 sudo touch /etc/rc6.d/K10do_destroy.sh
