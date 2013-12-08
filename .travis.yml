@@ -10,7 +10,7 @@ before_script:
   - sleep 5 # give Digital Ocean some time to fully provision the nodes
   - eval `ssh-agent`
   - chmod 400 travis.ssh && ssh-add travis.ssh
-  - ansible-playbook -i hosts --extra-vars "authorized_rsa_key=$(cat travis.ssh.pub)" -u root bootstrap/bootstrap.yml
+  - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
 script:
   - ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml
 after_success:
