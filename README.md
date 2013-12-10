@@ -137,23 +137,6 @@ Instructions on how to test the performance of your CDH4 cluster.
 Paste your public SSH RSA key in `bootstrap/ansible_rsa.pub` and run `bootstrap.sh` to bootstrap the nodes
 specified in `bootstrap/hosts`. See [`bootstrap/bootstrap.yml`](bootstrap/bootstrap.yml) for more information.
 
-### Cluster-wide SSH
-
-If you feel like using Ansible to run cluster-wide commands is overkill, take a look at
-[ClusterSSH](http://sourceforge.net/apps/mediawiki/clusterssh/index.php?title=Main_Page).
-
-To install:
-
-```sh
-apt-get install clusterssh
-```
-
-To open a SSH connection to all nodes used in this playbook:
-
-```sh
-./cssh.sh
-```
-
 ### What about Pig, Flume, etc?
 
 You can manually install additional components after running this playbook. Follow the
