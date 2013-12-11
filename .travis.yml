@@ -3,17 +3,17 @@ python: '2.6'
 addons:
   firefox: "25.0.1"
 install:
+  - sudo apt-get install python-keyczar
   - pip install ansible
   - sudo pip install dopy
 before_script:
   - ansible-playbook -i localhost --extra-vars "api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID" do_cluster.yml
-  - sleep 200 # DigitalOcean can be damn slow creating droplets
-  - sleep 200 # DigitalOcean can be damn slow creating droplets
+  - sleep 300 # DigitalOcean can be damn slow creating droplets
   - eval `ssh-agent`
   - "chmod 400 travis.ssh && ssh-add travis.ssh"
 script:
   - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
-  - ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml
+  - ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml
 after_success:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
