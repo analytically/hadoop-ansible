@@ -8,7 +8,7 @@
   sudo: true
   roles:
     - common
-    - postfix_mandrill
+    - { role: postfix_mandrill, when: notify_email is defined and postfix_domain is defined and mandrill_username is defined and mandrill_api_key is defined }
     - ganglia_monitor
 
 - hosts: 2_links_aggregated
@@ -16,7 +16,7 @@
   user: ansibler
   sudo: true
   roles:
-    - { role: 2_aggregated_links, when: "ansible_virtualization_role == 'host' and ansible_interfaces|length == 3 and 'bond0' not in ansible_interfaces" }
+    - { role: 2_aggregated_links, when: bond_mode is defined and mtu is defined and ansible_virtualization_role == "host" and ansible_interfaces|length == 3 and "bond0" not in ansible_interfaces }
 
 - hosts: monitors[0]
   accelerate: "{{ accelerate }}"

@@ -3,13 +3,11 @@
 
 - name: add PostgreSQL repository
   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
-  tags:
-      - postgres
+  tags: postgres
 
 - name: add PostgreSQL key
   apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
-  tags:
-      - postgres
+  tags: postgres
 
 - name: install PostgreSQL via apt
   apt: name={{ item }} force=yes
@@ -17,8 +15,8 @@
     - postgresql-9.1
     - python-psycopg2
     - libpostgresql-jdbc-java
-  tags:
-    - postgres
+  tags: postgres
 
 - name: install PostgreSQL contrib via apt
   apt: name=postgresql-contrib-9.1 force=yes
+  tags: postgres

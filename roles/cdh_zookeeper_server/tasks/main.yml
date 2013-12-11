@@ -31,5 +31,5 @@
   tags: zookeeper
 
 - name: initialize ZooKeeper
-  shell: creates=/var/lib/zookeeper/myid service zookeeper-server init --myid={{ zoo_id }}
+  shell: creates=/var/lib/zookeeper/myid service zookeeper-server init --myid={{ zookeeper_id }}
   tags: zookeeper

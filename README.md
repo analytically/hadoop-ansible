@@ -12,7 +12,7 @@ Hire/Follow [@analytically](http://twitter.com/analytically). **NEW: Deploys [Hi
 
   - [Ansible](http://www.ansibleworks.com/) 1.4 or later
   - 6 + 1 Ubuntu 12.04 LTS, 13.04 or 13.10 hosts - see [ubuntu-netboot-tftp](https://github.com/analytically/ubuntu-netboot-tftp) if you need automated server installation
-  - [Mandrill](http://mandrill.com/) API key for sending emails
+  - [Mandrill](http://mandrill.com/) username and API key for sending email notifications
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
 
 ### Cloudera ([CDH4](http://www.cloudera.com/content/support/en/documentation/cdh4-documentation/cdh4-documentation-v4-latest.html)) Hadoop Roles
@@ -48,25 +48,19 @@ If you're assembling your own Hadoop playbook, these roles are available for you
 
 ### Configure
 
-Customize the following files:
+Set the following variables by `--extra-vars` or editing [`group_vars/all`](group_vars/all):
 
 Required:
 
-- [`group_vars/all`](group_vars/all) - site_name and notify_email
-- [`roles/postfix_mandrill/defaults/main.yml`](roles/postfix_mandrill/defaults/main.yml) - set your [Mandrill](http://mandrill.com/) account (API key)
+- `site_name` - used as Hadoop nameservices and various directory names. Alphanumeric only.
 
 Optional:
 
-- [`roles/2_aggregated_links/defaults/main.yml`](roles/2_aggregated_links/defaults/main.yml) - aggregated link bond mode and mtu
-- [`roles/cdh_hadoop_config/defaults/main.yml`](roles/cdh_hadoop_config/defaults/main.yml) - Hadoop settings
-- [`roles/presto_coordinator/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
-- [`roles/presto_worker/templates/config.properties`](roles/cdh_hadoop_config/defaults/main.yml) - Presto coordinator configuration
+- Email notification: `notify_email`, `postfix_domain`, `mandrill_username`, `mandrill_api_key`
+- [`roles/2_aggregated_links`](roles/2_aggregated_links/defaults/main.yml) - `bond_mode` (`balance-alb`) and `mtu` (9216)
+- [`roles/cdh_hadoop_config`](roles/cdh_hadoop_config/defaults/main.yml) - `dfs_blocksize` (268435456), `max_xcievers` (4096), `heapsize` (12278)
 
-##### Role Vars
-
-When specifying/reusing roles, one can override the vars, eg.:
-
-`- { role: postfix_mandrill, postfix_domain: example.com, mandrill_username: joe, mandrill_api_key: 123 }`
+You're welcome to edit any of the XML files to further customize this playbook.
 
 #### Adding hosts
 
@@ -156,4 +150,4 @@ official [CDH4 Installation Guide](http://www.cloudera.com/content/cloudera-cont
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-Copyright 2013 [Mathias Bogaert](mailto:mathias.bogaert@gmail.com).
+Copyright 2013-2014 [Mathias Bogaert](mailto:mathias.bogaert@gmail.com).

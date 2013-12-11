@@ -9,8 +9,16 @@
   apt: pkg=td-agent update_cache=yes force=yes
   tags: tdagent
 
+- name: remove older fluent elasticsearch plugin versions
+  command: removes={{ item }} rm -Rf {{ item }}
+  with_items:
+    - /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.1
+    - /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.2
+    - /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.3
+    - /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.4
+
 - name: install the fluent elasticsearch plugin
-  shell: creates=/usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.4/Gemfile /usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-elasticsearch
+  shell: creates=/usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.2.0/Gemfile /usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-elasticsearch
   tags: tdagent
 
 - name: configure td-agent in /etc/td-agent/td-agent.conf

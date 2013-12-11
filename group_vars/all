@@ -1,2 +1,8 @@
 site_name: hydrodesk
-notify_email: info@example.com
+
+# To enable Postfix SMTP through Mandrill (@mandrillapp), set the following variables:
+
+# postfix_domain: example.com
+# notify_email: info@example.com
+# mandrill_username: your_username
+# mandrill_api_key: your_api_key

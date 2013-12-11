@@ -1,8 +1,8 @@
 ---
 # file: roles/oracle_jdk/tasks/main.yml
 
-- name: install Oracle Java 7 JDK via apt
-  apt: pkg={{ item }}
+- name: install or update Oracle Java 7 JDK via apt
+  apt: pkg={{ item }} update_cache=yes
   with_items:
        - oracle-java7-jdk
   tags:
