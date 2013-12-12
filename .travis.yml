@@ -8,23 +8,23 @@ install:
   - sudo pip install dopy
 before_script:
   - ansible-playbook -i localhost --extra-vars "api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID" do_cluster.yml
-  - sleep 300 # DigitalOcean can be damn slow creating droplets
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - "wget http://download.slimerjs.org/v0.9/0.9.0/slimerjs-0.9.0.zip"
+  - "unzip slimerjs-0.9.0.zip && mv slimerjs-0.9.0 ./slimerjs"
+  - "gem install travis-artifacts"
+  - sleep 300 # DigitalOcean can be damn slow creating/booting droplets, so wait a little longer
   - eval `ssh-agent`
   - "chmod 400 travis.ssh && ssh-add travis.ssh"
 script:
   - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
   - ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml
 after_success:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - "wget http://download.slimerjs.org/v0.9/0.9.0rc1/slimerjs-0.9.0rc1.zip"
-  - "unzip slimerjs-0.9.0rc1.zip && mv slimerjs-0.9.0rc1 ./slimerjs"
-  - "gem install travis-artifacts"
   - "slimerjs screenshot.js http://hmaster01:50070 active-namenode.png"
-  - "travis-artifacts upload --path active-namenode.png"
   - "slimerjs screenshot.js http://hmaster02:50070 standby-namenode.png"
-  - "travis-artifacts upload --path standby-namenode.png"
   - "slimerjs screenshot.js http://monitor01/ganglia ganglia.png"
+  - "travis-artifacts upload --path active-namenode.png"
+  - "travis-artifacts upload --path standby-namenode.png"
   - "travis-artifacts upload --path ganglia.png"
   - sudo /etc/rc6.d/K10do_destroy.sh
 after_failure:
