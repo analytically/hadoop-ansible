@@ -18,7 +18,7 @@ before_script:
   - sleep 300 # DigitalOcean can be damn slow creating/booting droplets, so wait a little longer
 script:
   - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
-  - rm -f .fireball.keys
+  - rm -f /home/travis/.fireball.keys
   - ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml
 after_success:
   - "slimerjs screenshot.js http://hmaster01:50070 active-namenode.png"

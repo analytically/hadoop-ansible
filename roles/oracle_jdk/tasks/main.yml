@@ -7,3 +7,6 @@
        - oracle-java7-jdk
   tags:
     - java
+
+- name: download floatingdecimal-0.1.jar to /usr/lib/jvm (fixes monitor contention when parsing doubles due to a static synchronized method)
+  shell: creates=/usr/lib/jvm/floatingdecimal-0.1.jar chdir=/usr/lib/jvm curl -O http://repo1.maven.org/maven2/io/airlift/floatingdecimal/0.1/floatingdecimal-0.1.jar
