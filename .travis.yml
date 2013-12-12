@@ -13,9 +13,10 @@ before_script:
   - "wget http://download.slimerjs.org/v0.9/0.9.0/slimerjs-0.9.0.zip"
   - "unzip slimerjs-0.9.0.zip && mv slimerjs-0.9.0 ./slimerjs"
   - "gem install travis-artifacts"
-  - sleep 300 # DigitalOcean can be damn slow creating/booting droplets, so wait a little longer
   - eval `ssh-agent`
   - "chmod 400 travis.ssh && ssh-add travis.ssh"
+  - sleep 300 # DigitalOcean can be damn slow creating/booting droplets, so wait a little longer
+  - rm -f .fireball.keys
 script:
   - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
   - ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml
