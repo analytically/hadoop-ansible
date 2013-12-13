@@ -12,6 +12,7 @@
 - name: install postfix via apt
   apt: pkg={{ item }}
   with_items:
+     - heirloom-mailx
      - postfix
      - mailutils
      - libsasl2-2
