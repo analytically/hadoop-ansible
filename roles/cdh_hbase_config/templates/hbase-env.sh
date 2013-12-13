@@ -39,7 +39,7 @@ export HBASE_HEAPSIZE=4096
 # Below are what we set by default.  May only work with SUN JVM.
 # For more on why as well as other possible settings,
 # see http://wiki.apache.org/hadoop/PerformanceTuning
-export HBASE_OPTS="-Xbootclasspath/p:/usr/lib/jvm/floatingdecimal-0.1.jar -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+AggressiveOpts"
+export HBASE_OPTS="-Xbootclasspath/p:/usr/lib/jvm/floatingdecimal-0.1.jar -XX:+UseConcMarkSweepGC -XX:+AggressiveOpts -XX:+MaxPermSize=300M -XX:+CMSClassUnloadingEnabled -XX:SurvivorRatio=8 -XX:+ExplicitGCInvokesConcurrent"
 
 # Uncomment below to enable java garbage collection logging for the server-side processes
 # this enables basic gc logging for the server processes to the .out file
