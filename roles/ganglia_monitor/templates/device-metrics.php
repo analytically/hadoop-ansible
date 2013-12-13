@@ -74,7 +74,7 @@ for ($row = 0; $row < count($data); $row++) {
         exec('gmetric -c /etc/ganglia/gmond.conf --name="' . $name . '" --title="' . $title . '" --value="' . $value . '" --type="float" --units="' . $unit . '" -g disk');
     }
 
-    exec('/usr/sbin/hddtemp -n /dev/' . $data[$row][0], $temperature);
+    exec('/usr/sbin/hddtemp -q -n /dev/' . $data[$row][0], $temperature);
     exec('gmetric -c /etc/ganglia/gmond.conf --name="' . $namePrefix . 'temp" --title="' . $titlePrefix . 'Temperature" --value="' . $temperature[0] . '" --type="int8" --units="degrees C" -g disk');
 }
 ?>
