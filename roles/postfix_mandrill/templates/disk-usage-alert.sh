@@ -4,10 +4,9 @@
 # {{ ansible_managed }}
 
 # Shell script to monitor or watch the disk space
-# It will send an email to $EMAIL when the (free available) percentage of space is >= 80%.
+# It will send an email to root when the (free available) percentage of space is >= 80%.
 # -------------------------------------------------------------------------
 
-EMAIL="{{ notify_email }}"
 USE_ALERT_PCT=80
 
 # Exclude list of unwanted monitoring, if several partions then use "|" to separate the partitions.
@@ -21,7 +20,7 @@ do
   partition=$(echo $output | awk '{print $2}')
   if [ $usep -ge $USE_ALERT_PCT ] ; then
      echo "Running out of space: $partition is $usep% used on server $(hostname)." | \
-     mail -s "WARNING: $(hostname) running out of disk space: $usep% used" $EMAIL
+     mail -s "WARNING: $(hostname) running out of disk space: $usep% used" root
   fi
 done
 }

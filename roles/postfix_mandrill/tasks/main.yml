@@ -3,9 +3,11 @@
 
 - name: debconf-set-selections mailname for postfix
   shell: executable=/bin/bash debconf-set-selections <<< "postfix postfix/mailname string {{ ansible_hostname }}.{{ postfix_domain }}"
+  tags: postfix
 
 - name: debconf-set-selections mailer type for postfix
   shell: executable=/bin/bash debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+  tags: postfix
 
 - name: install postfix via apt
   apt: pkg={{ item }}
@@ -15,15 +17,19 @@
      - libsasl2-2
      - libsasl2-modules
      - ca-certificates
+  tags: postfix
 
 - name: setup Mandrill credentials for Postfix
   template: src=sasl_passwd dest=/etc/postfix/sasl_passwd owner=root group=root mode=600
+  tags: postfix
 
 - name: run postmap to configure Postfix's lookup tables
-  shell: creates=/etc/postfix/sasl_passwd.db postmap /etc/postfix/sasl_passwd
+  shell: postmap /etc/postfix/sasl_passwd
+  tags: postfix
 
 - name: install Mandrill (Thawte Premium Server) SSL certificates
   shell: creates=/etc/postfix/cacert.pem cat /etc/ssl/certs/Thawte_Premium_Server_CA.pem | tee /etc/postfix/cacert.pem
+  tags: postfix
 
 - name: configure postfix
   lineinfile: dest=/etc/postfix/main.cf regexp='{{ item }}' line='{{ item }}'
@@ -34,15 +40,28 @@
     - 'smtp_use_tls = yes'
     - "mydomain = {{ postfix_domain }}"
     - 'inet_interfaces = 127.0.0.1' # Make sure Postfix listens to localhost only
+  tags: postfix
 
 - name: configure postfix's relayhost in /etc/postfix/main.cf
   lineinfile: dest=/etc/postfix/main.cf regexp='mandrillapp' line='relayhost = [smtp.mandrillapp.com]'
   notify:
     - restart postfix
     - send test email
+  tags: postfix
+
+- name: forward root user email to {{ notify_email }} if not already forwarding
+  shell: creates=~/.forward chdir=~ echo "{{ notify_email }}" > .forward
+  tags: postfix
+
+- name: forward ansible user email to {{ notify_email }} if not already forwarding
+  sudo: false
+  shell: creates=~/.forward chdir=~ echo "{{ notify_email }}" > .forward
+  tags: postfix
 
 - name: copy disk-usage-alert script to /etc/cron.hourly (emails when disk full)
   template: src=disk-usage-alert.sh dest=/etc/cron.hourly/disk-usage-alert owner=root group=root mode=755
+  tags: postfix
 
 - name: configure unattended upgrades in /etc/apt/apt.conf.d/50unattended-upgrades (emails upon upgrade failure)
   template: src=50unattended-upgrades dest=/etc/apt/apt.conf.d/50unattended-upgrades
+  tags: postfix
