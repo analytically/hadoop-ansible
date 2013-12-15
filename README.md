@@ -89,7 +89,7 @@ To run Ansible:
 ```
 
 To e.g. just install ZooKeeper, add the `zookeeper` tag as argument (available tags: apache, bonding, configuration,
-elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, presto, rsyslog, tdagent, zookeeper):
+elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix, postgres, presto, rsyslog, tdagent, zookeeper):
 
 ```sh
 ./site.sh zookeeper
@@ -97,16 +97,17 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, presto,
 
 #### What else is installed?
 
-  - [link aggregation](roles/2_aggregated_links/templates/interfaces) configures [Link Aggregation](https://help.ubuntu.com/community/UbuntuBonding) if 2 interfaces are available on the nodes (`balance-alb` by default)
+  - [link aggregation](roles/2_aggregated_links/templates/interfaces) configures [Link Aggregation](https://help.ubuntu.com/community/UbuntuBonding) if 2 interfaces are available
   - [Htop](http://htop.sourceforge.net/)
-  - curl, checkinstall, intel-microcode/amd64-microcode, net-tools, zip
+  - curl, checkinstall, heirloom-mailx, intel-microcode/amd64-microcode, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
   - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
   - [local 'apt' repository for Oracle Java packages](https://github.com/flexiondotorg/oab-java6)
   - unattended upgrades [email to inform success/failure](roles/postfix_mandrill/templates/50unattended-upgrades)
   - php5-cli, sysstat, hddtemp to report [device metrics](roles/ganglia_monitor/templates/device-metrics.php)
-    (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d).
+    (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d)
   - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy 1.1.1](https://code.google.com/p/snappy/) compression
+  - A [fork of openjdk's FloatingDecimal](https://github.com/airlift/floatingdecimal) to fix monitor contention when parsing doubles due to a static synchronized method
 
 ### Performance testing
 

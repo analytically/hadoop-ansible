@@ -15,7 +15,7 @@ before_script:
   - "gem install travis-artifacts"
   - eval `ssh-agent`
   - "chmod 400 travis.ssh && ssh-add travis.ssh"
-  - sleep 480 # DigitalOcean can be damn slow creating/booting droplets
+  - sleep 500 # DigitalOcean can be damn slow creating/booting droplets
 script:
   - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
   - rm -f /home/travis/.fireball.keys
