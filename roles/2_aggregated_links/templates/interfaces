@@ -14,11 +14,6 @@ iface {{ interface }} inet manual
 {% if loop.index > 1 %}
 pre-up sleep 3
 {% endif %}
-hardware-dma-ring-rx 4096
-hardware-dma-ring-tx 4096
-ethernet-pause-autoneg off
-ethernet-pause-rx off
-ethernet-pause-tx off
 bond-master bond0
 
 {% endfor %}
