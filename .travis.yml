@@ -15,11 +15,11 @@ before_script:
   - "gem install travis-artifacts"
   - eval `ssh-agent`
   - "chmod 400 travis.ssh && ssh-add travis.ssh"
-  - sleep 500 # DigitalOcean can be damn slow creating/booting droplets
+  - sleep 450 # DigitalOcean can be damn slow creating/booting droplets
 script:
   - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
   - rm -f /home/travis/.fireball.keys
-  - ansible-playbook -i hosts --extra-vars "accelerate=true" site.yml
+  - ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml
 after_success:
   - "slimerjs screenshot.js http://hmaster01:50070 active-namenode.png"
   - "slimerjs screenshot.js http://hmaster02:50070 standby-namenode.png"
