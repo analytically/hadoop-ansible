@@ -1,7 +1,7 @@
 ---
 # file: roles/cdh_hadoop_common/tasks/main.yml
 
-- name: install the base Hadoop packages via apt
+- name: install base Hadoop packages via apt
   apt: name={{ item }} update_cache=yes
   with_items:
     - hadoop
