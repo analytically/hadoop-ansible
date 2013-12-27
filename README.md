@@ -1,4 +1,4 @@
-Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hadoop-ansible.png)](https://travis-ci.org/analytically/hadoop-ansible)
+Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hadoop-ansible.png)](https://travis-ci.org/analytically/hadoop-ansible) ([build artifacts](http://hadoop-ansible.s3-website-us-east-1.amazonaws.com/#artifacts/))
 =======================
 
 [Ansible](http://www.ansibleworks.com/) Playbook that installs a CDH4 [Hadoop](http://hadoop.apache.org/)
