@@ -6,7 +6,7 @@ cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/con
 with [HBase](http://hbase.apache.org/), [Presto](http://prestodb.io/) for analytics, and [Ganglia](http://ganglia.sourceforge.net/), [Fluentd](http://fluentd.org/),
 [ElasticSearch](http://www.elasticsearch.org/) and [Kibana 3](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
 
-Hire/Follow [@analytically](http://twitter.com/analytically). [Build artifacts](http://hadoop-ansible.s3-website-us-east-1.amazonaws.com/#artifacts/).
+Hire/Follow [@analytically](http://twitter.com/analytically). Browse the CI [build screenshots](http://hadoop-ansible.s3-website-us-east-1.amazonaws.com/#artifacts/).
 
 ### Requirements
 
