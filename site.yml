@@ -3,6 +3,9 @@
 # ==================
 
 - hosts: all
+  tasks: []
+
+- hosts: all
   accelerate: "{{ accelerate }}"
   user: ansibler
   sudo: true
