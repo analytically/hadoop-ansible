@@ -110,6 +110,17 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix
   - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy 1.1.1](https://code.google.com/p/snappy/) compression
   - a [fork of openjdk's FloatingDecimal](https://github.com/airlift/floatingdecimal) to fix monitor contention when parsing doubles due to a static synchronized method
   - a [logstash index cleaner](https://github.com/logstash/expire-logs), defaults to maximum 128 GB of data in ElasticSearch, via cron at 2:00AM
+  - [SmokePing](http://oss.oetiker.ch/smokeping/) to keep track of network latency
+
+#### URL's
+
+After the installation, go here:
+
+  - Ganglia at [monitor01/ganglia](http://monitor01/ganglia/)
+  - Kibana at [monitor01/kibana/index.html#/dashboard/file/logstash.json](http://monitor01/kibana/index.html#/dashboard/file/logstash.json)
+  - Smokeping at [monitor01/smokeping/smokeping.cgi](http://monitor01/smokeping/smokeping.cgi)
+  - hmaster01 at [hmaster01:50070](http://hmaster01:50070) - active namenode
+  - hmaster02 at [hmaster02:50070](http://hmaster01:50070) - standby namenode
 
 ### Performance testing
 
