@@ -1,0 +1,41 @@
+# {{ ansible_managed }}
+
+*** Alerts ***
+to = root@localhost
+from = smokealert@{{ site_name|lower }}
+
++bigloss
+type = loss
+# in percent
+pattern = ==0%,==0%,==0%,==0%,>0%,>0%,>0%
+comment = suddenly there is packet loss
+
++someloss
+type = loss
+# in percent
+pattern = >0%,*12*,>0%,*12*,>0%
+comment = loss 3 times in a row
+
++startloss
+type = loss
+# in percent
+pattern = ==S,>0%,>0%,>0%
+comment = loss at startup
+
++rttdetect
+type = rtt
+# in milli seconds
+pattern = <10,<10,<10,<10,<10,<100,>100,>100,>100
+comment = routing messed up again ?
+
++hostdown
+type = loss
+# in percent
+pattern = ==0%,==0%,==0%, ==U
+comment = no reply
+
++lossdetect
+type = loss
+# in percent
+pattern = ==0%,==0%,==0%,==0%,>20%,>20%,>20%
+comment = suddenly there is packet loss

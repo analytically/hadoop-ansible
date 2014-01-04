@@ -1,0 +1,37 @@
+# {{ ansible_managed }}
+
+*** Targets ***
+
+probe = FPing
+
+menu = Top
+title = Network Latency Grapher
+remark = SmokePing for {{ site_name|capitalize }}.
+
++ {{ site_name|capitalize }}
+menu = {{ site_name|capitalize }}
+title = {{ site_name|capitalize }}
+
+++ Namenodes
+menu = Hadoop Namenodes
+title = Hadoop Namenodes
+
+{% for host in groups['namenodes'] %}
++++ {{ hostvars[host]['ansible_hostname'] }}
+menu = {{ hostvars[host]['ansible_hostname'] }}
+title = Namenode {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+host = {{ hostvars[host]['ansible_hostname'] }}
+alerts = bigloss,someloss,startloss,rttdetect,hostdown
+{% endfor %}
+
+++ Datanodes
+menu = Hadoop Datanodes
+title = Hadoop Datanodes
+
+{% for host in groups['datanodes'] %}
++++ {{ hostvars[host]['ansible_hostname'] }}
+menu = {{ hostvars[host]['ansible_hostname'] }}
+title = Datanode {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+host = {{ hostvars[host]['ansible_hostname'] }}
+alerts = bigloss,someloss,startloss,rttdetect,hostdown
+{% endfor %}

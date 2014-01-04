@@ -40,7 +40,7 @@
 
     <property>
         <name>javax.jdo.option.ConnectionPassword</name>
-        <value>hive_{{ site_name }}</value>
+        <value>hive_{{ site_name|lower }}</value>
     </property>
 
     <property>

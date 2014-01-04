@@ -1,0 +1,31 @@
+---
+# file: roles/smokeping/tasks/main.yml
+
+- name: install smokeping via apt
+  apt: pkg=smokeping
+  tags: smokeping
+
+- name: configure smokeping at /etc/smokeping/config.d
+  template: src={{ item }} dest=/etc/smokeping/config.d/{{ item }} owner=root group=root mode=644
+  with_items:
+    - Alerts
+    - General
+    - Targets
+  tags: smokeping
+  notify:
+    - restart smokeping
+
+- name: fix bad ubuntu install
+  shell: chdir=/etc/apache2/conf-available ln -s ../../smokeping/apache2.conf smokeping.conf
+  ignore_errors: true
+  tags: smokeping
+
+- name: enable the smokeping apache2 configuration
+  shell: a2enconf smokeping
+  tags: smokeping
+
+- name: enable the cgid apache2 module
+  shell: a2enmod cgid
+  tags: smokeping
+  notify:
+    - reload apache config

@@ -8,24 +8,24 @@
     - zookeeper-server
   tags: zookeeper
 
-- name: copy /etc/zookeeper/conf.dist to /etc/zookeeper/conf.{{ site_name }}
-  shell: creates=/etc/zookeeper/conf.{{ site_name }} cp -R -p /etc/zookeeper/conf.dist /etc/zookeeper/conf.{{ site_name }}
+- name: copy /etc/zookeeper/conf.dist to /etc/zookeeper/conf.{{ site_name|lower }}
+  shell: creates=/etc/zookeeper/conf.{{ site_name|lower }} cp -R -p /etc/zookeeper/conf.dist /etc/zookeeper/conf.{{ site_name|lower }}
   tags: zookeeper
 
 - name: run 'update-alternatives' to install ZooKeeper configuration
-  shell: update-alternatives --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.{{ site_name }} 50
+  shell: update-alternatives --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.{{ site_name|lower }} 50
   tags: zookeeper
 
 - name: run 'update-alternatives' to set ZooKeeper configuration
-  shell: update-alternatives --set zookeeper-conf /etc/zookeeper/conf.{{ site_name }}
+  shell: update-alternatives --set zookeeper-conf /etc/zookeeper/conf.{{ site_name|lower }}
   tags: zookeeper
 
 - name: create /var/lib/zookeeper directory
   file: path=/var/lib/zookeeper owner=zookeeper group=zookeeper state=directory
   tags: zookeeper
 
-- name: configure ZooKeeper in /etc/zookeeper/conf.{{ site_name }}
-  template: src=zoo.cfg dest=/etc/zookeeper/conf.{{ site_name }}/zoo.cfg owner=zookeeper group=zookeeper mode=0644
+- name: configure ZooKeeper in /etc/zookeeper/conf.{{ site_name|lower }}
+  template: src=zoo.cfg dest=/etc/zookeeper/conf.{{ site_name|lower }}/zoo.cfg owner=zookeeper group=zookeeper mode=0644
   notify:
     - restart zookeeper
   tags: zookeeper

@@ -1,0 +1,4 @@
+---
+dependencies:
+  - postfix_mandrill
+  - apache2

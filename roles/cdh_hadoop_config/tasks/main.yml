@@ -1,14 +1,14 @@
 ---
 # file: roles/cdh_hadoop_config/tasks/main.yml
 
-- name: copy /etc/hadoop/conf.empty to /etc/hadoop/conf.{{ site_name }}
-  shell: creates=/etc/hadoop/conf.{{ site_name }} cp -R -p /etc/hadoop/conf.empty /etc/hadoop/conf.{{ site_name }}
+- name: copy /etc/hadoop/conf.empty to /etc/hadoop/conf.{{ site_name|lower }}
+  shell: creates=/etc/hadoop/conf.{{ site_name|lower }} cp -R -p /etc/hadoop/conf.empty /etc/hadoop/conf.{{ site_name|lower }}
   tags:
     - hadoop
     - configuration
 
-- name: configure Hadoop in /etc/hadoop/conf.{{ site_name }}
-  template: src={{ item }} dest=/etc/hadoop/conf.{{ site_name }}/{{ item }} owner=root group=root mode=0644
+- name: configure Hadoop in /etc/hadoop/conf.{{ site_name|lower }}
+  template: src={{ item }} dest=/etc/hadoop/conf.{{ site_name|lower }}/{{ item }} owner=root group=root mode=0644
   with_items:
     - core-site.xml
     - hadoop-env.sh
@@ -28,9 +28,9 @@
     - configuration
 
 - name: run 'update-alternatives' to install Hadoop configuration
-  shell: update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.{{ site_name }} 50
+  shell: update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.{{ site_name|lower }} 50
   tags: hadoop
 
 - name: run 'update-alternatives' to set Hadoop configuration
-  shell: update-alternatives --set hadoop-conf /etc/hadoop/conf.{{ site_name }}
+  shell: update-alternatives --set hadoop-conf /etc/hadoop/conf.{{ site_name|lower }}
   tags: hadoop
