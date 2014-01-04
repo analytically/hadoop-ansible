@@ -98,8 +98,9 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix
 
 #### What else is installed?
 
+  - To improve performance, [sysctl tuning](roles/common/templates/sysctl.conf)
   - [link aggregation](roles/2_aggregated_links/templates/interfaces) configures [Link Aggregation](https://help.ubuntu.com/community/UbuntuBonding) if 2 interfaces are available
-  - [Htop](http://htop.sourceforge.net/)
+  - [htop](http://htop.sourceforge.net/)
   - curl, checkinstall, heirloom-mailx, intel-microcode/amd64-microcode, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
   - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
@@ -108,7 +109,8 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix
   - php5-cli, sysstat, hddtemp to report [device metrics](roles/ganglia_monitor/templates/device-metrics.php)
     (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d)
   - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy 1.1.1](https://code.google.com/p/snappy/) compression
-  - A [fork of openjdk's FloatingDecimal](https://github.com/airlift/floatingdecimal) to fix monitor contention when parsing doubles due to a static synchronized method
+  - a [fork of openjdk's FloatingDecimal](https://github.com/airlift/floatingdecimal) to fix monitor contention when parsing doubles due to a static synchronized method
+  - a [logstash index cleaner](https://github.com/logstash/expire-logs), defaults to maximum 128 GB of data in ElasticSearch
 
 ### Performance testing
 
