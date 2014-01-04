@@ -4,6 +4,11 @@
 - name: mount / with inode_readahead_blks=128,noatime,errors=remount-ro
   shell: creates=/etc/fstab.bak chdir=/etc cp fstab fstab.bak && sed -i "s/ errors=remount-ro/ inode_readahead_blks=128,noatime,errors=remount-ro/" fstab
 
+- name: write sysctl config file to /etc/sysctl.d/60-hadoop.conf
+  template: src=sysctl.conf dest=/etc/sysctl.d/60-hadoop.conf owner=root group=root mode=0644
+  notify:
+    - restart procps
+
 - name: configure /etc/security/limits.conf with high max file descriptors (soft/hard)
   template: src=limits.conf dest=/etc/security/limits.conf mode=0644
 
