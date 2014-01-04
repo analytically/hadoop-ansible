@@ -18,6 +18,13 @@
   roles:
     - { role: 2_aggregated_links, when: bond_mode is defined and mtu is defined and ansible_virtualization_role == "host" and ansible_interfaces|length == 3 and "bond0" not in ansible_interfaces }
 
+- hosts: elasticsearch
+  accelerate: "{{ accelerate }}"
+  user: ansibler
+  sudo: true
+  roles:
+    - elasticsearch
+
 - hosts: monitors[0]
   accelerate: "{{ accelerate }}"
   user: ansibler
@@ -26,7 +33,7 @@
     - oracle_jdk
     - ganglia_metad
     - ganglia_web
-    - elasticsearch
+    - logstash_index_cleaner
     - kibana3
 
 - hosts: all

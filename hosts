@@ -36,6 +36,9 @@ namenodes
 [regionservers:children]
 datanodes
 
+[elasticsearch]
+monitor01
+
 [monitors]
 monitor01
 

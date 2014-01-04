@@ -1,0 +1,4 @@
+---
+
+# maximum logstash data size in elasticsearch, defaults to 128 gb
+logstash_max_data_gb: 128
