@@ -109,7 +109,7 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix
     (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d)
   - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy 1.1.1](https://code.google.com/p/snappy/) compression
   - a [fork of openjdk's FloatingDecimal](https://github.com/airlift/floatingdecimal) to fix monitor contention when parsing doubles due to a static synchronized method
-  - a [logstash index cleaner](https://github.com/logstash/expire-logs), defaults to maximum 128 GB of data in ElasticSearch
+  - a [logstash index cleaner](https://github.com/logstash/expire-logs), defaults to maximum 128 GB of data in ElasticSearch, via cron at 2:00AM
 
 ### Performance testing
 
