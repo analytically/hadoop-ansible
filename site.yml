@@ -23,6 +23,7 @@
   user: ansibler
   sudo: true
   roles:
+    - oracle_jdk
     - elasticsearch
 
 - hosts: monitors[0]
