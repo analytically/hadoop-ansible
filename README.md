@@ -160,6 +160,8 @@ official [CDH4 Installation Guide](http://www.cloudera.com/content/cloudera-cont
 
 ![kibana](images/kibana.png)
 
+![smokeping](images/smokeping.png)
+
 ### License
 
 Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
