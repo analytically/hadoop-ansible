@@ -57,7 +57,8 @@ Required:
 Optional:
 
 - Email notification: `notify_email`, `postfix_domain`, `mandrill_username`, `mandrill_api_key`
-- [`roles/2_aggregated_links`](roles/2_aggregated_links/defaults/main.yml) - `bond_mode` (`balance-alb`) and `mtu` (9216)
+- [`roles/common`](roles/common/defaults/main.yml) - `kernel_swappiness`(0), `nofile` limits, ntp servers and `rsyslog_polling_interval_secs`(10)
+- [`roles/2_aggregated_links`](roles/2_aggregated_links/defaults/main.yml) - `bond_mode` (balance-alb) and `mtu` (9216)
 - [`roles/cdh_hadoop_config`](roles/cdh_hadoop_config/defaults/main.yml) - `dfs_blocksize` (268435456), `max_xcievers` (4096), `heapsize` (12278)
 
 You're welcome to edit any of the XML files to further customize this playbook.
