@@ -100,8 +100,7 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix
 
   - To improve performance, [sysctl tuning](roles/common/templates/sysctl.conf)
   - [link aggregation](roles/2_aggregated_links/templates/interfaces) configures [Link Aggregation](https://help.ubuntu.com/community/UbuntuBonding) if 2 interfaces are available
-  - [htop](http://htop.sourceforge.net/)
-  - curl, checkinstall, heirloom-mailx, intel-microcode/amd64-microcode, net-tools, zip
+  - [htop](http://htop.sourceforge.net/), curl, checkinstall, heirloom-mailx, intel-microcode/amd64-microcode, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
   - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
   - [local 'apt' repository for Oracle Java packages](https://github.com/flexiondotorg/oab-java6)
