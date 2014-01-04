@@ -20,11 +20,11 @@
      - ca-certificates
   tags: postfix
 
-- name: setup Mandrill credentials for Postfix
+- name: setup Mandrill credentials for postfix
   template: src=sasl_passwd dest=/etc/postfix/sasl_passwd owner=root group=root mode=600
   tags: postfix
 
-- name: run postmap to configure Postfix's lookup tables
+- name: run postmap to configure postfix lookup tables
   shell: postmap /etc/postfix/sasl_passwd
   tags: postfix
 
@@ -32,7 +32,7 @@
   shell: creates=/etc/postfix/cacert.pem cat /etc/ssl/certs/Thawte_Premium_Server_CA.pem | tee /etc/postfix/cacert.pem
   tags: postfix
 
-- name: configure postfix
+- name: configure postfix in /etc/postfix/main.cf
   lineinfile: dest=/etc/postfix/main.cf regexp='{{ item }}' line='{{ item }}'
   with_items:
     - 'smtp_sasl_auth_enable = yes'

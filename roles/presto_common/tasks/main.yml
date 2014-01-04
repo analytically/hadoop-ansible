@@ -17,14 +17,14 @@
   shell: creates=/usr/lib/presto/bin/launcher chdir=/tmp curl http://central.maven.org/maven2/com/facebook/presto/presto-server/0.55/presto-server-0.55.tar.gz | tar xz && mv presto-server-0.55/* /usr/lib/presto
   tags: presto
 
-- name: configure Presto
+- name: configure presto in /usr/lib/presto/etc
   template: src={{ item }} dest=/usr/lib/presto/etc/{{ item }} owner=root group=root mode=0644
   with_items:
     - node.properties
     - jvm.config
   tags: presto
 
-- name: configure Presto Hive Catalog
+- name: configure presto hive catalog in /usr/lib/presto/etc/catalog
   template: src={{ item }} dest=/usr/lib/presto/etc/catalog/{{ item }} owner=root group=root mode=0644
   with_items:
     - jmx.properties

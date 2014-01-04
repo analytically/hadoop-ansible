@@ -1,7 +1,7 @@
 ---
 # file: roles/presto_worker/tasks/main.yml
 
-- name: configure Presto worker
+- name: configure presto worker
   template: src={{ item }} dest=/usr/lib/presto/etc/{{ item }} owner=root group=root mode=0644
   with_items:
     - config.properties

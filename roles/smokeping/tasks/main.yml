@@ -5,7 +5,7 @@
   apt: pkg=smokeping
   tags: smokeping
 
-- name: configure smokeping at /etc/smokeping/config.d
+- name: configure smokeping in /etc/smokeping/config.d
   template: src={{ item }} dest=/etc/smokeping/config.d/{{ item }} owner=root group=root mode=644
   with_items:
     - Alerts
@@ -15,7 +15,7 @@
   notify:
     - restart smokeping
 
-- name: fix bad ubuntu install
+- name: link to smokeping config in /etc/apache2/conf-available
   shell: chdir=/etc/apache2/conf-available ln -s ../../smokeping/apache2.conf smokeping.conf
   ignore_errors: true
   tags: smokeping

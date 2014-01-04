@@ -5,7 +5,7 @@
   shell: creates=/etc/hive/conf.{{ site_name|lower }} cp -R -p /etc/hive/conf.dist /etc/hive/conf.{{ site_name|lower }}
   tags: hive
 
-- name: configure Hive in /etc/hive/conf.{{ site_name|lower }}
+- name: configure hive in /etc/hive/conf.{{ site_name|lower }}
   template: src={{ item }} dest=/etc/hive/conf.{{ site_name|lower }}/{{ item }} owner=root group=root mode=0644
   with_items:
     - hive-site.xml
@@ -15,11 +15,11 @@
     - hive
     - configuration
 
-- name: run 'update-alternatives' to install Hive configuration
+- name: run 'update-alternatives' to install hive configuration
   shell: update-alternatives --install /etc/hive/conf hive-conf /etc/hive/conf.{{ site_name|lower }} 50
   tags: hive
 
-- name: run 'update-alternatives' to set Hive configuration
+- name: run 'update-alternatives' to set hive configuration
   shell: update-alternatives --set hive-conf /etc/hive/conf.{{ site_name|lower }}
   tags: hive
 

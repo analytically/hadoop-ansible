@@ -7,7 +7,7 @@
     - hadoop
     - configuration
 
-- name: configure Hadoop in /etc/hadoop/conf.{{ site_name|lower }}
+- name: configure hadoop in /etc/hadoop/conf.{{ site_name|lower }}
   template: src={{ item }} dest=/etc/hadoop/conf.{{ site_name|lower }}/{{ item }} owner=root group=root mode=0644
   with_items:
     - core-site.xml
@@ -27,10 +27,10 @@
     - hadoop
     - configuration
 
-- name: run 'update-alternatives' to install Hadoop configuration
+- name: run 'update-alternatives' to install hadoop configuration
   shell: update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.{{ site_name|lower }} 50
   tags: hadoop
 
-- name: run 'update-alternatives' to set Hadoop configuration
+- name: run 'update-alternatives' to set hadoop configuration
   shell: update-alternatives --set hadoop-conf /etc/hadoop/conf.{{ site_name|lower }}
   tags: hadoop
