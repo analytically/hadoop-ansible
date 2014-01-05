@@ -16,8 +16,7 @@
     - restart smokeping
 
 - name: link to smokeping config in /etc/apache2/conf-available
-  shell: chdir=/etc/apache2/conf-available ln -s ../../smokeping/apache2.conf smokeping.conf
-  ignore_errors: true
+  shell: creates=/etc/apache2/conf-available/smokeping.conf chdir=/etc/apache2/conf-available ln -s ../../smokeping/apache2.conf smokeping.conf
   tags: smokeping
 
 - name: enable the smokeping apache2 configuration

@@ -1,8 +1,13 @@
 # {{ ansible_managed }}
 
 *** Alerts ***
+{% if notify_email is defined %}
+to = {{ notify_email }}
+{% else %}
 to = root@localhost
-from = smokealert@{{ site_name|lower }}
+{% endif %}
+
+from = smokealert@{{ site_name|lower }}.com
 
 +bigloss
 type = loss
@@ -24,9 +29,9 @@ comment = loss at startup
 
 +rttdetect
 type = rtt
-# in milli seconds
+# in milliseconds
 pattern = <10,<10,<10,<10,<10,<100,>100,>100,>100
-comment = routing messed up again ?
+comment = routing messed up again?
 
 +hostdown
 type = loss
