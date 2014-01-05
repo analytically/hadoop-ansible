@@ -1,5 +1,8 @@
 site_name: hydrodesk
 
+# maximum for Intel/Cisco hardware
+mtu: 9216
+
 # To enable Postfix SMTP through Mandrill (@mandrillapp), set the following variables:
 
 # postfix_domain: example.com
