@@ -14,7 +14,7 @@
   tags: presto
 
 - name: install Presto at /usr/lib/presto
-  shell: creates=/usr/lib/presto/bin/launcher chdir=/tmp curl http://central.maven.org/maven2/com/facebook/presto/presto-server/0.55/presto-server-0.55.tar.gz | tar xz && mv presto-server-0.55/* /usr/lib/presto
+  shell: creates=/usr/lib/presto/bin/launcher chdir=/tmp curl http://central.maven.org/maven2/com/facebook/presto/presto-server/0.56/presto-server-0.56.tar.gz | tar xz && mv presto-server-0.56/* /usr/lib/presto
   tags: presto
 
 - name: configure presto in /usr/lib/presto/etc
@@ -32,7 +32,7 @@
   tags: presto
 
 - name: install presto command line client
-  shell: chdir=/usr/bin curl -o presto http://search.maven.org/remotecontent?filepath=com/facebook/presto/presto-cli/0.55/presto-cli-0.55-executable.jar && chmod +x presto
+  shell: chdir=/usr/bin curl -o presto http://search.maven.org/remotecontent?filepath=com/facebook/presto/presto-cli/0.56/presto-cli-0.56-executable.jar && chmod +x presto
   tags: presto
 
 - name: install upstart config for presto

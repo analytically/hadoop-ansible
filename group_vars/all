@@ -1,11 +1,11 @@
-site_name: hydrodesk
+site_name: acme
 
-# maximum for Intel/Cisco hardware
+# IPv4 maximum transmission unit, 9216 is the maximum for Intel/Cisco hardware
 mtu: 9216
 
 # To enable Postfix SMTP through Mandrill (@mandrillapp), set the following variables:
 
+# notify_email: notifications@example.com
 # postfix_domain: example.com
-# notify_email: info@example.com
 # mandrill_username: your_username
 # mandrill_api_key: your_api_key
