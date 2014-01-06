@@ -39,7 +39,7 @@
     - ganglia_metad
     - ganglia_web
     - logstash_index_cleaner
-    - kibana3
+    - kibana
     - smokeping
 
 - hosts: all

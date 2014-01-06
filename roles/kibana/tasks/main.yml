@@ -1,7 +1,7 @@
 ---
-# file: roles/kibana3/tasks/main.yml
+# file: roles/kibana/tasks/main.yml
 
-- name: download and extract Kibana 3 to /var/www/kibana
+- name: download and extract Kibana to /var/www/kibana
   shell: creates=/var/www/kibana chdir=/tmp curl -O http://download.elasticsearch.org/kibana/kibana/kibana-latest.zip && unzip kibana-latest.zip && mv kibana-latest /var/www/kibana
   tags: kibana
   notify:
