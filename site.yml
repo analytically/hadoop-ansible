@@ -15,6 +15,7 @@
     - common
     - { role: postfix_mandrill, when: notify_email is defined and postfix_domain is defined and mandrill_username is defined and mandrill_api_key is defined }
     - ganglia_monitor
+    - oracle_jdk
 
 - hosts: 2_links_aggregated
   accelerate: "{{ accelerate }}"
@@ -28,7 +29,6 @@
   user: ansibler
   sudo: true
   roles:
-    - oracle_jdk
     - elasticsearch
 
 - hosts: monitors[0]
@@ -36,7 +36,6 @@
   user: ansibler
   sudo: true
   roles:
-    - oracle_jdk
     - ganglia_metad
     - ganglia_web
     - logstash_index_cleaner
@@ -58,8 +57,8 @@
   user: ansibler
   sudo: true
   roles:
-    - oracle_jdk
     - cdh_common
+    - cdh_hadoop_config
 
 - hosts: zookeepers
   accelerate: "{{ accelerate }}"
@@ -67,13 +66,6 @@
   sudo: true
   roles:
     - cdh_zookeeper_server
-
-- hosts: journalnodes:namenodes:datanodes
-  accelerate: "{{ accelerate }}"
-  user: ansibler
-  sudo: true
-  roles:
-    - cdh_hadoop_config
 
 - hosts: journalnodes
   accelerate: "{{ accelerate }}"

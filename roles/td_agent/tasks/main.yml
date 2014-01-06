@@ -10,12 +10,8 @@
   tags: tdagent
 
 - name: remove older fluent elasticsearch plugin versions
-  command: removes={{ item }} rm -Rf {{ item }}
-  with_items:
-    - /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.1
-    - /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.2
-    - /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.3
-    - /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.4
+  command: rm -Rf /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.*
+  ignore_errors: yes
 
 - name: install the fluent elasticsearch plugin
   shell: creates=/usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.2.0/Gemfile /usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-elasticsearch

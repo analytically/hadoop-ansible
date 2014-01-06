@@ -38,13 +38,6 @@
   apt: pkg=amd64-microcode
   when: (ansible_virtualization_role is not defined or ansible_virtualization_role == "host") and "AMD" in ansible_processor[0]
 
-- name: remove various useless files from guest
-  command: removes={{ item }} rm {{ item }}
-  with_items:
-    - /etc/update-motd.d/51-cloudguest
-    - /etc/update-motd.d/98-cloudguest
-  when: ansible_virtualization_role is defined and ansible_virtualization_role == "guest"
-
 - name: remove various useless files
   command: removes={{ item }} rm {{ item }}
   with_items:
