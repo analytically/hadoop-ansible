@@ -10,7 +10,7 @@
   tags: ganglia
 
 - name: install ganglia-web at /var/www/ganglia
-  shell: creates=/var/www/ganglia chdir=/var/www curl http://heanet.dl.sourceforge.net/project/ganglia/ganglia-web/3.5.11/ganglia-web-3.5.11.tar.gz | tar xz && mv ganglia-web-3.5.11 ganglia
+  shell: creates=/var/www/ganglia chdir=/var/www curl http://heanet.dl.sourceforge.net/project/ganglia/ganglia-web/3.5.12/ganglia-web-3.5.12.tar.gz | tar xz && mv ganglia-web-3.5.12 ganglia
   tags: ganglia
 
 - name: make sure ganglia-web makefile has the correct path
