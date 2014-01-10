@@ -3,9 +3,9 @@ Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hado
 
 [Ansible](http://www.ansibleworks.com/) Playbook that installs a CDH4 [Hadoop](http://hadoop.apache.org/)
 cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Release-Notes/Whats_New_in_4-4.html)),
-with [HBase](http://hbase.apache.org/), [Presto](http://prestodb.io/) for analytics, and [Ganglia](http://ganglia.sourceforge.net/),
+with [HBase](http://hbase.apache.org/), Hive, [Presto](http://prestodb.io/) for analytics, and [Ganglia](http://ganglia.sourceforge.net/),
 [Smokeping](http://oss.oetiker.ch/smokeping/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
-and [Kibana 3](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
+and [Kibana](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
 
 Hire/Follow [@analytically](http://twitter.com/analytically). Browse the CI [build screenshots](http://hadoop-ansible.s3-website-us-east-1.amazonaws.com/#artifacts/).
 
@@ -38,7 +38,7 @@ If you're assembling your own Hadoop playbook, these roles are available for you
   - [`cdh_hbase_regionserver`](roles/cdh_hbase_regionserver/) - installs HBase RegionServer
   - [`cdh_hive_common`](roles/cdh_hive_common/) - common packages shared by all Hive nodes
   - [`cdh_hive_config`](roles/cdh_hive_config/) - common configuration shared by all Hive nodes
-  - [`cdh_hive_metastore`](roles/cdh_hive_metastore/) - installs Hive metastore (using PostgreSQL database)
+  - [`cdh_hive_metastore`](roles/cdh_hive_metastore/) - installs Hive metastore (with PostgreSQL database)
   - [`cdh_zookeeper_server`](roles/cdh_zookeeper_server/) - installs ZooKeeper Server
 
 ### [Facebook Presto](http://prestodb.io/) Roles
@@ -47,9 +47,9 @@ If you're assembling your own Hadoop playbook, these roles are available for you
   - [`presto_coordinator`](roles/presto_coordinator/) - installs Presto coordinator config
   - [`presto_worker`](roles/presto_worker/) - installs Presto worker config
 
-### Configure
+### Configuration
 
-Set the following variables by `--extra-vars` or editing [`group_vars/all`](group_vars/all):
+Set the following variables using `--extra-vars` or editing [`group_vars/all`](group_vars/all):
 
 Required:
 
@@ -58,11 +58,9 @@ Required:
 Optional:
 
 - Email notification: `notify_email`, `postfix_domain`, `mandrill_username`, `mandrill_api_key`
-- [`roles/common`](roles/common/defaults/main.yml) - `kernel_swappiness`(0), `nofile` limits, ntp servers and `rsyslog_polling_interval_secs`(10)
-- [`roles/2_aggregated_links`](roles/2_aggregated_links/defaults/main.yml) - `bond_mode` (balance-alb) and `mtu` (9216)
-- [`roles/cdh_hadoop_config`](roles/cdh_hadoop_config/defaults/main.yml) - `dfs_blocksize` (268435456), `max_xcievers` (4096), `heapsize` (12278)
-
-You're welcome to edit any of the XML files to further customize this playbook.
+- [`roles/common`](roles/common/defaults/main.yml): `kernel_swappiness`(0), `nofile` limits, ntp servers and `rsyslog_polling_interval_secs`(10)
+- [`roles/2_aggregated_links`](roles/2_aggregated_links/defaults/main.yml): `bond_mode` (balance-alb) and `mtu` (9216)
+- [`roles/cdh_hadoop_config`](roles/cdh_hadoop_config/defaults/main.yml): `dfs_blocksize` (268435456), `max_xcievers` (4096), `heapsize` (12278)
 
 #### Adding hosts
 
@@ -82,7 +80,7 @@ Make sure that the `zookeepers` and `journalnodes` groups contain at least 3 hos
 Since we're using unicast mode for Ganglia (which significantly reduces chatter), you may have to wait 60 seconds
 after node startup before it is seen/shows up in the web interface.
 
-### Installing Hadoop
+### Installation
 
 To run Ansible:
 
@@ -91,7 +89,8 @@ To run Ansible:
 ```
 
 To e.g. just install ZooKeeper, add the `zookeeper` tag as argument (available tags: apache, bonding, configuration,
-elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix, postgres, presto, rsyslog, tdagent, zookeeper):
+elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, logstash_index_cleaner, ntp, postfix, postgres, presto,
+rsyslog, tdagent, zookeeper):
 
 ```sh
 ./site.sh zookeeper
@@ -110,7 +109,7 @@ elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix
     (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d)
   - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy 1.1.1](https://code.google.com/p/snappy/) compression
   - a [fork of openjdk's FloatingDecimal](https://github.com/airlift/floatingdecimal) to fix monitor contention when parsing doubles due to a static synchronized method
-  - a [logstash index cleaner](https://github.com/logstash/expire-logs), defaults to maximum 128 GB of data in ElasticSearch, via cron at 2:00AM
+  - [logstash index cleaner](https://github.com/logstash/expire-logs), defaults to maximum 30 GB of data in ElasticSearch, via cron daily at 2:00AM
   - [SmokePing](http://oss.oetiker.ch/smokeping/) to keep track of network latency
 
 #### URL's
