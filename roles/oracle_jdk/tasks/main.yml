@@ -10,7 +10,7 @@
 - name: install or update Oracle Java 7 JDK via apt
   apt: pkg={{ item }} update_cache=yes state=latest install_recommends=yes
   with_items:
-       - oracle-java7-jdk
+       - oracle-java7-installer
        - oracle-java7-set-default
   tags:
     - java
