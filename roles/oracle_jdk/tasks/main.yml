@@ -1,10 +1,17 @@
 ---
 # file: roles/oracle_jdk/tasks/main.yml
 
+- name: add webupd8team java repository
+  apt_repository: repo='ppa:webupd8team/java'
+
+- name: autoaccept license for java
+  shell: executable=/bin/bash debconf-set-selections <<< "oracle-java7-installer shared/accepted-oracle-license-v1-1 select true"
+
 - name: install or update Oracle Java 7 JDK via apt
-  apt: pkg={{ item }} update_cache=yes
+  apt: pkg={{ item }} update_cache=yes state=latest install_recommends=yes
   with_items:
        - oracle-java7-jdk
+       - oracle-java7-set-default
   tags:
     - java
 

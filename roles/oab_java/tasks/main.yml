@@ -1,7 +1,0 @@
----
-# file: roles/oab_java/tasks/main.yml
-
-- name: create a local 'apt' repository for Oracle Java 7 packages
-  script: oab-java.sh -s -7
-  tags:
-    - java
