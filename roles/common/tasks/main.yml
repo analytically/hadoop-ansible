@@ -27,6 +27,7 @@
     - net-tools
     - liblzo2-dev
     - zip
+    - git
     - python-pycurl
     - software-properties-common
 
