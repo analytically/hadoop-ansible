@@ -25,10 +25,12 @@ after_success:
   - "slimerjs screenshot.js http://hmaster02:50070 standby-namenode.png"
   - "slimerjs screenshot.js http://monitor01/ganglia ganglia.png"
   - "slimerjs screenshot.js http://monitor01/smokeping/smokeping.cgi?target=_charts smokeping.png"
+  - "slimerjs screenshot.js http://hmaster02:8080 presto.png"
   - "travis-artifacts upload --path active-namenode.png"
   - "travis-artifacts upload --path standby-namenode.png"
   - "travis-artifacts upload --path ganglia.png"
   - "travis-artifacts upload --path smokeping.png"
+  - "travis-artifacts upload --path presto.png"
   - sudo /etc/rc6.d/K10do_destroy.sh
 after_failure:
   - sudo /etc/rc6.d/K10do_destroy.sh
