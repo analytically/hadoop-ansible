@@ -2,7 +2,10 @@
 # file: roles/smokeping/tasks/main.yml
 
 - name: install smokeping via apt
-  apt: pkg=smokeping
+  apt: pkg={{ item }}
+  with_items:
+    - smokeping
+    - sendmail
   tags: smokeping
 
 - name: configure smokeping in /etc/smokeping/config.d
@@ -17,10 +20,12 @@
 
 - name: link to smokeping config in /etc/apache2/conf-available
   shell: creates=/etc/apache2/conf-available/smokeping.conf chdir=/etc/apache2/conf-available ln -s ../../smokeping/apache2.conf smokeping.conf
+  when: ansible_distribution_version not in ["12.04", "12.10", "13.04"]
   tags: smokeping
 
 - name: enable the smokeping apache2 configuration
   shell: a2enconf smokeping
+  when: ansible_distribution_version not in ["12.04", "12.10", "13.04"]
   tags: smokeping
 
 - name: enable the cgid apache2 module
