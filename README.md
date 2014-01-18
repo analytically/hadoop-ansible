@@ -89,7 +89,7 @@ To run Ansible:
 ```
 
 To e.g. just install ZooKeeper, add the `zookeeper` tag as argument (available tags: apache, bonding, configuration,
-elasticsearch, fluentd, ganglia, hadoop, hbase, hive, java, kibana, logstash_index_cleaner, ntp, postfix, postgres, presto,
+elasticsearch, elasticsearch_curator, fluentd, ganglia, hadoop, hbase, hive, java, kibana, ntp, postfix, postgres, presto,
 rsyslog, tdagent, zookeeper):
 
 ```sh
@@ -109,7 +109,7 @@ rsyslog, tdagent, zookeeper):
     (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d)
   - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy 1.1.1](https://code.google.com/p/snappy/) compression
   - a [fork of openjdk's FloatingDecimal](https://github.com/airlift/floatingdecimal) to fix monitor contention when parsing doubles due to a static synchronized method
-  - [logstash index cleaner](https://github.com/logstash/expire-logs), defaults to maximum 30 GB of data in ElasticSearch, via cron daily at 2:00AM
+  - [Elasticsearch Curator](https://github.com/elasticsearch/curator), defaults to maximum 30 GB of data in Elasticsearch, via cron daily at 2:00AM
   - [SmokePing](http://oss.oetiker.ch/smokeping/) to keep track of network latency
 
 #### URL's

@@ -1,0 +1,4 @@
+---
+
+# https://github.com/elasticsearch/curator arguments
+elasticsearch_curator_args: -C space -g 30
