@@ -30,6 +30,7 @@
   sudo: true
   roles:
     - elasticsearch
+    - elasticsearch_curator
 
 - hosts: monitors[0]
   accelerate: "{{ accelerate }}"
@@ -38,7 +39,6 @@
   roles:
     - ganglia_metad
     - ganglia_web
-    - logstash_index_cleaner
     - kibana
     - smokeping
 
