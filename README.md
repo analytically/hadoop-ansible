@@ -4,7 +4,7 @@ Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hado
 [Ansible](http://www.ansibleworks.com/) Playbook that installs a CDH4 [Hadoop](http://hadoop.apache.org/)
 cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Release-Notes/Whats_New_in_4-4.html)),
 with [HBase](http://hbase.apache.org/), Hive, [Presto](http://prestodb.io/) for analytics, and [Ganglia](http://ganglia.sourceforge.net/),
-[Smokeping](http://oss.oetiker.ch/smokeping/), [Fluentd](http://fluentd.org/), [ElasticSearch](http://www.elasticsearch.org/)
+[Smokeping](http://oss.oetiker.ch/smokeping/), [Fluentd](http://fluentd.org/), [Elasticsearch](http://www.elasticsearch.org/)
 and [Kibana](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
 
 Hire/Follow [@analytically](http://twitter.com/analytically). Browse the CI [build screenshots](http://hadoop-ansible.s3-website-us-east-1.amazonaws.com/#artifacts/).

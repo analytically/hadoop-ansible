@@ -1,14 +1,14 @@
 ---
 # file: roles/elasticsearch/tasks/main.yml
 
-- name: install ElasticSearch
+- name: install Elasticsearch
   shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.10.deb && dpkg -i elasticsearch-0.90.10.deb
   tags: elasticsearch
 
-- name: install ElasticSearch head plugin
+- name: install Elasticsearch head plugin
   shell: creates=/usr/share/elasticsearch/plugins/head chdir=/usr/share/elasticsearch/bin ./plugin -install mobz/elasticsearch-head
   tags: elasticsearch
 
-- name: install ElasticSearch bigdesk plugin
+- name: install Elasticsearch bigdesk plugin
   shell: creates=/usr/share/elasticsearch/plugins/bigdesk chdir=/usr/share/elasticsearch/bin ./plugin -install lukas-vlcek/bigdesk
   tags: elasticsearch
