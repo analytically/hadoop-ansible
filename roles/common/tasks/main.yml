@@ -1,7 +1,7 @@
 ---
 # file: roles/common/tasks/main.yml
 
-- name: mount / with inode_readahead_blks=128,noatime,errors=remount-ro
+- name: mount / with inode_readahead_blks=128,noatime,commit=30,errors=remount-ro
   shell: creates=/etc/fstab.bak chdir=/etc cp fstab fstab.bak && sed -i "s/ errors=remount-ro/ inode_readahead_blks=128,noatime,commit=30,errors=remount-ro/" fstab
 
 - name: write sysctl config file to /etc/sysctl.d/60-hadoop.conf
