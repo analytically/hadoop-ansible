@@ -2,7 +2,10 @@
 # file: roles/smokeping/tasks/main.yml
 
 - name: install smokeping via apt
-  apt: pkg=smokeping
+  apt: pkg={{ item }}
+  with_items:
+    - smokeping
+    - sendmail
   tags: smokeping
 
 - name: configure smokeping in /etc/smokeping/config.d
