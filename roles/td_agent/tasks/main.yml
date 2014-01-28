@@ -17,6 +17,10 @@
   shell: creates=/usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.2.0/Gemfile /usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-elasticsearch
   tags: tdagent
 
+- name: install the fluent tail-multiline plugin
+  shell: creates=/usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-tail-multiline-0.1.5/Gemfile /usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-tail-multiline
+  tags: tdagent
+
 - name: configure td-agent in /etc/td-agent/td-agent.conf
   template: src=td-agent.conf dest=/etc/td-agent/td-agent.conf owner=root group=root mode=0644
   tags: tdagent
