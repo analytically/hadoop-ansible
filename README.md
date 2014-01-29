@@ -110,6 +110,7 @@ rsyslog, tdagent, zookeeper):
   - LZO (Lempel–Ziv–Oberhumer) and [Google Snappy 1.1.1](https://code.google.com/p/snappy/) compression
   - a [fork of openjdk's FloatingDecimal](https://github.com/airlift/floatingdecimal) to fix monitor contention when parsing doubles due to a static synchronized method
   - [Elasticsearch Curator](https://github.com/elasticsearch/curator), defaults to maximum 30 GB of data in Elasticsearch, via cron daily at 2:00AM
+  - [Elasticsearch Marvel](http://www.elasticsearch.org/overview/marvel/), monitor your Elasticsearch cluster's heartbeat
   - [SmokePing](http://oss.oetiker.ch/smokeping/) to keep track of network latency
 
 #### URL's
