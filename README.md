@@ -103,7 +103,6 @@ rsyslog, tdagent, zookeeper):
   - [htop](http://htop.sourceforge.net/), curl, checkinstall, heirloom-mailx, intel-microcode/amd64-microcode, net-tools, zip
   - [NTP](http://www.ntp.org/) configured with the [Oxford University NTP service](http://www.oucs.ox.ac.uk/network/ntp/) by default
   - [Postfix](http://www.postfix.org/) with [Mandrill](http://mandrill.com/) configuration
-  - [local 'apt' repository for Oracle Java packages](https://github.com/flexiondotorg/oab-java6)
   - unattended upgrades [email to inform success/failure](roles/postfix_mandrill/templates/50unattended-upgrades)
   - php5-cli, sysstat, hddtemp to report [device metrics](roles/ganglia_monitor/templates/device-metrics.php)
     (reads/writes/temp) to Ganglia [every 10 minutes](roles/ganglia_monitor/templates/device-metrics.cron.d)
