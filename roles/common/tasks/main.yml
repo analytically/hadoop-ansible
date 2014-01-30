@@ -22,14 +22,16 @@
   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
   with_items:
     - checkinstall
-    - htop
     - curl
-    - net-tools
-    - liblzo2-dev
-    - zip
     - git
+    - htop
+    - liblzo2-dev
+    - net-tools
+    - ntp
     - python-pycurl
     - software-properties-common
+    - zip
+  tags: ntp
 
 - name: install intel-microcode
   apt: pkg=intel-microcode
@@ -56,10 +58,6 @@
   tags: rsyslog
   notify:
     - restart rsyslog
-
-- name: install NTP
-  apt: pkg=ntp
-  tags: ntp
 
 - name: configure NTP in /etc/ntp.conf
   template: src=ntp.conf dest=/etc/ntp.conf

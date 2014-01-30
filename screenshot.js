@@ -5,7 +5,7 @@ if (args.length === 3) {
     var filename = args[2];
 
     var page = require('webpage').create();
-    page.viewportSize = { width: 1024, height: 768 };
+    page.viewportSize = { width: 1280, height: 800 };
     page.open(url, function () {
         page.onConsoleMessage = function (msg) {
             console.log(msg);
@@ -14,7 +14,7 @@ if (args.length === 3) {
         window.setTimeout(function () {
             page.render(filename);
             phantom.exit();
-        }, 1000);
+        }, 200);
     });
 }
 else {
