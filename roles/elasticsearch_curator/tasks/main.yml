@@ -6,7 +6,7 @@
   tags: elasticsearch_curator
 
 - name: install elasticsearch-curator via pip
-  pip: elasticsearch-curator
+  pip: name=elasticsearch-curator
   tags: elasticsearch_curator
 
 - name: install the elasticsearch-curator crontab at /etc/cron.d/elasticsearch-curator
