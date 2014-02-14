@@ -29,6 +29,7 @@
   with_items:
     - jmx.properties
     - hive.properties
+    - tpch.properties
   tags: presto
 
 - name: install presto command line client
