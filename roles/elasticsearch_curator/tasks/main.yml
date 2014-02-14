@@ -5,12 +5,8 @@
   apt: pkg=python-pip
   tags: elasticsearch_curator
 
-- name: clone the elasticsearch-curator repo to /var/lib/logstash-index-cleaner
-  git: repo=https://github.com/elasticsearch/curator.git dest=/var/lib/elasticsearch-curator update=true
-  tags: elasticsearch_curator
-
-- name: pip install -r requirements.txt
-  shell: chdir=/var/lib/elasticsearch-curator pip install -r requirements.txt
+- name: install elasticsearch-curator via pip
+  pip: elasticsearch-curator
   tags: elasticsearch_curator
 
 - name: install the elasticsearch-curator crontab at /etc/cron.d/elasticsearch-curator
