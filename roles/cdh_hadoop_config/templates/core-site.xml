@@ -7,7 +7,7 @@
 
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://{{ hostvars[groups['namenodes'][0]]['ansible_hostname'] }}</value>
+        <value>hdfs://{{ hostvars[groups['namenodes'][0]]['ansible_fqdn'] }}</value>
         <final>true</final>
     </property>
 

@@ -8,5 +8,5 @@
   tags: apache
 
 - name: configure apache2 so it doesn't complain 'can't determine fqdn'
-  lineinfile: dest=/etc/apache2/apache2.conf regexp="{{ ansible_hostname }}" line="ServerName {{ ansible_hostname }}"
+  lineinfile: dest=/etc/apache2/apache2.conf regexp="{{ ansible_fqdn }}" line="ServerName {{ ansible_fqdn }}"
   tags: apache
