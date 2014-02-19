@@ -6,23 +6,23 @@
 <configuration>
     <property>
         <name>yarn.resourcemanager.resource-tracker.address</name>
-        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_hostname'] }}:8031</value>
+        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_fqdn'] }}:8031</value>
     </property>
     <property>
         <name>yarn.resourcemanager.address</name>
-        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_hostname'] }}:8032</value>
+        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_fqdn'] }}:8032</value>
     </property>
     <property>
         <name>yarn.resourcemanager.scheduler.address</name>
-        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_hostname'] }}:8030</value>
+        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_fqdn'] }}:8030</value>
     </property>
     <property>
         <name>yarn.resourcemanager.admin.address</name>
-        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_hostname'] }}:8033</value>
+        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_fqdn'] }}:8033</value>
     </property>
     <property>
         <name>yarn.resourcemanager.webapp.address</name>
-        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_hostname'] }}:8088</value>
+        <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_fqdn'] }}:8088</value>
     </property>
     <property>
         <description>Classpath for typical applications.</description>

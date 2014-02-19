@@ -21,10 +21,10 @@
 
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        {% if hostvars[groups["hive_metastore"][0]]["ansible_hostname"] == ansible_hostname %}
+        {% if hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] == ansible_fqdn %}
         <value>jdbc:postgresql://localhost/metastore</value>
         {% else %}
-        <value>jdbc:postgresql://{{ hostvars[groups["hive_metastore"][0]]["ansible_hostname"] }}/metastore</value>
+        <value>jdbc:postgresql://{{ hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] }}/metastore</value>
         {% endif %}
     </property>
 
@@ -50,7 +50,7 @@
 
     <property>
         <name>hive.metastore.uris</name>
-        <value>thrift://{{ hostvars[groups["hive_metastore"][0]]["ansible_hostname"] }}:9083</value>
+        <value>thrift://{{ hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] }}:9083</value>
         <description>IP address (or fully-qualified domain name) and port of the metastore host</description>
     </property>
 
