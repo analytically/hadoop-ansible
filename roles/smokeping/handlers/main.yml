@@ -2,6 +2,3 @@
 
 - name: restart smokeping
   service: name=smokeping state=restarted
-
-- name: reload apache config
-  service: name=apache2 state=reloaded

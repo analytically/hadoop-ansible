@@ -1,0 +1,5 @@
+---
+# file: roles/apache2/handlers/main.yml
+
+- name: reload apache config
+  service: name=apache2 state=reloaded
