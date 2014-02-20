@@ -1,8 +1,15 @@
 ---
 # file: roles/oracle_jdk/tasks/main.yml
 
-- name: add webupd8team java repository
+- name: add webupd8team java repository for ubuntu
   apt_repository: repo='ppa:webupd8team/java'
+  when: ansible_os_family == "Ubuntu"
+
+- name: add webupd8team java repository for debian
+  script: install_debian_webupd8team_repo.sh
+  when:
+    - ansible_os_family == "Debian"
+    - ansible_lsb["codename"] == "wheezy"
 
 - name: autoaccept license for java
   shell: executable=/bin/bash debconf-set-selections <<< "oracle-java7-installer shared/accepted-oracle-license-v1-1 select true"

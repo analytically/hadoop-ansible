@@ -19,7 +19,7 @@ title = Hadoop Namenodes
 {% for host in groups['namenodes'] %}
 +++ {{ hostvars[host]['ansible_hostname'] }}
 menu = {{ hostvars[host]['ansible_hostname'] }}
-title = Namenode {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+title = Namenode {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_eth1']['ipv4']['address'] }}
 host = {{ hostvars[host]['ansible_fqdn'] }}
 alerts = bigloss,someloss,startloss,rttdetect,hostdown
 {% endfor %}
@@ -31,7 +31,7 @@ title = Hadoop Datanodes
 {% for host in groups['datanodes'] %}
 +++ {{ hostvars[host]['ansible_hostname'] }}
 menu = {{ hostvars[host]['ansible_hostname'] }}
-title = Datanode {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+title = Datanode {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_eth1']['ipv4']['address'] }}
 host = {{ hostvars[host]['ansible_fqdn'] }}
 alerts = bigloss,someloss,startloss,rttdetect,hostdown
 {% endfor %}

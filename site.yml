@@ -107,7 +107,7 @@
   sudo_user: hdfs
   tasks:
     - name: wait for the first namenode to come online
-      wait_for: host={{ hostvars[groups['namenodes'][0]]['ansible_default_ipv4']['address'] }} port=50070
+      wait_for: host={{ hostvars[groups['namenodes'][0]]['ansible_eth1']['ipv4']['address'] }} port=50070
       tags:
         - hadoop
         - hbase
