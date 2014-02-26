@@ -49,6 +49,8 @@ If you're assembling your own Hadoop playbook, these roles are available for you
 
 ### Configuration
 
+Copy [`group_vars/all.sample`](group_vars/all.sample) to [`group_vars/all`](group_vars/all).
+
 Set the following variables using `--extra-vars` or editing [`group_vars/all`](group_vars/all):
 
 Required:
@@ -63,6 +65,8 @@ Optional:
 - [`roles/cdh_hadoop_config`](roles/cdh_hadoop_config/defaults/main.yml): `dfs_blocksize` (268435456), `max_xcievers` (4096), `heapsize` (12278)
 
 #### Adding hosts
+
+Copy the [hosts.sample](hosts.sample) file to (hosts)[hosts]. 
 
 Edit the [hosts](hosts) file and list hosts per group (see [Inventory](http://www.ansibleworks.com/docs/intro_inventory.html) for more examples):
 
