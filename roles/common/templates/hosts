@@ -4,6 +4,6 @@
 
 {% for host in groups['all'] %}
 # {{ host }}
-{{ hostvars[host]["ansible_eth1"]["ipv4"]["address"] }} {{ hostvars[host]["ansible_fqdn"] }} {{ hostvars[host]["ansible_hostname"] }}
+{{ hostvars[host]["ansible_default_ipv4"]["address"] }} {{ hostvars[host]["ansible_fqdn"] }} {{ hostvars[host]["ansible_hostname"] }}
 
 {% endfor %}
