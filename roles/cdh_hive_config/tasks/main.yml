@@ -25,4 +25,11 @@
 
 - name: soft link postgresql-jdbc4.jar
   shell: creates=/usr/lib/hive/lib/postgresql-jdbc4.jar ln -s /usr/share/java/postgresql-jdbc4.jar /usr/lib/hive/lib/postgresql-jdbc4.jar
+  when: metastore == "postgresql"
   tags: hive
+
+
+- name: symbolically link libmysql-java.jar
+  shell: creates=/usr/lib/hive/lib/libmysql-java.jar
+         ln -s /usr/share/java/mysql-connector-java.jar /usr/lib/hive/lib/libmysql-java.jar 
+  when: metastore == "mysql"

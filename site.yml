@@ -252,31 +252,9 @@
   user: ansibler
   sudo: true
   roles:
-    - postgresql_server
+    - { role: postgresql_server, when metastore == "postgresql" }
+    - { role: mysql_server, when metastore == "mysql" }
     - cdh_hive_config
-
-- hosts: hive_metastore
-  accelerate: "{{ accelerate }}"
-  user: ansibler
-  sudo: true
-  sudo_user: postgres
-  tasks:
-    - postgresql_db: name=metastore
-      tags:
-        - postgres
-        - hive
-    - postgresql_user: db=metastore name=hiveuser password=hive_{{ site_name }} priv=CONNECT
-      tags:
-        - postgres
-        - hive
-    - shell: psql --dbname=metastore --file=/usr/lib/hive/scripts/metastore/upgrade/postgres/hive-schema-0.10.0.postgres.sql
-      tags:
-        - postgres
-        - hive
-    - shell: psql --dbname=metastore --command="GRANT ALL ON ALL TABLES IN SCHEMA public TO hiveuser;"
-      tags:
-        - postgres
-        - hive
 
 - hosts: hive_metastore
   accelerate: "{{ accelerate }}"

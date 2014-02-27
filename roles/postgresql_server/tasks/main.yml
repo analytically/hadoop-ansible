@@ -20,3 +20,35 @@
 - name: install PostgreSQL contrib via apt
   apt: name=postgresql-contrib-9.1 force=yes
   tags: postgres
+
+- name: create postgresql db 'metastore'
+  sudo: true
+  sudo_user: postgres
+  postgresql_db: name=metastore
+  tags:
+    - postgres
+    - hive
+
+- name: add postgresql user 'hiveuser'
+  sudo: true
+  sudo_user: postgres
+  postgresql_user: db=metastore name=hiveuser password=hive_{{ site_name }} priv=CONNECT
+  tags:
+    - postgres
+    - hive
+
+- name: init metastore schema
+  sudo: true
+  sudo_user: postgres
+  shell: psql --dbname=metastore --file=/usr/lib/hive/scripts/metastore/upgrade/postgres/hive-schema-0.10.0.postgres.sql
+  tags:
+    - postgres
+    - hive
+
+- name: grant hiveuser
+  sudo: true
+  sudo_user: postgres
+  shell: psql --dbname=metastore --command="GRANT ALL ON ALL TABLES IN SCHEMA public TO hiveuser;"
+  tags:
+    - postgres
+    - hive

@@ -1,0 +1,42 @@
+---
+# file: roles/mysql_server/tasks/main.yml
+
+- name: predefine mysql root passwd
+  shell: executable=/bin/bash
+         create=/root/.mysql-root-passwd-configured
+         debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password hive_{{ site_name }}"
+
+- name: predefine mysql root passwd confirm
+  shell: executable=/bin/bash
+         create=/root/.mysql-root-passwd-again-configured
+         debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password hive_{{ site_name }}"
+
+- name: install MySQL and related-package via apt
+  apt: name={{ item }}
+       update_cache=yes
+  with_items:
+    - mysql-server-5.5
+    - libmysql-java
+    - python-mysqldb
+
+- name: service mysql restart
+  service: name=mysql
+           state=restarted
+
+- name: create mysql db 'metastore'
+  mysql_db: name=metastore
+            state=present
+            login_user=root
+            login_password=hive_{{ site_name }}
+
+- name: init metastore schema
+  shell: mysql -uroot -phive_{{ site_name }} metastore < /usr/lib/hive/scripts/metastore/upgrade/mysql/hive-schema-0.10.0.mysql.sql
+
+- name: add mysql user 'hiveuser'
+  mysql_user: name=hiveuser
+              host=localhost
+              password=hive_{{ site_name }}
+              priv=metastore.*:ALL
+              state=present
+              login_user=root
+              login_password=hive_{{ site_name }}
