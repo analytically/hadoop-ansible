@@ -120,7 +120,8 @@ After the installation, go here:
   - Kibana at [monitor01/kibana/index.html#/dashboard/file/logstash.json](http://monitor01/kibana/index.html#/dashboard/file/logstash.json)
   - Smokeping at [monitor01/smokeping/smokeping.cgi](http://monitor01/smokeping/smokeping.cgi)
   - hmaster01 at [hmaster01:50070](http://hmaster01:50070) - active namenode
-  - hmaster02 at [hmaster02:50070](http://hmaster01:50070) - standby namenode
+  - hmaster02 at [hmaster02:50070](http://hmaster02:50070) - standby namenode
+  - Presto at [hmaster02:8081](http://hmaster02:8081) - Presto coordinator
 
 ### Performance testing
 
