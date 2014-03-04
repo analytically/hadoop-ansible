@@ -14,7 +14,7 @@
   tags: presto
 
 - name: install Presto at /usr/lib/presto
-  shell: chdir=/tmp curl http://central.maven.org/maven2/com/facebook/presto/presto-server/0.60/presto-server-0.60.tar.gz | tar xz && mv presto-server-0.60/* /usr/lib/presto
+  shell: creates=/usr/lib/presto/bin/launcher chdir=/tmp curl http://central.maven.org/maven2/com/facebook/presto/presto-server/0.60/presto-server-0.60.tar.gz | tar xz && mv presto-server-0.60/* /usr/lib/presto
   tags: presto
 
 - name: configure presto in /usr/lib/presto/etc
