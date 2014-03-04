@@ -22,15 +22,20 @@
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
         {% if hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] == ansible_fqdn %}
-        <value>jdbc:postgresql://localhost/metastore</value>
+        <value>jdbc:{{ metastore }}://localhost/metastore</value>
         {% else %}
-        <value>jdbc:postgresql://{{ hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] }}/metastore</value>
+        <value>jdbc:{{ metastore }}://{{ hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] }}/metastore</value>
         {% endif %}
     </property>
 
     <property>
         <name>javax.jdo.option.ConnectionDriverName</name>
+        {% if metastore == postgresql %}
         <value>org.postgresql.Driver</value>
+        {% endif %}
+        {% if metastore == mysql %}
+        <value>com.mysql.jdbc.Driver</value>
+        {% endif %}
     </property>
 
     <property>

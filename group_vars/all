@@ -9,3 +9,6 @@ mtu: 9216
 # postfix_domain: example.com
 # mandrill_username: your_username
 # mandrill_api_key: your_api_key
+
+# Choose postgresql or mysql as hive metastore
+metastore: postgresql
