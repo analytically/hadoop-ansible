@@ -26,6 +26,3 @@
 
     - name: change sudoers to contains NOPASSWD for sudo group
       shell: "creates=/etc/sudoers.bak chdir=/etc cp sudoers sudoers.bak && sed -ri -e 's/(%sudo\\s+ALL=\\(ALL:ALL\\))\\s+ALL/\\1 NOPASSWD: ALL/' /etc/sudoers"
-
-    - name: install python-keyczar via apt (for Ansible's Accelerated Mode)
-      apt: pkg=python-keyczar
