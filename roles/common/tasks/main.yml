@@ -66,6 +66,6 @@
     - restart ntp
   tags: ntp
 
-- name: make sure NTP is running and enabled
-  service: name=ntp state=running enabled=yes
+- name: make sure NTP is enabled and started
+  service: name=ntp enabled=yes state=started
   tags: ntp

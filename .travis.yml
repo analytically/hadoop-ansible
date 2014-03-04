@@ -18,15 +18,14 @@ before_script:
   - sleep 300 # DigitalOcean can be damn slow creating/booting droplets
 script:
   - ansible-playbook -i hosts --extra-vars "authorized_rsa_key='$(cat travis.ssh.pub)'" -u root bootstrap/bootstrap.yml
-  - rm -f /home/travis/.fireball.keys
-  - ansible-playbook -i hosts --extra-vars "accelerate=false" site.yml
+  - ansible-playbook -i hosts site.yml
 after_success:
   - "slimerjs screenshot.js http://hmaster01:50070 active-namenode.png"
   - "slimerjs screenshot.js http://hmaster02:50070 standby-namenode.png"
   - "slimerjs screenshot.js http://monitor01/ganglia ganglia.png"
   - "slimerjs screenshot.js http://monitor01:9200 elasticsearch.png"
   - "slimerjs screenshot.js http://monitor01/smokeping/smokeping.cgi?target=_charts smokeping.png"
-  - "slimerjs screenshot.js http://hmaster02:8080 presto.png"
+  - "slimerjs screenshot.js http://hmaster02:8081 presto.png"
   - "travis-artifacts upload --path active-namenode.png"
   - "travis-artifacts upload --path standby-namenode.png"
   - "travis-artifacts upload --path ganglia.png"

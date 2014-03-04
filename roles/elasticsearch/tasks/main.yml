@@ -5,6 +5,10 @@
   shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb && dpkg -i elasticsearch-1.0.1.deb
   tags: elasticsearch
 
+- name: make sure Elasticsearch is enabled and started
+  service: name=elasticsearch enabled=yes state=started
+  tags: elasticsearch
+
 - name: install Elasticsearch marvel plugin
   shell: creates=/usr/share/elasticsearch/plugins/marvel chdir=/usr/share/elasticsearch/bin ./plugin -install elasticsearch/marvel/latest
   tags: elasticsearch
