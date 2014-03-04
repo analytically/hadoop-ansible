@@ -235,8 +235,8 @@
   user: ansibler
   sudo: true
   roles:
-    - { role: postgresql_server, when hive_metastore == "postgresql" }
-    - { role: mysql_server, when hive_metastore == "mysql" }
+    - { role: postgresql_server, when: hive_metastore == "postgresql" }
+    - { role: mysql_server, when: hive_metastore == "mysql" }
     - cdh_hive_config
 
 - hosts: hive_metastore
