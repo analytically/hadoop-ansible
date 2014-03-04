@@ -23,6 +23,9 @@
     - restart hadoop-hdfs-namenode
     - restart hadoop-hdfs-journalnode
     - restart hadoop-hdfs-datanode
+    - restart hadoop-mapreduce-historyserver
+    - restart hadoop-yarn-nodemanager
+    - restart hadoop-yarn-resourcemanager
   tags:
     - hadoop
     - configuration

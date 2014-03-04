@@ -19,7 +19,7 @@
       hostname: name={{ inventory_hostname }}
 
     - name: create user 'ansibler'
-      user: name=ansibler groups=sudo generate_ssh_key=yes shell=/bin/bash
+      user: name=ansibler groups=sudo shell=/bin/bash
 
     - name: add 'ansibler' RSA SSH key
       authorized_key: user=ansibler key="{{ authorized_rsa_key }}"

@@ -11,4 +11,4 @@ mtu: 9216
 # mandrill_api_key: your_api_key
 
 # Choose postgresql or mysql as hive metastore
-metastore: postgresql
+hive_metastore: postgresql

@@ -22,7 +22,9 @@
   with_items:
     - node.properties
     - jvm.config
-  tags: presto
+  tags:
+    - configuration
+    - presto
 
 - name: configure presto hive catalog in /usr/lib/presto/etc/catalog
   template: src={{ item }} dest=/usr/lib/presto/etc/catalog/{{ item }} owner=root group=root mode=0644
@@ -30,7 +32,9 @@
     - jmx.properties
     - hive.properties
     - tpch.properties
-  tags: presto
+  tags:
+    - configuration
+    - presto
 
 - name: install presto command line client
   shell: chdir=/usr/bin curl -o presto http://central.maven.org/maven2/com/facebook/presto/presto-cli/0.60/presto-cli-0.60-executable.jar && chmod +x presto
@@ -38,4 +42,6 @@
 
 - name: install upstart config for presto
   template: src=upstart.conf dest=/etc/init/presto.conf owner=root group=root mode=0644
-  tags: presto
+  tags:
+    - configuration
+    - presto

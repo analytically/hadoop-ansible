@@ -4,6 +4,22 @@
 <!-- {{ ansible_managed }} -->
 
 <configuration>
+    <!-- CPU Cores -->
+    <property>
+        <name>yarn.nodemanager.resource.cpu-vcores</name>
+        <value>{{ ansible_processor_count * ansible_processor_cores * ansible_processor_threads_per_core }}</value>
+    </property>
+
+    <!-- Memory limits -->
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>{{ ansible_memtotal_mb - 1024 }}</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>{{ ansible_memtotal_mb - 1024 }}</value>
+    </property>
+
     <property>
         <name>yarn.resourcemanager.resource-tracker.address</name>
         <value>{{ hostvars[groups['resourcemanager'][0]]['ansible_fqdn'] }}:8031</value>
@@ -55,10 +71,6 @@
         <description>Where to aggregate logs</description>
         <name>yarn.nodemanager.remote-app-log-dir</name>
         <value>/var/log/hadoop-yarn/apps</value>
-    </property>
-    <property>
-        <name>yarn.app.mapreduce.am.staging-dir</name>
-        <value>/user</value>
     </property>
 
     <!-- Fair scheduling is a method of assigning resources to jobs such that all jobs get, on average, an equal

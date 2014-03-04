@@ -199,7 +199,7 @@
       tags:
         - hadoop
     - name: make sure the /user/history directory has the correct owner
-      shell: creates=/data/dfs/.historydirchowned sleep 5 && hadoop fs -chown yarn /user/history && touch /data/dfs/.historydirchowned
+      shell: creates=/data/dfs/.historydirchowned sleep 5 && hadoop fs -chown yarn:mapred /user/history && touch /data/dfs/.historydirchowned
       tags:
         - hadoop
     - name: create the /hbase directory on the cluster

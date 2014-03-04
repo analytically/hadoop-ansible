@@ -1,7 +1,7 @@
 Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hadoop-ansible.png)](https://travis-ci.org/analytically/hadoop-ansible) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/analytically/hadoop-ansible/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 =======================
 
-[Ansible](http://www.ansibleworks.com/) playbook that installs a CDH 4.5 [Hadoop](http://hadoop.apache.org/)
+[Ansible](http://www.ansibleworks.com/) playbook that installs a CDH 4.6.0 [Hadoop](http://hadoop.apache.org/)
 cluster (running on Java 7, supported from [CDH 4.4](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH4/latest/CDH4-Release-Notes/Whats_New_in_4-4.html)),
 with [HBase](http://hbase.apache.org/), Hive, [Presto](http://prestodb.io/) for analytics, and [Ganglia](http://ganglia.sourceforge.net/),
 [Smokeping](http://oss.oetiker.ch/smokeping/), [Fluentd](http://fluentd.org/), [Elasticsearch](http://www.elasticsearch.org/)
@@ -11,7 +11,7 @@ Hire/Follow [@analytically](http://twitter.com/analytically). Browse the CI [bui
 
 ### Requirements
 
-  - [Ansible](http://www.ansibleworks.com/) 1.4 or later (`pip install ansible`)
+  - [Ansible](http://www.ansibleworks.com/) 1.5 or later (`pip install ansible`)
   - 6 + 1 Ubuntu 12.04 LTS, 13.04 or 13.10 hosts - see [ubuntu-netboot-tftp](https://github.com/analytically/ubuntu-netboot-tftp) if you need automated server installation
   - [Mandrill](http://mandrill.com/) username and API key for sending email notifications
   - `ansibler` user in sudo group without sudo password prompt (see Bootstrapping section below)
@@ -138,7 +138,7 @@ Instructions on how to test the performance of your CDH4 cluster.
 
 ##### DFSIO
 
-  - `hadoop jar hadoop-mapreduce-client-jobclient-2.0.0-cdh4.5.0-tests.jar TestDFSIO -write`
+  - `hadoop jar hadoop-mapreduce-client-jobclient-2.0.0-cdh4.6.0-tests.jar TestDFSIO -write`
 
 ### Bootstrapping
 

@@ -25,7 +25,7 @@ hslave[01:04]
 datanodes
 
 [historyserver]
-hslave01
+hmaster01
 
 # HBase Nodes
 # ===========

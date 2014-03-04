@@ -10,6 +10,11 @@
     </property>
 
     <property>
+        <name>yarn.app.mapreduce.am.staging-dir</name>
+        <value>/user</value>
+    </property>
+
+    <property>
         <name>mapreduce.jobhistory.address</name>
         <value>{{ hostvars[groups['historyserver'][0]]['ansible_fqdn'] }}:10020</value>
     </property>
@@ -72,5 +77,11 @@
     <property>
         <name>mapreduce.output.fileoutputformat.compress.type</name>
         <value>BLOCK</value>
+    </property>
+
+    <property>
+        <name>mapreduce.map.java.opts</name>
+        <value>-Xmx1024m</value>
+        <description>Higher Java heap for mapper to work.</description>
     </property>
 </configuration>

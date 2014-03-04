@@ -15,6 +15,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
+<!-- {{ ansible_managed }} -->
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <configuration>
@@ -22,18 +23,18 @@
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
         {% if hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] == ansible_fqdn %}
-        <value>jdbc:{{ metastore }}://localhost/metastore</value>
+        <value>jdbc:{{ hive_metastore }}://localhost/metastore</value>
         {% else %}
-        <value>jdbc:{{ metastore }}://{{ hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] }}/metastore</value>
+        <value>jdbc:{{ hive_metastore }}://{{ hostvars[groups["hive_metastore"][0]]["ansible_fqdn"] }}/metastore</value>
         {% endif %}
     </property>
 
     <property>
         <name>javax.jdo.option.ConnectionDriverName</name>
-        {% if metastore == postgresql %}
+        {% if hive_metastore == "postgresql" %}
         <value>org.postgresql.Driver</value>
         {% endif %}
-        {% if metastore == mysql %}
+        {% if hive_metastore == "mysql" %}
         <value>com.mysql.jdbc.Driver</value>
         {% endif %}
     </property>

@@ -7,4 +7,6 @@
     - config.properties
   notify:
     - restart presto
-  tags: presto
+  tags:
+    - configuration
+    - presto
