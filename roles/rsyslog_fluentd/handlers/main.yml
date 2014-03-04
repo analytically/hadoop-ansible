@@ -5,4 +5,4 @@
   service: name=rsyslog state=restarted
 
 - name: log installation message
-  shell: logger -t ansible "Configured rsyslog integration with Fluentd on {{ ansible_fqdn }}"
+  command: logger -t ansible "Configured rsyslog integration with Fluentd on {{ ansible_fqdn }}"

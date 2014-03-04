@@ -10,5 +10,5 @@
   tags: elasticsearch
 
 - name: install Elasticsearch marvel plugin
-  shell: creates=/usr/share/elasticsearch/plugins/marvel chdir=/usr/share/elasticsearch/bin ./plugin -install elasticsearch/marvel/latest
+  command: creates=/usr/share/elasticsearch/plugins/marvel chdir=/usr/share/elasticsearch/bin ./plugin -install elasticsearch/marvel/latest
   tags: elasticsearch

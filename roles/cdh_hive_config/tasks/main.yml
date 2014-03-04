@@ -2,7 +2,7 @@
 # file: roles/cdh_hive_config/tasks/main.yml
 
 - name: copy /etc/hive/conf.empty to /etc/hive/conf.{{ site_name|lower }}
-  shell: creates=/etc/hive/conf.{{ site_name|lower }} cp -R -p /etc/hive/conf.dist /etc/hive/conf.{{ site_name|lower }}
+  command: creates=/etc/hive/conf.{{ site_name|lower }} cp -R -p /etc/hive/conf.dist /etc/hive/conf.{{ site_name|lower }}
   tags: hive
 
 - name: configure hive in /etc/hive/conf.{{ site_name|lower }}
@@ -16,20 +16,20 @@
     - configuration
 
 - name: run 'update-alternatives' to install hive configuration
-  shell: update-alternatives --install /etc/hive/conf hive-conf /etc/hive/conf.{{ site_name|lower }} 50
+  command: update-alternatives --install /etc/hive/conf hive-conf /etc/hive/conf.{{ site_name|lower }} 50
   tags: hive
 
 - name: run 'update-alternatives' to set hive configuration
-  shell: update-alternatives --set hive-conf /etc/hive/conf.{{ site_name|lower }}
+  command: update-alternatives --set hive-conf /etc/hive/conf.{{ site_name|lower }}
   tags: hive
 
 - name: soft link postgresql-jdbc4.jar
-  shell: creates=/usr/lib/hive/lib/postgresql-jdbc4.jar ln -s /usr/share/java/postgresql-jdbc4.jar /usr/lib/hive/lib/postgresql-jdbc4.jar
+  command: creates=/usr/lib/hive/lib/postgresql-jdbc4.jar ln -s /usr/share/java/postgresql-jdbc4.jar /usr/lib/hive/lib/postgresql-jdbc4.jar
   when: hive_metastore == "postgresql"
   tags: hive
 
 - name: symbolically link libmysql-java.jar
-  shell: creates=/usr/lib/hive/lib/libmysql-java.jar
+  command: creates=/usr/lib/hive/lib/libmysql-java.jar
          ln -s /usr/share/java/mysql-connector-java.jar /usr/lib/hive/lib/libmysql-java.jar 
   when: hive_metastore == "mysql"
   tags: hive

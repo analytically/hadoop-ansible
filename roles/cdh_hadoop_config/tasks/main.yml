@@ -2,7 +2,7 @@
 # file: roles/cdh_hadoop_config/tasks/main.yml
 
 - name: copy /etc/hadoop/conf.empty to /etc/hadoop/conf.{{ site_name|lower }}
-  shell: creates=/etc/hadoop/conf.{{ site_name|lower }} cp -R -p /etc/hadoop/conf.empty /etc/hadoop/conf.{{ site_name|lower }}
+  command: creates=/etc/hadoop/conf.{{ site_name|lower }} cp -R -p /etc/hadoop/conf.empty /etc/hadoop/conf.{{ site_name|lower }}
   tags:
     - hadoop
     - configuration
@@ -31,9 +31,9 @@
     - configuration
 
 - name: run 'update-alternatives' to install hadoop configuration
-  shell: update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.{{ site_name|lower }} 50
+  command: update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.{{ site_name|lower }} 50
   tags: hadoop
 
 - name: run 'update-alternatives' to set hadoop configuration
-  shell: update-alternatives --set hadoop-conf /etc/hadoop/conf.{{ site_name|lower }}
+  command: update-alternatives --set hadoop-conf /etc/hadoop/conf.{{ site_name|lower }}
   tags: hadoop

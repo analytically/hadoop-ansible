@@ -76,7 +76,7 @@
         - hadoop
         - hbase
     - name: format the namenode - WILL NOT FORMAT IF /data/dfs/nn/current/VERSION EXISTS TO AVOID DATA LOSS
-      shell: creates=/data/dfs/nn/current/VERSION hdfs namenode -format -force
+      command: creates=/data/dfs/nn/current/VERSION hdfs namenode -format -force
       tags:
         - hadoop
         - hbase
@@ -235,8 +235,8 @@
   user: ansibler
   sudo: true
   roles:
-    - { role: postgresql_server, when metastore == "postgresql" }
-    - { role: mysql_server, when metastore == "mysql" }
+    - { role: postgresql_server, when hive_metastore == "postgresql" }
+    - { role: mysql_server, when hive_metastore == "mysql" }
     - cdh_hive_config
 
 - hosts: hive_metastore

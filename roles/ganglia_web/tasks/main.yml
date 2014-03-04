@@ -14,15 +14,15 @@
   tags: ganglia
 
 - name: make sure ganglia-web makefile has the correct path
-  shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia sed -i "s=/var/www/html/ganglia=/var/www/ganglia=" Makefile
+  command: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia sed -i "s=/var/www/html/ganglia=/var/www/ganglia=" Makefile
   tags: ganglia
 
 - name: make sure ganglia-web makefile has the correct user
-  shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia sed -i "s/APACHE_USER =  apache/APACHE_USER = www-data/" Makefile
+  command: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia sed -i "s/APACHE_USER =  apache/APACHE_USER = www-data/" Makefile
   tags: ganglia
 
 - name: make install ganglia-web
-  shell: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia make install
+  command: creates=/var/lib/ganglia-web/dwoo chdir=/var/www/ganglia make install
   notify:
     - restart apache2
   tags: ganglia

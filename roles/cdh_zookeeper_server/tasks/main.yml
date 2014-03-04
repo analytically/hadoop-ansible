@@ -9,15 +9,15 @@
   tags: zookeeper
 
 - name: copy /etc/zookeeper/conf.dist to /etc/zookeeper/conf.{{ site_name|lower }}
-  shell: creates=/etc/zookeeper/conf.{{ site_name|lower }} cp -R -p /etc/zookeeper/conf.dist /etc/zookeeper/conf.{{ site_name|lower }}
+  command: creates=/etc/zookeeper/conf.{{ site_name|lower }} cp -R -p /etc/zookeeper/conf.dist /etc/zookeeper/conf.{{ site_name|lower }}
   tags: zookeeper
 
 - name: run 'update-alternatives' to install ZooKeeper configuration
-  shell: update-alternatives --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.{{ site_name|lower }} 50
+  command: update-alternatives --install /etc/zookeeper/conf zookeeper-conf /etc/zookeeper/conf.{{ site_name|lower }} 50
   tags: zookeeper
 
 - name: run 'update-alternatives' to set ZooKeeper configuration
-  shell: update-alternatives --set zookeeper-conf /etc/zookeeper/conf.{{ site_name|lower }}
+  command: update-alternatives --set zookeeper-conf /etc/zookeeper/conf.{{ site_name|lower }}
   tags: zookeeper
 
 - name: create /var/lib/zookeeper directory
@@ -31,5 +31,5 @@
   tags: zookeeper
 
 - name: initialize ZooKeeper
-  shell: creates=/var/lib/zookeeper/myid service zookeeper-server init --myid={{ zookeeper_id }}
+  command: creates=/var/lib/zookeeper/myid service zookeeper-server init --myid={{ zookeeper_id }}
   tags: zookeeper

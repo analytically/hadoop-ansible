@@ -25,7 +25,7 @@
   tags: postfix
 
 - name: run postmap to configure postfix lookup tables
-  shell: postmap /etc/postfix/sasl_passwd
+  command: postmap /etc/postfix/sasl_passwd
   tags: postfix
 
 - name: install Mandrill (Thawte Premium Server) SSL certificates
