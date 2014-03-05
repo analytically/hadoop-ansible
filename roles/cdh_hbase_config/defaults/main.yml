@@ -1,5 +1,5 @@
 ---
-# file: roles/cdh_hbase_config/vars/main.yml
+# file: roles/cdh_hbase_config/defaults/main.yml
 
 hbase:
     # The HBase heap size

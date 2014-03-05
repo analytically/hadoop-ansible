@@ -1,0 +1,5 @@
+---
+# file: roles/cdh_hive_config/defaults/main.yml
+
+# Choose postgresql or mysql as hive metastore
+hive_metastore: postgresql

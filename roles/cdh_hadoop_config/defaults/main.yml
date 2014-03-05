@@ -1,5 +1,5 @@
 ---
-# file: roles/cdh_hadoop_config/vars/main.yml
+# file: roles/cdh_hadoop_config/defaults/main.yml
 
 # The default block size for new files, in bytes - here 256 MB
 dfs_blocksize: 268435456
