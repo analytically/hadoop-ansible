@@ -10,7 +10,7 @@
   tags: kernel
 
 - name: install the latest kernel
-  command: chdir=/tmp dpkg -i linux-*.deb
+  shell: chdir=/tmp dpkg -i linux-*.deb
   tags: kernel
 
 - name: reboot after kernel upgrade
