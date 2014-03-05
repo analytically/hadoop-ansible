@@ -4,6 +4,11 @@
 <!-- {{ ansible_managed }} -->
 
 <configuration>
+    <property>
+        <name>dfs.hosts.exclude</name>
+        <value>/etc/hadoop/conf/dfs.hosts.exclude</value>
+    </property>
+
     <!-- common server name -->
     <property>
         <name>dfs.nameservices</name>

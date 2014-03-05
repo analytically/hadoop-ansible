@@ -24,3 +24,7 @@
 - name: restart hadoop-yarn-resourcemanager
   service: name=hadoop-yarn-resourcemanager state=restarted
   ignore_errors: yes
+
+- name: refresh datanodes
+  sudo_user: hdfs
+  command: hdfs dfsadmin -refreshNodes

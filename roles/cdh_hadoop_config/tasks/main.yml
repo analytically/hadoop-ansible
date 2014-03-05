@@ -30,6 +30,14 @@
     - hadoop
     - configuration
 
+- name: update excluded datanodes
+  copy: src=dfs.hosts.exclude dest=/etc/hadoop/conf/dfs.hosts.exclude owner=root group=root mode=644
+  notify:
+    - refresh datanodes
+  tags:
+    - hadoop
+    - configuration
+
 - name: run 'update-alternatives' to install hadoop configuration
   command: update-alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.{{ site_name|lower }} 50
   tags: hadoop
