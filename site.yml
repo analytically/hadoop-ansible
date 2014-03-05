@@ -10,6 +10,7 @@
   user: ansibler
   sudo: true
   roles:
+    - { role: kernel, when: upgrade_kernel }
     - common
     - { role: postfix_mandrill, when: notify_email is defined and postfix_domain is defined and mandrill_username is defined and mandrill_api_key is defined }
     - ganglia_monitor

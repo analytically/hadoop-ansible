@@ -1,0 +1,28 @@
+---
+# file: roles/kernel/tasks/main.yml
+
+- name: download the latest kernel debian packages
+  get_url: url={{ item }} dest=/tmp
+  with_items:
+    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.5-trusty/linux-headers-3.13.5-031305-generic_3.13.5-031305.201402221823_amd64.deb
+    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.5-trusty/linux-image-3.13.5-031305-generic_3.13.5-031305.201402221823_amd64.deb
+    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.5-trusty/linux-headers-3.13.5-031305_3.13.5-031305.201402221823_all.deb
+  tags: kernel
+
+- name: install the latest kernel
+  command: chdir=/tmp dpkg -i linux-*.deb
+  tags: kernel
+
+- name: reboot after kernel upgrade
+  shell: sleep 2s && /sbin/reboot &
+  tags: kernel
+
+- name: wait for the server to go down (reboot)
+  sudo: false
+  local_action: wait_for host={{ inventory_hostname }} port=22 state=stopped
+  tags: kernel
+
+- name: wait for the server to come up
+  sudo: false
+  local_action: wait_for host={{ inventory_hostname }} port=22 delay=30
+  tags: kernel

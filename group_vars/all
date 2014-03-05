@@ -10,5 +10,8 @@ mtu: 9216
 # mandrill_username: your_username
 # mandrill_api_key: your_api_key
 
+# Upgrade kernel to 3.13, much improved epoll performance
+upgrade_kernel: no
+
 # Choose postgresql or mysql as hive metastore
 hive_metastore: postgresql
