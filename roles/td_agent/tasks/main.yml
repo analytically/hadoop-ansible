@@ -5,11 +5,11 @@
   apt_repository: repo='deb http://packages.treasure-data.com/precise/ precise contrib'
   tags: tdagent
 
-- name: install libssl0.9.8 for debian wheezy
+- name: install libssl0.9.8 for Debian "wheezy"
   script: install_debian_libssl0.9.8.sh
   when:
-    - ansible_os_family == "Debian"
-    - ansible_lsb["codename"] == "wheezy"
+    - ansible_distribution == "Debian"
+    - ansible_distribution_release == "wheezy"
 
 - name: install td-agent via apt
   apt: pkg=td-agent update_cache=yes force=yes

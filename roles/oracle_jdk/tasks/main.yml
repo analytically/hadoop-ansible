@@ -1,11 +1,11 @@
 ---
 # file: roles/oracle_jdk/tasks/main.yml
 
-- name: add webupd8team java repository for ubuntu
+- name: add webupd8team java repository for Ubuntu
   apt_repository: repo='ppa:webupd8team/java'
   when: ansible_distribution == "Ubuntu"
 
-- name: add webupd8team java repository for debian
+- name: add webupd8team java repository for Debian "wheezy"
   script: install_debian_webupd8team_repo.sh
   when:
     - ansible_distribution == "Debian"
