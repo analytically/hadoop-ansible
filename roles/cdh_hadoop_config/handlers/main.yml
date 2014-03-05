@@ -28,3 +28,4 @@
 - name: refresh datanodes
   sudo_user: hdfs
   command: hdfs dfsadmin -refreshNodes
+  ignore_errors: yes
