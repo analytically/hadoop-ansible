@@ -2,9 +2,12 @@ language: python
 python: '2.6'
 addons:
   firefox: "25.0.1"
+cache:
+  directories:
+    - $HOME/.pip-cache/
 install:
-  - pip install ansible
-  - pip install dopy
+  - pip install ansible --download-cache $HOME/.pip-cache
+  - pip install dopy --download-cache $HOME/.pip-cache
 before_script:
   - ansible-playbook -i hosts --extra-vars "api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID" do_cluster.yml
   - "export DISPLAY=:99.0"
