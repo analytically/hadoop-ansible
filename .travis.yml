@@ -4,7 +4,7 @@ addons:
   firefox: "25.0.1"
 install:
   - pip install ansible
-  - sudo pip install dopy
+  - pip install dopy
 before_script:
   - ansible-playbook -i hosts --extra-vars "api_key_password=$DO_API_KEY client_id=$DO_CLIENT_ID" do_cluster.yml
   - "export DISPLAY=:99.0"
