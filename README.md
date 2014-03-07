@@ -1,4 +1,4 @@
-Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hadoop-ansible.png)](https://travis-ci.org/analytically/hadoop-ansible) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/analytically/hadoop-ansible/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hadoop-ansible.png)](https://travis-ci.org/analytically/hadoop-ansible)
 =======================
 
 [Ansible](http://www.ansibleworks.com/) playbook that installs a CDH 4.6.0 [Hadoop](http://hadoop.apache.org/)
