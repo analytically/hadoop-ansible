@@ -4,9 +4,9 @@
 - name: download the latest kernel debian packages
   get_url: url={{ item }} dest=/tmp
   with_items:
-    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.5-trusty/linux-headers-3.13.5-031305-generic_3.13.5-031305.201402221823_amd64.deb
-    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.5-trusty/linux-image-3.13.5-031305-generic_3.13.5-031305.201402221823_amd64.deb
-    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.5-trusty/linux-headers-3.13.5-031305_3.13.5-031305.201402221823_all.deb
+    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.6-trusty/linux-headers-3.13.6-031306-generic_3.13.6-031306.201403070154_amd64.deb
+    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.6-trusty/linux-image-3.13.6-031306-generic_3.13.6-031306.201403070154_amd64.deb
+    - http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.13.6-trusty/linux-headers-3.13.6-031306_3.13.6-031306.201403070154_all.deb
   tags: kernel
 
 - name: install the latest kernel
