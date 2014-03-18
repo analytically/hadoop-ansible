@@ -4,26 +4,30 @@
 - name: add webupd8team java repository for Ubuntu
   apt_repository: repo='ppa:webupd8team/java'
   when: ansible_distribution == "Ubuntu"
+  tags: java
 
 - name: add webupd8team java repository for Debian "wheezy"
   script: install_debian_webupd8team_repo.sh
   when:
     - ansible_distribution == "Debian"
     - ansible_distribution_release == "wheezy"
+  tags: java
 
 - name: autoaccept license for java
   shell: executable=/bin/bash debconf-set-selections <<< "oracle-java7-installer shared/accepted-oracle-license-v1-1 select true"
+  tags: java
 
 - name: install or update Oracle Java 7 JDK via apt
   apt: pkg={{ item }} update_cache=yes state=latest install_recommends=yes
   with_items:
-       - oracle-java7-installer
-       - oracle-java7-set-default
-  tags:
-    - java
+    - oracle-java7-installer
+    - oracle-java7-set-default
+  tags: java
 
 - name: download floatingdecimal-0.1.jar to /usr/lib/jvm (fixes monitor contention when parsing doubles due to a static synchronized method)
   command: creates=/usr/lib/jvm/floatingdecimal-0.1.jar chdir=/usr/lib/jvm curl -O http://repo1.maven.org/maven2/io/airlift/floatingdecimal/0.1/floatingdecimal-0.1.jar
+  tags: java
 
 - name: set fact jdk_installed
   set_fact: jdk_installed=true
+  tags: java
