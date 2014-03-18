@@ -23,11 +23,13 @@
   with_items:
     - checkinstall
     - curl
+    - dstat
     - git
     - htop
     - liblzo2-dev
     - net-tools
     - ntp
+    - numactl
     - python-pycurl
     - software-properties-common
     - zip
