@@ -12,3 +12,5 @@
 - name: install Elasticsearch marvel plugin
   command: creates=/usr/share/elasticsearch/plugins/marvel chdir=/usr/share/elasticsearch/bin ./plugin -install elasticsearch/marvel/latest
   tags: elasticsearch
+  notify:
+    - restart elasticsearch
