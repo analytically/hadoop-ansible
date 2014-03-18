@@ -10,17 +10,28 @@
   when:
     - ansible_distribution == "Debian"
     - ansible_distribution_release == "wheezy"
-
-- name: install td-agent via apt
-  apt: pkg=td-agent update_cache=yes force=yes
   tags: tdagent
 
-- name: remove older fluent Elasticsearch plugin versions
-  command: rm -Rf /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.*
+- name: install td-agent and libcurl via apt
+  apt: pkg={{ item }} update_cache=yes force=yes
+  with_items:
+    - td-agent
+    - libcurl3
+    - libcurl3-gnutls
+    - libcurl4-openssl-dev
+  tags: tdagent
+
+- name: remove older fluent Elasticsearch plugin versions v0.1.*
+  shell: rm -Rf /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.1.*
   ignore_errors: yes
+  tags: tdagent
+
+- name: remove older fluent Elasticsearch plugin versions v0.2.0
+  command: removes=/usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.2.0 rm -Rf /usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.2.0
+  tags: tdagent
 
 - name: install the fluent Elasticsearch plugin
-  command: creates=/usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.2.0/Gemfile /usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-elasticsearch
+  command: creates=/usr/lib/fluent/ruby/lib/ruby/gems/1.9.1/gems/fluent-plugin-elasticsearch-0.3.0/Gemfile /usr/lib/fluent/ruby/bin/fluent-gem install fluent-plugin-elasticsearch
   tags: tdagent
 
 - name: install the fluent tail-multiline plugin
