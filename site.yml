@@ -14,7 +14,7 @@
     - common
     - { role: postfix_mandrill, when: notify_email is defined and postfix_domain is defined and mandrill_username is defined and mandrill_api_key is defined }
     - ganglia_monitor
-    - {role: oracle_jdk, when: jdk_installed is not defined }
+    - { role: oracle_jdk, when: jdk_installed is not defined }
 
 - hosts: 2_links_aggregated
   user: ansibler
@@ -76,6 +76,7 @@
       tags:
         - hadoop
         - hbase
+        - hive
     - name: format the namenode - WILL NOT FORMAT IF /data/dfs/nn/current/VERSION EXISTS TO AVOID DATA LOSS
       command: creates=/data/dfs/nn/current/VERSION hdfs namenode -format -force
       tags:
@@ -100,11 +101,13 @@
       tags:
         - hadoop
         - hbase
+        - hive
     - name: create the /data/dfs/nn directory
       file: path=/data/dfs/nn owner=hdfs group=hdfs state=directory
       tags:
         - hadoop
         - hbase
+        - hive
     - name: bootstrap the standby namenode
       shell: creates=/data/dfs/nn/.bootstrapped hdfs namenode -bootstrapStandby && touch /data/dfs/nn/.bootstrapped
       tags:
