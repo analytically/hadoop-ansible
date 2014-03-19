@@ -23,13 +23,13 @@
     - mysql
     - hive
 
-- name: init metastore schema
+- name: init Hive metastore schema
   shell: mysql -uroot -phive_{{ site_name }} metastore < /usr/lib/hive/scripts/metastore/upgrade/mysql/hive-schema-0.10.0.mysql.sql
   tags:
     - mysql
     - hive
 
-- name: add MySQL user 'hiveuser'
+- name: add and grant MySQL user 'hiveuser'
   mysql_user: name=hiveuser host=localhost password=hive_{{ site_name }} priv=metastore.*:ALL state=present
               login_user=root login_password=hive_{{ site_name }}
   tags:
