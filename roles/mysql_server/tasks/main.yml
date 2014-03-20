@@ -3,9 +3,11 @@
 
 - name: predefine MySQL root passwd
   shell: executable=/bin/bash debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password hive_{{ site_name }}"
+  tags: mysql
 
 - name: predefine MySQL root passwd confirm
   shell: executable=/bin/bash debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password hive_{{ site_name }}"
+  tags: mysql
 
 - name: install MySQL via apt
   apt: name={{ item }}
@@ -13,5 +15,4 @@
     - mysql-server-5.5
     - libmysql-java
     - python-mysqldb
-  tags:
-    - mysql
+  tags: mysql
