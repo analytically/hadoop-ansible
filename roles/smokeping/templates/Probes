@@ -1,0 +1,11 @@
+*** Probes ***
+
++ FPing
+binary = /usr/bin/fping
+
++ Curl
+binary = /usr/bin/curl
+step = 60
+
+# a default for this target-specific variable
+urlformat = http://%host%/

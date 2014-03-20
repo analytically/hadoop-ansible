@@ -240,7 +240,9 @@
   sudo: true
   roles:
     - { role: postgresql_server, when: hive_metastore == "postgresql" }
+    - { role: cdh_hive_postgresql_metastore, when: hive_metastore == "postgresql" }
     - { role: mysql_server, when: hive_metastore == "mysql" }
+    - { role: cdh_hive_mysql_metastore, when: hive_metastore == "mysql" }
     - cdh_hive_config
 
 - hosts: hive_metastore

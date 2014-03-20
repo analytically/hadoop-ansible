@@ -2,6 +2,7 @@
 
 *** Targets ***
 
+ # default probe
 probe = FPing
 
 menu = Top
@@ -12,26 +13,17 @@ remark = SmokePing for {{ site_name|capitalize }}.
 menu = {{ site_name|capitalize }}
 title = {{ site_name|capitalize }}
 
-++ Namenodes
-menu = Hadoop Namenodes
-title = Hadoop Namenodes
+{% for group in groups|sort if group != 'all' and not 'aggreg' in group and group != 'ungrouped' %}
+++ {{ group }}
+menu = {{ group|replace("_", " ")|title }}
+title = {{ group|replace("_", " ")|title }}
 
-{% for host in groups['namenodes'] %}
+{% for host in groups[group] %}
 +++ {{ hostvars[host]['ansible_hostname'] }}
 menu = {{ hostvars[host]['ansible_hostname'] }}
-title = Namenode {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+title = {{ group|replace("_", " ")|title }} {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_default_ipv4']['address'] }}
 host = {{ hostvars[host]['ansible_fqdn'] }}
 alerts = bigloss,someloss,startloss,rttdetect,hostdown
 {% endfor %}
 
-++ Datanodes
-menu = Hadoop Datanodes
-title = Hadoop Datanodes
-
-{% for host in groups['datanodes'] %}
-+++ {{ hostvars[host]['ansible_hostname'] }}
-menu = {{ hostvars[host]['ansible_hostname'] }}
-title = Datanode {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_default_ipv4']['address'] }}
-host = {{ hostvars[host]['ansible_fqdn'] }}
-alerts = bigloss,someloss,startloss,rttdetect,hostdown
 {% endfor %}

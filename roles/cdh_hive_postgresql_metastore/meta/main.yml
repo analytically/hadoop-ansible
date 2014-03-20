@@ -1,0 +1,3 @@
+---
+dependencies:
+  - cdh_hive_common
