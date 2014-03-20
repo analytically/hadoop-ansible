@@ -31,7 +31,7 @@
     {% for host in groups['namenodes'] %}
     <property>
         <name>dfs.namenode.http-address.{{ site_name|lower }}.nn{{ loop.index }}</name>
-        <value>0.0.0.0:50070</value>
+        <value>{{ host }}:50070</value>
     </property>
     {% endfor %}
 
