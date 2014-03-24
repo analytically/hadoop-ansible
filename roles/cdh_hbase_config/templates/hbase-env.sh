@@ -32,8 +32,8 @@
 # Extra Java CLASSPATH elements.  Optional.
 # export HBASE_CLASSPATH=
 
-# The maximum amount of heap to use, in MB. Default is 1000.
-export HBASE_HEAPSIZE=4096
+# The maximum amount of heap to use, in MB. Default is 4096.
+export HBASE_HEAPSIZE={{ hbase_heapsize }}
 
 # Extra Java runtime options.
 # Below are what we set by default.  May only work with SUN JVM.

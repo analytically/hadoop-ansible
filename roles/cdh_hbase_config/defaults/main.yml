@@ -1,6 +1,5 @@
 ---
 # file: roles/cdh_hbase_config/defaults/main.yml
 
-hbase:
-    # The HBase heap size
-    heapsize: 8192
+# The HBase heap size
+hbase_heapsize: 4096
