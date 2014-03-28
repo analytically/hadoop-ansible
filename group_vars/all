@@ -12,3 +12,4 @@ mtu: 9216
 
 # Upgrade kernel to 3.13, much improved epoll performance
 upgrade_kernel: no
+network_interface: eth0

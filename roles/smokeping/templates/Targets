@@ -21,7 +21,7 @@ title = {{ group|replace("_", " ")|title }}
 {% for host in groups[group] %}
 +++ {{ hostvars[host]['ansible_hostname'] }}
 menu = {{ hostvars[host]['ansible_hostname'] }}
-title = {{ group|replace("_", " ")|title }} {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+title = {{ group|replace("_", " ")|title }} {{ hostvars[host]['ansible_hostname'] }} at {{ hostvars[host]["ansible_" + network_interface]["ipv4"]['address'] }}
 host = {{ hostvars[host]['ansible_fqdn'] }}
 alerts = bigloss,someloss,startloss,rttdetect,hostdown
 {% endfor %}
