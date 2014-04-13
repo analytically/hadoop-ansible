@@ -2,7 +2,7 @@
 # file: roles/elasticsearch/tasks/main.yml
 
 - name: install Elasticsearch
-  shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.deb && dpkg -i elasticsearch-1.0.1.deb
+  shell: creates=/usr/share/elasticsearch/bin/elasticsearch chdir=/tmp wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.0.deb && dpkg -i elasticsearch-1.1.0.deb
   tags: elasticsearch
 
 - name: make sure Elasticsearch is enabled and started

@@ -4,7 +4,10 @@
 
 - hosts: all
   user: ansibler
-  tasks: []
+  tasks:
+    - name: determine interface
+      set_fact: ipv4_address="{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}"
+      # eg. to use a eth1: ipv4_address="{{ hostvars[inventory_hostname].ansible_eth1.ipv4.address }}"
 
 - hosts: all
   user: ansibler
@@ -97,7 +100,7 @@
   sudo_user: hdfs
   tasks:
     - name: wait for the first namenode to come online
-      wait_for: host={{ hostvars[groups['namenodes'][0]]["ansible_" + network_interface]["ipv4"]['address'] }} port=50070
+      wait_for: host={{ hostvars[groups['namenodes'][0]].ipv4_address|default(hostvars[groups['namenodes'][0]].ansible_default_ipv4.address) }} port=50070
       tags:
         - hadoop
         - hbase

@@ -1,4 +1,4 @@
-Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hadoop-ansible.png)](https://travis-ci.org/analytically/hadoop-ansible)
+Hadoop Ansible Playbook [![Build Status](https://travis-ci.org/analytically/hadoop-ansible.svg?branch=master)](https://travis-ci.org/analytically/hadoop-ansible)
 =======================
 
 [Ansible](http://www.ansibleworks.com/) playbook that installs a CDH 4.6.0 [Hadoop](http://hadoop.apache.org/)
@@ -7,7 +7,7 @@ with [HBase](http://hbase.apache.org/), Hive, [Presto](http://prestodb.io/) for 
 [Smokeping](http://oss.oetiker.ch/smokeping/), [Fluentd](http://fluentd.org/), [Elasticsearch](http://www.elasticsearch.org/)
 and [Kibana](http://www.elasticsearch.org/overview/kibana/) for monitoring and centralized log indexing.
 
-Hire/Follow [@analytically](http://twitter.com/analytically). Browse the CI [build screenshots](http://hadoop-ansible.s3-website-us-east-1.amazonaws.com/#artifacts/).
+Follow [@analytically](http://twitter.com/analytically). Browse the CI [build screenshots](http://hadoop-ansible.s3-website-us-east-1.amazonaws.com/#artifacts/).
 
 ### Requirements
 
@@ -57,6 +57,9 @@ Required:
 
 Optional:
 
+- Network interface: if you'd like to use a different IP address per host (eg. internal interface), change `site.yml` and
+  change `set_fact: ipv4_address=...` to determine the correct IP address to use per host. If this fact is not set,
+  `ansible_default_ipv4.address` will be used.
 - Email notification: `notify_email`, `postfix_domain`, `mandrill_username`, `mandrill_api_key`
 - [`roles/common`](roles/common/defaults/main.yml): `kernel_swappiness`(0), `nofile` limits, ntp servers and `rsyslog_polling_interval_secs`(10)
 - [`roles/2_aggregated_links`](roles/2_aggregated_links/defaults/main.yml): `bond_mode` (balance-alb) and `mtu` (9216)

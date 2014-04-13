@@ -3,5 +3,5 @@
 127.0.0.1 localhost
 
 {% for host in groups['all'] %}
-{{ hostvars[host]["ansible_" + network_interface]["ipv4"]["address"] }} {{ hostvars[host]["ansible_fqdn"] }} {{ hostvars[host]["ansible_hostname"] }}
+{{ hostvars[host].ipv4_address|default(hostvars[host].ansible_default_ipv4.address) }} {{ hostvars[host]["ansible_fqdn"] }} {{ hostvars[host]["ansible_hostname"] }}
 {% endfor %}
