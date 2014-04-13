@@ -20,7 +20,7 @@
           api_key={{ api_key_password }}
           size_id=62
           region_id=4
-          image_id=1505699
+          image_id=3101918
       register: hosts
       with_items:
         - monitor01
