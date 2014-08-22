@@ -24,21 +24,21 @@
     {% for host in groups['namenodes'] %}
     <property>
         <name>dfs.namenode.rpc-address.{{ site_name|lower }}.nn{{ loop.index }}</name>
-        <value>{{ host }}:8020</value>
+        <value>{{ hostvars[host].ipv4_address|default(hostvars[host]['ansible_default_ipv4']['address']) }}:8020</value>
     </property>
     {% endfor %}
 
     {% for host in groups['namenodes'] %}
     <property>
         <name>dfs.namenode.http-address.{{ site_name|lower }}.nn{{ loop.index }}</name>
-        <value>{{ host }}:50070</value>
+        <value>{{ hostvars[host].ipv4_address|default(hostvars[host]['ansible_default_ipv4']['address']) }}:50070</value>
     </property>
     {% endfor %}
 
     <!-- Storage for edits' files -->
     <property>
         <name>dfs.namenode.shared.edits.dir</name>
-        <value>qjournal://{% for host in groups['journalnodes'] %}{{ host }}:8485{% if not loop.last %};{% endif %}{% endfor %}/{{ site_name|lower }}</value>
+        <value>qjournal://{% for host in groups['journalnodes'] %}{{ hostvars[host].ipv4_address|default(hostvars[host]['ansible_default_ipv4']['address']) }}:8485{% if not loop.last %};{% endif %}{% endfor %}/{{ site_name|lower }}</value>
     </property>
 
     <!-- Client failover -->
@@ -60,7 +60,7 @@
     </property>
     <property>
         <name>ha.zookeeper.quorum</name>
-        <value>{% for host in groups['zookeepers'] %}{{ host }}{% if not loop.last %},{% endif %}{% endfor %}</value>
+        <value>{% for host in groups['zookeepers'] %}{{ hostvars[host].ipv4_address|default(hostvars[host]['ansible_default_ipv4']['address']) }}{% if not loop.last %},{% endif %}{% endfor %}</value>
     </property>
 
     <!-- Replication factor -->
